@@ -6,18 +6,26 @@
   <title>KDN iLPF</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:       oklch(11% 0.01 262);
-      --line:     oklch(21% 0.01 262);
-      --ink:      oklch(92% 0.008 200);
-      --ink-muted: oklch(52% 0.008 200);
-      --ink-faint: oklch(30% 0.008 200);
-      --teal:     oklch(70% 0.12 185);
-      --orange:   oklch(68% 0.14 45);
+      --bg:        oklch(98.5% 0.008 82);
+      --line:      oklch(88% 0.012 82);
+      --ink:       oklch(16% 0.012 262);
+      --ink-muted: oklch(50% 0.01 262);
+      --ink-faint: oklch(70% 0.01 262);
+
+      --teal:      oklch(52% 0.19 185);
+      --teal-soft: oklch(93% 0.05 185);
+      --teal-mid:  oklch(86% 0.09 185);
+
+      --orange:      oklch(61% 0.19 45);
+      --orange-soft: oklch(94% 0.05 60);
+      --orange-mid:  oklch(87% 0.1 55);
+
+      --purple: oklch(56% 0.21 295);
     }
 
     html, body {
@@ -33,180 +41,270 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 80px 24px;
+      padding: 72px 24px;
       min-height: 100vh;
     }
 
     .hub {
       width: 100%;
-      max-width: 660px;
+      max-width: 720px;
     }
+
+    /* ── Dots ── */
+    .hub-dots {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 28px;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+    .dot-teal   { background: var(--teal); }
+    .dot-orange { background: var(--orange); }
+    .dot-purple { background: var(--purple); }
 
     /* ── Header ── */
     .hub-header {
-      margin-bottom: 52px;
+      margin-bottom: 48px;
     }
 
     .hub-eyebrow {
       font-size: 11px;
-      font-weight: 500;
+      font-weight: 600;
       letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--ink-faint);
-      margin-bottom: 14px;
+      margin-bottom: 12px;
     }
 
     .hub-title {
       font-family: 'Fraunces', serif;
-      font-size: clamp(40px, 8vw, 64px);
+      font-size: clamp(44px, 9vw, 72px);
       font-weight: 700;
-      line-height: 0.95;
-      letter-spacing: -0.025em;
+      line-height: 0.93;
+      letter-spacing: -0.03em;
       color: var(--ink);
     }
 
-    /* ── Nav entries ── */
-    .hub-nav {
-      border-top: 1px solid var(--line);
+    /* ── Cards grid ── */
+    .hub-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 36px;
     }
 
-    .nav-entry {
+    @media (max-width: 560px) {
+      .hub-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ── Card ── */
+    .card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 32px 28px;
+      border-radius: 20px;
+      text-decoration: none;
+      color: var(--ink);
+      min-height: 220px;
+      transition:
+        transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 48px -8px var(--card-shadow, rgba(0,0,0,.12));
+    }
+
+    .card-teal {
+      background: var(--teal-soft);
+      --card-shadow: oklch(52% 0.19 185 / 0.2);
+    }
+
+    .card-teal:hover {
+      background: var(--teal-mid);
+    }
+
+    .card-orange {
+      background: var(--orange-soft);
+      --card-shadow: oklch(61% 0.19 45 / 0.2);
+    }
+
+    .card-orange:hover {
+      background: var(--orange-mid);
+    }
+
+    .card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+    }
+
+    .card-number {
+      font-family: 'Fraunces', serif;
+      font-size: 56px;
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: -0.04em;
+      color: var(--card-accent);
+      opacity: 0.9;
+    }
+
+    .card-teal   { --card-accent: var(--teal); }
+    .card-orange { --card-accent: var(--orange); }
+
+    .card-arrow {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--card-accent);
       display: flex;
       align-items: center;
-      gap: 28px;
-      padding: 36px 0;
-      border-bottom: 1px solid var(--line);
-      text-decoration: none;
-      color: inherit;
-      position: relative;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
-    .nav-number {
+    .card:hover .card-arrow {
+      transform: translate(3px, -3px);
+    }
+
+    .card-arrow svg {
+      width: 16px;
+      height: 16px;
+      color: #fff;
+    }
+
+    .card-bottom {
+      margin-top: 24px;
+    }
+
+    .card-name {
       font-family: 'Fraunces', serif;
-      font-size: 12px;
-      font-weight: 300;
-      font-style: italic;
-      color: var(--ink-faint);
-      min-width: 24px;
-      align-self: flex-start;
-      padding-top: 6px;
-      transition: color 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    .nav-entry:hover .nav-number {
-      color: var(--entry-accent);
-    }
-
-    .nav-content {
-      flex: 1;
-    }
-
-    .nav-name {
-      font-family: 'Fraunces', serif;
-      font-size: clamp(26px, 4.5vw, 38px);
+      font-size: clamp(22px, 3.5vw, 28px);
       font-weight: 600;
-      line-height: 1.05;
+      line-height: 1.1;
       color: var(--ink);
-      margin-bottom: 8px;
-      transition: color 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+      margin-bottom: 6px;
     }
 
-    .nav-entry:hover .nav-name {
-      color: var(--entry-accent);
-    }
-
-    .nav-desc {
-      font-size: 12.5px;
-      font-weight: 400;
+    .card-desc {
+      font-size: 12px;
+      font-weight: 500;
       color: var(--ink-muted);
       letter-spacing: 0.01em;
     }
 
-    .nav-arrow {
-      color: var(--ink-faint);
-      flex-shrink: 0;
-      transition:
-        transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
-        color 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    .nav-entry:hover .nav-arrow {
-      transform: translateX(8px);
-      color: var(--entry-accent);
-    }
-
-    .nav-arrow svg {
-      display: block;
-      width: 20px;
-      height: 20px;
-    }
-
     /* ── Footer ── */
     .hub-footer {
-      margin-top: 44px;
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: 12px;
+      border-top: 1px solid var(--line);
+      padding-top: 24px;
     }
 
-    .footer-text {
+    .footer-label {
       font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.08em;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
       color: var(--ink-faint);
     }
 
-    .footer-dot {
+    .footer-sep {
       width: 3px;
       height: 3px;
       border-radius: 50%;
-      background: var(--ink-faint);
+      background: var(--line);
       flex-shrink: 0;
     }
+
+    .footer-chips {
+      display: flex;
+      gap: 6px;
+      margin-left: auto;
+    }
+
+    .chip {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 20px;
+    }
+
+    .chip-teal   { background: var(--teal-soft);   color: var(--teal); }
+    .chip-orange { background: var(--orange-soft);  color: var(--orange); }
+    .chip-purple { background: oklch(93% 0.05 295); color: var(--purple); }
   </style>
 </head>
 <body>
   <div class="hub">
+
+    <div class="hub-dots" aria-hidden="true">
+      <span class="dot dot-teal"></span>
+      <span class="dot dot-orange"></span>
+      <span class="dot dot-purple"></span>
+    </div>
 
     <header class="hub-header">
       <p class="hub-eyebrow">Kementerian Dalam Negeri</p>
       <h1 class="hub-title">KDN&nbsp;iLPF</h1>
     </header>
 
-    <nav class="hub-nav" aria-label="Modul">
+    <nav class="hub-grid" aria-label="Modul">
 
-      <a class="nav-entry" href="MovingForward/index.html" style="--entry-accent: var(--teal)">
-        <span class="nav-number" aria-hidden="true">01</span>
-        <div class="nav-content">
-          <div class="nav-name">Moving Forward</div>
-          <div class="nav-desc">Prestasi &amp; Perkembangan</div>
+      <a class="card card-teal" href="MovingForward/index.html">
+        <div class="card-top">
+          <span class="card-number" aria-hidden="true">01</span>
+          <span class="card-arrow" aria-hidden="true">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"
+                 stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 8h10M8.5 4l4.5 4-4.5 4"/>
+            </svg>
+          </span>
         </div>
-        <span class="nav-arrow" aria-hidden="true">
-          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M4 10h12M11 5l5 5-5 5"/>
-          </svg>
-        </span>
+        <div class="card-bottom">
+          <div class="card-name">Moving Forward</div>
+          <div class="card-desc">Prestasi &amp; Perkembangan</div>
+        </div>
       </a>
 
-      <a class="nav-entry" href="Profil/index.html" style="--entry-accent: var(--orange)">
-        <span class="nav-number" aria-hidden="true">02</span>
-        <div class="nav-content">
-          <div class="nav-name">Profil</div>
-          <div class="nav-desc">Analitik &amp; Dashboard</div>
+      <a class="card card-orange" href="Profil/index.html">
+        <div class="card-top">
+          <span class="card-number" aria-hidden="true">02</span>
+          <span class="card-arrow" aria-hidden="true">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"
+                 stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 8h10M8.5 4l4.5 4-4.5 4"/>
+            </svg>
+          </span>
         </div>
-        <span class="nav-arrow" aria-hidden="true">
-          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M4 10h12M11 5l5 5-5 5"/>
-          </svg>
-        </span>
+        <div class="card-bottom">
+          <div class="card-name">Profil</div>
+          <div class="card-desc">Analitik &amp; Dashboard</div>
+        </div>
       </a>
 
     </nav>
 
     <footer class="hub-footer">
-      <span class="footer-text">2026</span>
-      <span class="footer-dot" aria-hidden="true"></span>
-      <span class="footer-text">iLesen Penilaian Firma</span>
+      <span class="footer-label">2026</span>
+      <span class="footer-sep" aria-hidden="true"></span>
+      <span class="footer-label">iLesen Penilaian Firma</span>
+      <div class="footer-chips" aria-hidden="true">
+        <span class="chip chip-teal">Live</span>
+        <span class="chip chip-orange">Live</span>
+      </div>
     </footer>
 
   </div>
