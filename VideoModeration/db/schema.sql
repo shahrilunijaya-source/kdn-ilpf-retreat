@@ -1,5 +1,4 @@
-CREATE DATABASE IF NOT EXISTS video_moderation CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-USE video_moderation;
+USE u958029070_video_modera;
 
 CREATE TABLE IF NOT EXISTS moderation_jobs (
   id            BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
