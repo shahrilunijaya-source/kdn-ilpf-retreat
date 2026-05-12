@@ -1,0 +1,4063 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+<meta charset="utf-8">
+<title>iLPF - Tapisan PCBM20260396966</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<style>
+/* ══ RESET & NORMALIZATION (Bootstrap replacement) ══ */
+*, *::before, *::after { box-sizing: border-box; }
+html { font-size: 100%; -webkit-text-size-adjust: 100%; }
+body { margin: 0; }
+h1,h2,h3,h4,h5,h6 { margin: 0 0 .5em; font-weight: 600; line-height: 1.3; }
+p { margin: 0 0 1em; }
+ul,ol { margin: 0; padding: 0; list-style: none; }
+a { color: #5e6ad2; text-decoration: none; }
+a:hover { text-decoration: underline; }
+img { max-width: 100%; height: auto; display: block; }
+table { border-collapse: collapse; border-spacing: 0; }
+button { cursor: pointer; font-family: inherit; }
+input, button, select, textarea, optgroup { font-family: inherit; font-size: 100%; margin: 0; }
+button, input { overflow: visible; }
+[type="button"], [type="reset"], [type="submit"], button { -webkit-appearance: button; }
+
+/* Base form controls */
+.form-control {
+    display: block; width: 100%;
+    padding: 7px 10px;
+    border: 1.5px solid #e2e8f0; border-radius: 6px;
+    background: #fff; color: #1e293b;
+    font-family: inherit; font-size: 12.5px; line-height: 1.4;
+    transition: border-color .15s, box-shadow .15s;
+    -webkit-appearance: none; box-shadow: none;
+}
+.form-control:focus { outline: none; border-color: #5e6ad2; box-shadow: 0 0 0 3px rgba(94,106,210,.12); }
+textarea.form-control { height: auto; resize: vertical; }
+
+/* Bootstrap btn replacements */
+.btn { display: inline-flex; align-items: center; gap: 5px; padding: 6px 14px; border-radius: 6px; border: 1px solid transparent; font-family: inherit; font-size: 12.5px; font-weight: 500; cursor: pointer; line-height: 1.4; transition: all .15s; text-decoration: none; }
+.btn-default { background: #f8fafc; border-color: #e2e8f0; color: #475569; }
+.btn-default:hover { background: #f1f5f9; border-color: #cbd5e1; color: #334155; text-decoration: none; }
+.btn-sm { padding: 4px 12px; font-size: 12px; border-radius: 5px; }
+
+* { box-sizing: border-box; }
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    background: #f1f5f9;
+    color: #1a202c;
+    font-size: 13px;
+    margin: 0;
+    padding: 0;
+}
+
+/* ---- HEADER ---- */
+.page-header-top {
+    background: #0c1829;
+    height: 50px;
+    color: #c6cfda;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+}
+.header-left { display: flex; align-items: center; gap: 14px; }
+.header-logo {
+    background: #5e6ad2;
+    color: #0c1829;
+    font-weight: 800;
+    font-size: 16px;
+    padding: 6px 11px;
+    letter-spacing: 2px;
+    border-radius: 3px;
+}
+.header-title { color: #94a3b8; font-weight: 500; font-size: 12px; letter-spacing: 0.1px; }
+.header-right { display: flex; align-items: center; gap: 22px; }
+.sidebar-toggle-btn {
+    background: none;
+    border: none;
+    color: #b4bcc8;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 3px;
+    line-height: 1;
+}
+.sidebar-toggle-btn:hover { background: rgba(255,255,255,0.08); color: #fff; }
+.sidebar.collapsed { width: 0; overflow: hidden; }
+.container-main { transition: none; }
+.header-right .notif {
+    color: #b4bcc8;
+    text-decoration: none;
+    font-size: 12px;
+    position: relative;
+    cursor: pointer;
+    white-space: nowrap;
+}
+.header-right .notif .badge {
+    background: #e74c3c;
+    color: #fff;
+    border-radius: 50%;
+    padding: 1px 5px;
+    font-size: 10px;
+    position: absolute;
+    top: -7px; right: -10px;
+}
+.header-user {
+    display: flex; align-items: center; gap: 8px;
+    color: #c6cfda; font-size: 12px; cursor: pointer;
+}
+.header-user .avatar {
+    width: 28px; height: 28px; border-radius: 50%;
+    background: #5e6ad2; display: flex; align-items: center; justify-content: center;
+    color: #0c1829; font-size: 11px; font-weight: 800;
+}
+
+/* ---- LAYOUT ---- */
+.container-main { display: flex; margin-top: 50px; min-height: calc(100vh - 50px); }
+
+/* ---- SIDEBAR ---- */
+.sidebar {
+    width: 220px;
+    background: #0c1829;
+    flex-shrink: 0;
+    min-height: 100%;
+    border-right: 1px solid rgba(255,255,255,0.04);
+}
+.sidebar ul { list-style: none; padding: 0; margin: 0; }
+.sidebar > ul > li > a {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 15px 10px 18px;
+    color: #94a3b8;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 500;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    border-left: 3px solid transparent;
+    cursor: pointer;
+    letter-spacing: 0.1px;
+    transition: all 0.15s;
+}
+.sidebar > ul > li > a:hover,
+.sidebar > ul > li.open > a { background: rgba(94,106,210,0.1); color: #c7d2fe; }
+.sidebar > ul > li > a i.fa-fw { width: 18px; margin-right: 6px; }
+.sub-menu { background: #070f1c; display: none; }
+.sub-menu.open { display: block; }
+.sub-menu li a {
+    display: block;
+    padding: 8px 15px 8px 38px;
+    font-size: 12px;
+    color: #7d90a8;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+.sub-menu li a:hover,
+.sub-menu li.active a { background: rgba(94,106,210,0.08); color: #c7d2fe; }
+
+/* ---- MAIN CONTENT ---- */
+.main-content { flex: 1; padding: 18px 22px 36px; background: #f1f5f9; overflow-x: hidden; }
+
+/* ---- BREADCRUMB (minimal inline) ---- */
+.breadcrumb-inline {
+    font-size: 12px;
+    color: #94a3b8;
+    margin-bottom: 14px;
+}
+.breadcrumb-inline a { color: #64748b; text-decoration: none; }
+.breadcrumb-inline a:hover { color: #2563eb; }
+.breadcrumb-inline .sep { margin: 0 6px; color: #cbd5e1; }
+.breadcrumb-inline .cur { color: #1e293b; font-weight: 600; }
+
+/* ---- CARD BASE ---- */
+.card {
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(12,24,41,0.06), 0 4px 14px rgba(12,24,41,0.04);
+    border: 1px solid #e2e8f0;
+    margin-bottom: 14px;
+}
+
+/* ---- STATUS BAR ---- */
+.status-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 18px;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+.status-bar-left { display: flex; flex-direction: column; gap: 2px; }
+.status-bar-left .sb-title { font-size: 15px; font-weight: 800; color: #0c1829; letter-spacing: 0.2px; }
+.status-bar-left .sb-ref { font-size: 11px; color: #64748b; font-weight: 500; }
+.status-bar-center { flex: 1; display: flex; justify-content: center; }
+.step-badge {
+    background: #ede9fe;
+    color: #3730a3;
+    border: 1px solid #a5b4fc;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 5px 14px;
+    border-radius: 20px;
+    white-space: nowrap;
+}
+.status-bar-right { display: flex; gap: 6px; }
+.btn-outline-sm {
+    background: #fff;
+    border: 1px solid #cbd5e1;
+    color: #475569;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 5px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.15s;
+}
+.btn-outline-sm:hover { border-color: #2563eb; color: #2563eb; background: #eff6ff; }
+.btn-outline-sm i { margin-right: 4px; }
+
+/* ---- PROFILE CARD ---- */
+.profile-card {
+    border-top: 3px solid #5e6ad2;
+    padding: 16px 18px;
+}
+.profile-card h1 {
+    color: #2563eb;
+    font-size: 17px;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin: 0 0 8px;
+    letter-spacing: 0.5px;
+}
+.synopsis-scroll {
+    max-height: 80px;
+    overflow-y: auto;
+    font-size: 12.5px;
+    line-height: 1.7;
+    color: #475569;
+    padding-right: 4px;
+}
+.meta-tags { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 6px; }
+.meta-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: #d1fae5;
+    color: #065f46;
+    font-weight: 600;
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 20px;
+}
+.meta-chip i { font-size: 10px; color: #059669; }
+
+/* ---- VIDEO WORKSPACE CARD ---- */
+.workspace-card {
+    display: flex;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(12,24,41,0.08), 0 8px 24px rgba(12,24,41,0.06);
+    border: 1px solid #e2e8f0;
+    margin-bottom: 14px;
+    background: #fff;
+}
+.ws-video-col {
+    flex: 0 0 61%;
+    background: #0f172a;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+.ws-video-col video {
+    width: 100%;
+    display: block;
+    background: #000;
+    flex: 1;
+}
+
+/* Video controls bar */
+.vid-controls {
+    background: #1e293b;
+    padding: 7px 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+}
+.vid-btn {
+    background: none;
+    border: none;
+    color: #e2e8f0;
+    font-size: 14px;
+    cursor: pointer;
+    width: 22px;
+    text-align: center;
+    flex-shrink: 0;
+    padding: 0;
+    line-height: 1;
+}
+.vid-btn:hover { color: #5e6ad2; }
+.vid-time {
+    color: #94a3b8;
+    font-size: 11px;
+    white-space: nowrap;
+    min-width: 38px;
+    font-family: 'Inter', monospace;
+}
+#progressTrack {
+    flex: 1;
+    padding: 10px 0;
+    cursor: pointer;
+    position: relative;
+}
+.vid-rail {
+    height: 4px;
+    background: #334155;
+    border-radius: 2px;
+    position: relative;
+    transition: height 0.12s;
+}
+#progressTrack:hover .vid-rail { height: 6px; }
+#progressFill {
+    height: 100%;
+    width: 0%;
+    background: #5e6ad2;
+    border-radius: 2px;
+    position: relative;
+    pointer-events: none;
+}
+.vid-thumb {
+    width: 12px;
+    height: 12px;
+    background: #fff;
+    border-radius: 50%;
+    position: absolute;
+    right: -6px;
+    top: 50%;
+    transform: translateY(-50%);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.5);
+    opacity: 0;
+    transition: opacity 0.15s;
+}
+#progressTrack:hover .vid-thumb { opacity: 1; }
+
+/* iLPF watermark */
+.ilpf-watermark {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    pointer-events: none;
+    opacity: 0.88;
+    background: #0c1829;
+    border: 2px solid #5e6ad2;
+    padding: 10px 10px 8px;
+    width: 90px;
+    text-align: center;
+    box-shadow: inset 0 0 0 3px #0c1829, inset 0 0 0 5px #5e6ad2;
+}
+.wm-inner {
+    border: 2px solid #5e6ad2;
+    padding: 6px 4px 4px;
+    color: #5e6ad2;
+    font-size: 22px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    font-family: inherit;
+    line-height: 1;
+}
+.wm-sub {
+    color: #5e6ad2;
+    font-size: 8px;
+    margin-top: 7px;
+    line-height: 1.5;
+    font-family: inherit;
+}
+
+/* ---- ANNOTATION PANEL ---- */
+.ws-ann-col {
+    flex: 0 0 39%;
+    background: #fff;
+    border-left: 1px solid #e2e8f0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* File info strip */
+.ann-fileinfo {
+    background: #f1f5f9;
+    border-bottom: 1px solid #e2e8f0;
+    padding: 10px 14px;
+}
+.ann-fileinfo-row {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 11.5px;
+    color: #475569;
+    margin-bottom: 3px;
+}
+.ann-fileinfo-row:last-child { margin-bottom: 0; }
+.ann-fileinfo-row i { color: #2563eb; font-size: 12px; flex-shrink: 0; }
+.ann-fileinfo-row span { font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* Section label */
+.ann-sec-label {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: #94a3b8;
+    padding: 8px 14px 4px;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+/* Timestamp stamp area */
+.ann-stamp-row {
+    display: flex;
+    gap: 8px;
+    padding: 10px 14px;
+    border-bottom: 1px solid #f1f5f9;
+}
+.ann-stamp-col { flex: 1; display: flex; flex-direction: column; }
+.ts-btn-mula {
+    background: #2563eb;
+    color: #fff;
+    border: none;
+    padding: 7px 6px;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+    border-radius: 6px 6px 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    letter-spacing: 0.3px;
+    transition: background 0.15s;
+}
+.ts-btn-mula:hover { background: #1d4ed8; }
+.ts-btn-stop {
+    background: #dc2626;
+    color: #fff;
+    border: none;
+    padding: 7px 6px;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+    border-radius: 6px 6px 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    letter-spacing: 0.3px;
+    transition: background 0.15s;
+}
+.ts-btn-stop:hover { background: #b91c1c; }
+.ts-input {
+    border: 1px solid #e2e8f0;
+    border-top: none;
+    border-radius: 0 0 6px 6px;
+    padding: 6px 8px;
+    font-size: 13px;
+    font-family: 'IBM Plex Mono', monospace;
+    text-align: center;
+    color: #0c1829;
+    font-weight: 600;
+    background: #f8faff;
+    width: 100%;
+    outline: none;
+}
+
+/* Form fields */
+.ann-fields {
+    padding: 10px 14px;
+    border-bottom: 1px solid #f1f5f9;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.ann-field-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: #64748b;
+    margin-bottom: 3px;
+}
+.ann-select {
+    width: 100%;
+    padding: 7px 10px;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    font-size: 12.5px;
+    color: #1e293b;
+    background: #fff;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.15s;
+}
+.ann-select:focus { border-color: #2563eb; box-shadow: 0 0 0 2px rgba(37,99,235,0.15); }
+
+.ahli-pick-btn {
+    display: flex; align-items: center; justify-content: space-between;
+    width: 100%; padding: 6px 10px;
+    background: #f8faff; border: 1px solid #e2e8f0; border-radius: 5px;
+    font-size: 12px; color: #64748b; cursor: pointer; text-align: left;
+    font-family: inherit;
+}
+.ahli-pick-btn:hover { border-color: #2563eb; background: #eff6ff; color: #1d4ed8; }
+.ahli-pick-btn.has-val { color: #1e293b; }
+
+/* Toggle chip grid — Genre & Tema */
+.chip-grid {
+    display: flex; flex-wrap: wrap; gap: 6px;
+    padding: 10px; border: 1px solid #e2e8f0; border-radius: 6px;
+    background: #f8fafc; max-height: 160px; overflow-y: auto;
+}
+.chip-grid .chip {
+    display: inline-flex; align-items: center;
+    padding: 4px 11px; border-radius: 20px;
+    border: 1.5px solid #cbd5e1; background: #fff;
+    color: #475569; font-size: 12px; cursor: pointer;
+    user-select: none; transition: all 0.15s;
+}
+.chip-grid .chip:hover { border-color: #2563eb; color: #1d4ed8; }
+.chip-grid .chip.selected { background: #2563eb; border-color: #1d4ed8; color: #fff; font-weight: 600; }
+
+/* Segmented button group — Pemberat severity */
+.seg-group { display: flex; flex-wrap: wrap; gap: 3px; }
+.seg-btn {
+    padding: 4px 9px; border: 1.5px solid #cbd5e1; border-radius: 4px;
+    background: #fff; font-size: 11px; cursor: pointer;
+    color: #64748b; white-space: nowrap; transition: all 0.12s;
+}
+.seg-btn:hover { border-color: #94a3b8; background: #f1f5f9; }
+/* Keputusan radio buttons */
+.keputusan-group { display: flex; flex-wrap: wrap; gap: 8px; }
+.keputusan-btn {
+    display: flex; align-items: center; gap: 8px;
+    padding: 9px 16px; border-radius: 6px;
+    border: 2px solid #e2e8f0; background: #fff;
+    font-size: 12px; font-weight: 600; cursor: pointer;
+    color: #475569; transition: all 0.15s; letter-spacing: 0.02em;
+}
+.keputusan-btn:hover { border-color: #94a3b8; background: #f8fafc; }
+.keputusan-btn .kep-badge {
+    padding: 2px 7px; border-radius: 10px; font-size: 10px;
+    background: #e2e8f0; color: #475569; font-weight: 700;
+}
+.keputusan-btn.active { border-color: #059669; background: #ecfdf5; color: #065f46; }
+.keputusan-btn.active .kep-badge { background: #059669; color: #fff; }
+.keputusan-tut.active { border-color: #dc2626; background: #fef2f2; color: #991b1b; }
+.keputusan-tut.active .kep-badge { background: #dc2626; color: #fff; }
+
+.seg-btn[data-val="1"].active { background:#059669;border-color:#047857;color:#fff; }
+.seg-btn[data-val="0"].active { background:#64748b;border-color:#475569;color:#fff; }
+.seg-btn[data-val="Tiada"].active       { background:#10b981;border-color:#059669;color:#fff; }
+.seg-btn[data-val="Sangat ringan"].active { background:#84cc16;border-color:#65a30d;color:#fff; }
+.seg-btn[data-val="Ringan"].active      { background:#eab308;border-color:#ca8a04;color:#fff; }
+.seg-btn[data-val="Sederhana"].active   { background:#f97316;border-color:#ea580c;color:#fff; }
+.seg-btn[data-val="Berat"].active       { background:#ef4444;border-color:#dc2626;color:#fff; }
+.seg-btn[data-val="Sangat berat"].active { background:#dc2626;border-color:#b91c1c;color:#fff; }
+.seg-btn[data-val="Keterlaluan"].active { background:#991b1b;border-color:#7f1d1d;color:#fff; }
+
+/* Rating pill group — Klasifikasi */
+.rating-group { display:flex; gap:5px; }
+.rating-btn {
+    padding: 5px 14px; border-radius: 4px; border: 1.5px solid #cbd5e1;
+    background: #fff; font-size: 13px; font-weight: 600; cursor: pointer;
+    color: #475569; transition: all 0.12s;
+}
+.rating-btn:hover { border-color: #2563eb; }
+.rating-btn.active { background: #1e3a5f; border-color: #1e3a5f; color: #fff; }
+
+.chip-hint { font-size: 11px; color: #94a3b8; margin-top: 4px; }
+
+/* ---- PICKER TRIGGER ---- */
+.picker-box {
+    display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+    padding: 7px 10px; border: 1.5px solid #e2e8f0; border-radius: 6px;
+    background: #f8faff; cursor: pointer; min-height: 38px;
+    transition: border-color 0.15s;
+}
+.picker-box:hover { border-color: #2563eb; }
+.picker-tags { display: flex; flex-wrap: wrap; gap: 5px; flex: 1; }
+.picker-tag {
+    display: inline-flex; align-items: center; gap: 4px;
+    padding: 3px 8px; border-radius: 12px;
+    background: #2563eb; color: #fff; font-size: 11.5px; font-weight: 600;
+}
+.picker-empty { color: #94a3b8; font-size: 12px; }
+.picker-edit-btn {
+    flex-shrink: 0; padding: 4px 10px; border-radius: 4px;
+    border: 1.5px solid #cbd5e1; background: #fff; font-size: 11px;
+    color: #475569; cursor: pointer; white-space: nowrap;
+}
+.picker-edit-btn:hover { border-color: #2563eb; color: #1d4ed8; }
+
+/* ---- PICKER MODAL ---- */
+.picker-overlay {
+    display: none; position: fixed; inset: 0;
+    background: rgba(15,23,42,0.55); z-index: 1000;
+    align-items: center; justify-content: center;
+}
+.picker-overlay.open { display: flex; }
+.picker-modal {
+    background: #fff; border-radius: 10px;
+    width: 560px; max-width: 95vw;
+    max-height: 80vh; display: flex; flex-direction: column;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+}
+.picker-modal-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 18px; border-bottom: 1px solid #f1f5f9;
+}
+.picker-modal-title { font-weight: 700; font-size: 14px; color: #1e293b; }
+.picker-modal-close {
+    background: none; border: none; font-size: 18px; cursor: pointer;
+    color: #94a3b8; line-height: 1; padding: 2px 6px; border-radius: 4px;
+}
+.picker-modal-close:hover { background: #f1f5f9; color: #475569; }
+.picker-modal-search {
+    padding: 10px 18px; border-bottom: 1px solid #f8fafc;
+}
+.picker-modal-search input {
+    width: 100%; padding: 7px 12px; border: 1.5px solid #e2e8f0;
+    border-radius: 6px; font-size: 12.5px; outline: none;
+    font-family: inherit; color: #1e293b;
+}
+.picker-modal-search input:focus { border-color: #2563eb; }
+.picker-modal-body {
+    flex: 1; overflow-y: auto; padding: 14px 18px;
+}
+.picker-modal-chips {
+    display: flex; flex-wrap: wrap; gap: 7px;
+}
+.picker-modal-chip {
+    padding: 5px 13px; border-radius: 20px;
+    border: 1.5px solid #cbd5e1; background: #fff;
+    color: #475569; font-size: 12px; cursor: pointer;
+    user-select: none; transition: all 0.12s;
+}
+.picker-modal-chip:hover { border-color: #2563eb; color: #1d4ed8; }
+.picker-modal-chip.selected { background: #2563eb; border-color: #1d4ed8; color: #fff; font-weight: 600; }
+.picker-modal-chip.hidden { display: none; }
+.picker-modal-footer {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 18px; border-top: 1px solid #f1f5f9; gap: 10px;
+}
+.picker-count { font-size: 12px; color: #64748b; }
+.picker-btn-cancel {
+    padding: 8px 18px; border-radius: 5px; border: 1.5px solid #e2e8f0;
+    background: #fff; font-size: 12.5px; color: #64748b; cursor: pointer;
+}
+.picker-btn-cancel:hover { background: #f8fafc; }
+.picker-btn-confirm {
+    padding: 8px 20px; border-radius: 5px; border: none;
+    background: #059669; color: #fff; font-size: 12.5px;
+    font-weight: 600; cursor: pointer;
+}
+.picker-btn-confirm:hover { background: #047857; }
+
+/* Tindakan icon button group */
+.tindakan-group { display: flex; flex-wrap: wrap; gap: 4px; }
+.tindakan-btn {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 6px 8px; border: 1.5px solid #e2e8f0; border-radius: 6px;
+    background: #fff; cursor: pointer; font-size: 10px; color: #64748b;
+    gap: 3px; min-width: 52px; transition: all 0.12s; flex: 1;
+}
+.tindakan-btn i { font-size: 14px; }
+.tindakan-btn:hover { border-color: #2563eb; color: #1d4ed8; }
+.tindakan-btn.active { background: #1e3a5f; border-color: #1e3a5f; color: #fff; }
+
+/* Adegan chip grid (single-select) */
+.adegan-grid { display: flex; flex-wrap: wrap; gap: 5px; }
+.adegan-chip {
+    padding: 4px 10px; border-radius: 14px; border: 1.5px solid #e2e8f0;
+    background: #fff; font-size: 11px; color: #475569; cursor: pointer;
+    white-space: nowrap; transition: all 0.12s; user-select: none;
+}
+.adegan-chip:hover { border-color: #e74c3c; color: #c0392b; }
+.adegan-chip.active { background: #e74c3c; border-color: #c0392b; color: #fff; font-weight: 600; }
+.ann-textarea {
+    width: 100%;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 7px 10px;
+    font-size: 12.5px;
+    font-family: inherit;
+    color: #1e293b;
+    resize: vertical;
+    min-height: 72px;
+    outline: none;
+    transition: border-color 0.15s;
+}
+.ann-textarea:focus { border-color: #2563eb; box-shadow: 0 0 0 2px rgba(37,99,235,0.15); }
+
+/* Save button */
+.ann-save-row {
+    padding: 12px 14px;
+    background: #fff;
+    margin-top: auto;
+}
+.btn-simpan {
+    width: 100%;
+    background: linear-gradient(135deg, #059669 0%, #047857 100%);
+    color: #fff;
+    border: none;
+    padding: 10px;
+    font-size: 12.5px;
+    font-weight: 700;
+    border-radius: 7px;
+    cursor: pointer;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    transition: all 0.2s;
+    box-shadow: 0 2px 8px rgba(5,150,105,0.3);
+}
+.btn-simpan:hover { background: linear-gradient(135deg, #047857 0%, #065f46 100%); box-shadow: 0 4px 12px rgba(5,150,105,0.4); transform: translateY(-1px); }
+
+/* ---- SENARAI PENGUBAHAN ---- */
+.senarai-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 16px;
+    cursor: pointer;
+    border-bottom: 1px solid #e2e8f0;
+    background: #f1f5f9;
+    border-radius: 8px 8px 0 0;
+}
+.senarai-header:hover { background: #e8eef5; }
+.sh-title { font-size: 12px; font-weight: 700; color: #334155; display: flex; align-items: center; gap: 7px; }
+.sh-toggle { color: #94a3b8; font-size: 13px; }
+
+.senarai-tabs {
+    border-bottom: 1px solid #e2e8f0;
+    padding: 0 14px;
+    background: #fff;
+}
+.senarai-tabs a {
+    display: inline-block;
+    padding: 8px 16px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #64748b;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    text-decoration: none;
+    transition: color 0.15s;
+}
+.senarai-tabs a.active { color: #0c1829; border-bottom-color: #5e6ad2; font-weight: 700; }
+.senarai-tabs a:hover { color: #0c1829; }
+
+.senarai-body { padding: 0; overflow-x: auto; }
+
+/* Senarai table */
+.senarai-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+.senarai-table th {
+    background: #f1f5f9;
+    padding: 8px 14px;
+    font-weight: 700;
+    color: #94a3b8;
+    text-transform: uppercase;
+    font-size: 10px;
+    letter-spacing: 0.6px;
+    border-bottom: 1px solid #e2e8f0;
+    text-align: left;
+    white-space: nowrap;
+}
+.senarai-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid #f1f5f9;
+    vertical-align: middle;
+}
+.senarai-table tbody tr:last-child td { border-bottom: none; }
+.senarai-table tbody tr:hover td { background: #f1f5f9; }
+.senarai-table td:nth-child(2) { white-space: nowrap; }
+
+/* Bil badge */
+.bil-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #e2e8f0;
+    color: #475569;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+/* Timestamp links */
+.ts-link {
+    color: #2563eb;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11.5px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+}
+.ts-link:hover { text-decoration: underline; color: #1d4ed8; }
+.btn-cf-edit {
+    background: none; border: none; color: #cbd5e1;
+    cursor: pointer; font-size: 10px; padding: 1px 3px; border-radius: 3px;
+    line-height: 1; vertical-align: middle; margin-left: 3px;
+    transition: color 0.12s, background 0.12s; display: inline-block;
+}
+.btn-cf-edit:hover { color: #3b82f6; background: #eff6ff; }
+/* Edit Field Modal */
+#efModal { display:none; position:fixed; inset:0; z-index:5000; background:rgba(0,0,0,0.4); align-items:center; justify-content:center; }
+#efModal.show { display:flex; }
+.efm-box { background:#fff; border-radius:10px; padding:24px; min-width:320px; max-width:480px; width:90%; box-shadow:0 20px 60px rgba(0,0,0,0.22); }
+.efm-title { font-size:14px; font-weight:700; color:#1e293b; margin-bottom:4px; }
+.efm-label { font-size:10.5px; font-weight:700; color:#64748b; text-transform:uppercase; letter-spacing:.5px; margin-bottom:8px; margin-top:12px; }
+.efm-input { width:100%; padding:8px 10px; border:1.5px solid #e2e8f0; border-radius:6px; font-size:13px; font-family:inherit; color:#1e293b; }
+.efm-input:focus { outline:none; border-color:#2563eb; box-shadow:0 0 0 2px rgba(37,99,235,0.15); }
+.efm-chips { display:flex; flex-wrap:wrap; gap:5px; }
+.efm-chip { padding:4px 10px; border-radius:14px; border:1.5px solid #e2e8f0; background:#fff; font-size:11px; color:#475569; cursor:pointer; white-space:nowrap; transition:all 0.12s; user-select:none; }
+.efm-chip:hover { border-color:#e74c3c; color:#c0392b; }
+.efm-chip.active { background:#e74c3c; border-color:#c0392b; color:#fff; font-weight:600; }
+.efm-footer { display:flex; gap:8px; justify-content:flex-end; margin-top:20px; }
+.efm-cancel { padding:7px 16px; border-radius:6px; border:1.5px solid #e2e8f0; background:#fff; color:#64748b; font-size:12px; font-weight:600; cursor:pointer; }
+.efm-cancel:hover { background:#f8fafc; }
+.efm-save { padding:7px 16px; border-radius:6px; border:none; background:#2563eb; color:#fff; font-size:12px; font-weight:600; cursor:pointer; }
+.efm-save:hover { background:#1d4ed8; }
+
+/* Chip badges in table */
+.chip-blue {
+    display: inline-block;
+    background: #dbeafe;
+    color: #1d4ed8;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 10px;
+}
+.chip-amber {
+    display: inline-block;
+    background: #ede9fe;
+    color: #3730a3;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 10px;
+}
+
+.btn-play-sm {
+    background: #059669;
+    color: #fff;
+    border: none;
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    margin-right: 4px;
+    transition: background 0.15s;
+}
+.btn-play-sm:hover { background: #047857; }
+.btn-del-sm {
+    background: #dc2626;
+    color: #fff;
+    border: none;
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    transition: background 0.15s;
+}
+.btn-del-sm:hover { background: #b91c1c; }
+
+/* Keterangan truncate */
+.ket-text {
+    max-width: 160px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #475569;
+}
+
+/* ---- TABS SECTION ---- */
+.tab-section {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(12,24,41,0.06), 0 4px 14px rgba(12,24,41,0.04);
+    border: 1px solid #e2e8f0;
+    margin-bottom: 14px;
+}
+.nav-tabs-custom {
+    background: #f1f5f9;
+    border-bottom: 1px solid #e2e8f0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    border-radius: 8px 8px 0 0;
+    overflow: hidden;
+}
+.nav-tabs-custom li a {
+    display: block;
+    padding: 12px 22px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #64748b;
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    transition: color 0.15s;
+    white-space: nowrap;
+    letter-spacing: 0.2px;
+}
+.nav-tabs-custom li.active a {
+    color: #0c1829;
+    background: #fff;
+    border-bottom: 2px solid #5e6ad2;
+    font-weight: 700;
+}
+.nav-tabs-custom li a:hover { color: #0c1829; }
+.tab-body { padding: 20px; }
+.tab-pane { display: none; }
+.tab-pane.active { display: block; }
+
+/* ---- FORM TABLE (Tindakan tab) ---- */
+.form-tbl {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 16px;
+}
+.form-tbl td {
+    padding: 10px 14px;
+    border-bottom: 1px solid #f1f5f9;
+    vertical-align: top;
+    font-size: 12.5px;
+}
+.form-tbl td.lbl {
+    width: 22%;
+    background: #f1f5f9;
+    font-weight: 600;
+    color: #475569;
+    border-right: 1px solid #e8eef5;
+    white-space: nowrap;
+    font-size: 11.5px;
+    letter-spacing: 0.1px;
+}
+.form-tbl tr.sec-hdr td {
+    background: #1e3a8a;
+    color: #bfdbfe;
+    font-weight: 700;
+    font-size: 10.5px;
+    padding: 7px 14px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+.form-control {
+    border-radius: 6px !important;
+    font-size: 12.5px !important;
+    border-color: #e2e8f0 !important;
+    font-family: inherit !important;
+}
+.form-control:focus {
+    border-color: #2563eb !important;
+    box-shadow: 0 0 0 2px rgba(37,99,235,0.15) !important;
+    outline: none !important;
+}
+.req { color: #dc2626; }
+
+/* Pills */
+.multi-pill-box {
+    border: 1px solid #e2e8f0;
+    padding: 6px;
+    background: #fff;
+    min-height: 38px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    align-items: center;
+    cursor: text;
+    border-radius: 6px;
+}
+.pill {
+    background: #dbeafe;
+    color: #1d4ed8;
+    padding: 3px 9px;
+    font-size: 11px;
+    border-radius: 10px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-weight: 600;
+}
+.pill .x { color: #60a5fa; cursor: pointer; font-size: 12px; }
+.pill .x:hover { color: #dc2626; }
+
+/* PEMBERAT */
+.pemberat-tbl { width: 100%; border-collapse: collapse; }
+.pemberat-tbl td { border-bottom: 1px solid #f1f5f9; padding: 7px 10px; font-size: 12px; }
+.pemberat-tbl td:first-child { width: 190px; background: #f1f5f9; font-weight: 600; color: #475569; font-size: 11.5px; }
+
+/* Detail table (Butir-Butir) */
+.detail-tbl { width: 100%; border-collapse: collapse; }
+.detail-tbl td { border-bottom: 1px solid #f1f5f9; padding: 10px 14px; font-size: 12.5px; }
+.detail-tbl tr:last-child td { border-bottom: none; }
+.detail-tbl td:first-child { width: 28%; font-weight: 600; color: #475569; background: #f1f5f9; font-size: 11.5px; }
+
+/* ---- BUTIR-BUTIR PERMOHONAN ENHANCED ---- */
+.bb-hero { background: linear-gradient(135deg, #0c1829 0%, #152238 100%); border-radius: 8px; padding: 20px 22px; margin-bottom: 16px; border: 1px solid rgba(94,106,210,0.3); }
+.bb-hero-title { font-size: 19px; font-weight: 800; color: #fff; letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 10px; line-height: 1.3; }
+.bb-hero-badges { display: flex; gap: 7px; flex-wrap: wrap; }
+.bb-hero-badge { background: rgba(94,106,210,0.12); border: 1px solid rgba(94,106,210,0.35); color: #5e6ad2; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 20px; display: inline-flex; align-items: center; gap: 5px; }
+.bb-featured { display: flex; gap: 0; margin-bottom: 16px; border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden; background: #f8fafc; }
+.bb-stat { flex: 1; text-align: center; padding: 14px 10px; border-right: 1px solid #e2e8f0; }
+.bb-stat:last-child { border-right: none; }
+.bb-stat-val { font-size: 17px; font-weight: 800; color: #1e293b; line-height: 1.2; }
+.bb-stat-val.sm { font-size: 12px; font-weight: 700; }
+.bb-stat-lbl { font-size: 10px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px; }
+.bb-section-title { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: #94a3b8; margin: 0 0 10px; padding-bottom: 6px; border-bottom: 1px solid #f1f5f9; display: flex; align-items: center; gap: 6px; }
+.bb-section-title i { color: #cbd5e1; }
+.bb-credits { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 14px 16px; margin-bottom: 16px; }
+.bb-credits-row { display: flex; align-items: flex-start; gap: 12px; padding: 7px 0; border-bottom: 1px solid #f1f5f9; }
+.bb-credits-row:last-child { border-bottom: none; padding-bottom: 0; }
+.bb-credits-row:first-child { padding-top: 0; }
+.bb-credits-role { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: #94a3b8; min-width: 76px; flex-shrink: 0; padding-top: 2px; }
+.bb-credits-name { font-size: 13px; font-weight: 600; color: #1e293b; }
+.bb-docs { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
+.bb-doc-card { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border: 1px solid #e2e8f0; border-radius: 8px; background: #fff; text-decoration: none; transition: all 0.15s; cursor: pointer; }
+.bb-doc-card:hover { border-color: #2563eb; background: #eff6ff; }
+.bb-doc-icon { width: 38px; height: 38px; background: #dbeafe; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #2563eb; font-size: 17px; flex-shrink: 0; }
+.bb-doc-sublabel { font-size: 10px; font-weight: 700; text-transform: uppercase; color: #94a3b8; letter-spacing: 0.5px; margin-bottom: 2px; }
+.bb-doc-name { font-size: 12.5px; font-weight: 600; color: #1e293b; }
+.bb-doc-meta { font-size: 11px; color: #94a3b8; margin-top: 1px; }
+.bb-doc-arrow { color: #94a3b8; font-size: 13px; margin-left: auto; flex-shrink: 0; }
+.bb-comment { background: #eef0ff; border: 2px solid #a5b4fc; border-radius: 8px; padding: 14px 16px; }
+.bb-comment-label { font-size: 10px; font-weight: 700; text-transform: uppercase; color: #3730a3; letter-spacing: 0.6px; margin-bottom: 8px; display: flex; align-items: center; gap: 5px; }
+.bb-comment-text { font-size: 13px; color: #1e293b; line-height: 1.75; }
+
+/* Kronologi timeline */
+.kron-timeline { padding: 6px 4px 0; }
+.kron-item { display: flex; position: relative; }
+.kron-item:not(:last-child)::before {
+    content: '';
+    position: absolute;
+    left: 18px;
+    top: 36px;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, #cbd5e1, #e2e8f0);
+    z-index: 0;
+}
+.kron-dot {
+    width: 38px;
+    min-width: 38px;
+    padding-top: 2px;
+    display: flex;
+    justify-content: center;
+    z-index: 1;
+}
+.kron-circle {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+    color: #fff;
+    outline: 3px solid #fff;
+    outline-offset: 2px;
+    flex-shrink: 0;
+}
+.kron-body {
+    flex: 1;
+    padding: 0 0 22px 14px;
+}
+.kron-status-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 4px;
+    flex-wrap: wrap;
+}
+.kron-badge {
+    font-size: 10.5px;
+    font-weight: 700;
+    padding: 3px 9px;
+    border-radius: 4px;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+}
+.kron-time {
+    font-size: 11px;
+    color: #94a3b8;
+    margin-left: auto;
+    white-space: nowrap;
+}
+.kron-user {
+    font-size: 11px;
+    color: #64748b;
+    font-weight: 600;
+    margin-bottom: 3px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+.kron-user::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: currentColor; display: inline-block; }
+.kron-desc {
+    font-size: 11.5px;
+    color: #64748b;
+    line-height: 1.55;
+}
+
+/* Bottom action bar */
+.bottom-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 0 0;
+}
+.bottom-actions .right-btns { display: flex; gap: 8px; }
+.btn-lg-custom {
+    padding: 9px 20px;
+    font-size: 12.5px;
+    font-weight: 600;
+    border-radius: 7px;
+    cursor: pointer;
+    font-family: inherit;
+    letter-spacing: 0.3px;
+    transition: all 0.15s;
+}
+.btn-back { background: #fff; border: 1px solid #cbd5e1 !important; color: #475569; border: none; }
+.btn-back:hover { background: #f1f5f9; border-color: #94a3b8 !important; }
+.btn-save { background: #2563eb; color: #fff; border: none; }
+.btn-save:hover { background: #1d4ed8; }
+.btn-report { background: #fff; color: #2563eb; border: 1px solid #2563eb !important; }
+.btn-report:hover { background: #eff6ff; }
+.btn-submit { background: #059669; color: #fff; border: none; }
+.btn-submit:hover { background: #047857; }
+
+/* Footer */
+.page-footer { background: #e9eef5; border-top: 1px solid #d1dae5; padding: 12px 20px; font-size: 11px; color: #94a3b8; }
+
+/* CKEditor toolbar mock */
+.ck-toolbar {
+    background: #f1f5f9;
+    border: 1px solid #e2e8f0;
+    border-bottom: none;
+    padding: 5px 8px;
+    font-size: 12px;
+    color: #475569;
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    align-items: center;
+    border-radius: 6px 6px 0 0;
+}
+.ck-toolbar span { cursor: pointer; padding: 2px 5px; border-radius: 3px; user-select: none; transition: background 0.1s; }
+.ck-toolbar span:hover { background: #e2e8f0; }
+.ck-toolbar span.ck-active { background: #dbeafe; color: #1d4ed8; }
+.ck-toolbar .ck-sep { border-left: 1px solid #e2e8f0; height: 14px; margin: 0 3px; }
+.ck-dropdown { position: fixed; background: #fff; border: 1px solid #e2e8f0; border-radius: 7px; box-shadow: 0 6px 20px rgba(0,0,0,0.13); min-width: 150px; overflow: hidden; z-index: 9999; }
+.ck-dd-item { padding: 8px 13px; cursor: pointer; font-size: 12px; color: #334155; }
+.ck-dd-item:hover { background: #f1f5f9; }
+.ck-colorpicker { display: flex; gap: 5px; padding: 8px; flex-wrap: wrap; min-width: unset; width: auto; }
+.ck-color-swatch { width: 22px; height: 22px; border-radius: 4px; cursor: pointer; border: 1px solid rgba(0,0,0,0.15); transition: transform 0.1s; }
+.ck-color-swatch:hover { transform: scale(1.25); }
+.ck-body:focus { outline: none; border-color: #2563eb; box-shadow: 0 0 0 2px rgba(37,99,235,0.15); }
+.ck-fullscreen { position: fixed !important; top: 50px !important; left: 16px !important; right: 16px !important; bottom: 16px !important; z-index: 9990 !important; overflow-y: auto !important; min-height: unset !important; border-radius: 8px !important; }
+.ck-body {
+    border: 1px solid #e2e8f0;
+    padding: 10px;
+    min-height: 100px;
+    font-size: 13px;
+    background: #fff;
+    border-radius: 0 0 6px 6px;
+    color: #334155;
+}
+
+/* Modal steps */
+.m-step {
+    flex: 1;
+    text-align: center;
+    padding: 10px 6px;
+    min-width: 70px;
+}
+.m-step-active {
+    background: #eff4ff;
+    border: 1px solid #93c5fd;
+    border-radius: 4px;
+}
+.m-num { font-size: 26px; font-weight: 800; color: #8fa5bb; line-height: 1; }
+.m-step-active .m-num { color: #2563eb; }
+.m-ttl { font-size: 9px; font-weight: 700; color: #6e86a0; text-transform: uppercase; margin-top: 6px; line-height: 1.3; }
+.m-step-active .m-ttl { color: #1d4ed8; }
+.m-dsc { font-size: 8.5px; color: #9eaec0; margin-top: 3px; line-height: 1.3; }
+.m-step-active .m-dsc { color: #3b82f6; }
+.m-arrow { display: flex; align-items: center; color: #c0cdd8; font-size: 20px; padding: 0 2px; flex-shrink: 0; }
+
+/* Panel lantik */
+.lantik-panel { border: 1px solid #e2e8f0; padding: 12px; margin-top: 10px; border-radius: 6px; }
+.lantik-panel label { font-weight: 600; font-size: 12px; margin-bottom: 6px; display: block; color: #475569; }
+.panel-list { border: 1px solid #e2e8f0; height: 90px; width: 100%; font-size: 12px; }
+
+/* Responsive */
+@media (max-width: 900px) {
+    .workspace-card { flex-direction: column; }
+    .ws-video-col, .ws-ann-col { flex: none; width: 100%; }
+    .status-bar { flex-direction: column; align-items: flex-start; }
+}
+
+/* ══════════════════════════════════════════════════════════
+   DESIGN ELEVATION — animations, micro-interactions & polish
+   ══════════════════════════════════════════════════════════ */
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #94a3b8; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #5e6ad2; }
+
+/* Header — amber glow bottom border */
+.page-header-top { border-bottom-color: rgba(94,106,210,0.22); }
+
+/* Sidebar — subtle dot texture for depth */
+.sidebar {
+    background-image: radial-gradient(rgba(255,255,255,0.025) 1px, transparent 1px);
+    background-size: 22px 22px;
+}
+
+/* ---- Page load staggered reveal ---- */
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+.breadcrumb-inline { animation: fadeUp 0.30s ease both; }
+.status-bar        { animation: fadeUp 0.35s 0.06s ease both; }
+.profile-card      { animation: fadeUp 0.35s 0.12s ease both; }
+.workspace-card    { animation: fadeUp 0.35s 0.18s ease both; }
+.tab-section       { animation: fadeUp 0.35s 0.24s ease both; }
+
+/* ---- Watermark subtle breathe ---- */
+@keyframes wmPulse {
+    0%,100% { opacity:0.88; }
+    50%     { opacity:0.62; }
+}
+.ilpf-watermark { animation: wmPulse 5s ease-in-out infinite; }
+
+/* ---- Step progress bar ---- */
+.step-progress-bar {
+    width: 160px; height: 3px;
+    background: rgba(94,106,210,0.2);
+    border-radius: 2px;
+    overflow: hidden;
+    margin: 7px auto 0;
+}
+.step-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #5e6ad2 0%, #818cf8 100%);
+    border-radius: 2px;
+}
+
+/* ---- Annotation section label ---- */
+.ann-sec-label { padding-left: 11px; }
+
+/* ---- Tindakan buttons — spring lift ---- */
+.tindakan-btn { transition: all 0.2s cubic-bezier(0.34,1.56,0.64,1); }
+.tindakan-btn:hover  { transform: translateY(-3px); box-shadow: 0 5px 16px rgba(37,99,235,0.2); border-color: #2563eb; color: #1d4ed8; }
+.tindakan-btn.active { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(30,58,95,0.25); }
+
+/* ---- Adegan chips — spring ---- */
+.adegan-chip { transition: all 0.18s cubic-bezier(0.34,1.56,0.64,1); }
+.adegan-chip:hover  { transform: translateY(-2px); box-shadow: 0 3px 10px rgba(231,76,60,0.18); }
+.adegan-chip.active { transform: translateY(-1px); box-shadow: 0 2px 12px rgba(231,76,60,0.3); }
+
+/* ---- Keputusan decision buttons ---- */
+.keputusan-btn { transition: all 0.18s ease; }
+.keputusan-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.1); }
+.keputusan-btn.active { box-shadow: 0 4px 14px rgba(5,150,105,0.25); }
+.keputusan-tut.active { box-shadow: 0 4px 14px rgba(220,38,38,0.25); }
+
+/* ---- Rating buttons ---- */
+.rating-btn { transition: all 0.15s; }
+.rating-btn:hover  { transform: translateY(-1px); box-shadow: 0 4px 10px rgba(0,0,0,0.12); }
+.rating-btn.active { transform: translateY(-1px); box-shadow: 0 4px 14px rgba(30,58,95,0.3); }
+
+/* ---- Timestamp stamp buttons ---- */
+.ts-btn-mula, .ts-btn-stop { transition: filter 0.15s, transform 0.12s; }
+.ts-btn-mula:hover { filter: brightness(1.1); transform: translateY(-1px); }
+.ts-btn-stop:hover { filter: brightness(1.1); transform: translateY(-1px); }
+
+/* ---- Senarai table row hover — amber inset left accent ---- */
+.senarai-table tbody tr td:first-child { transition: box-shadow 0.15s; }
+.senarai-table tbody tr:hover td:first-child { box-shadow: inset 3px 0 0 #5e6ad2; }
+
+/* ---- Tab nav hover — amber preview underline ---- */
+.nav-tabs-custom li:not(.active) a:hover { border-bottom: 2px solid rgba(94,106,210,0.38); }
+
+/* ---- Picker box hover depth ---- */
+.picker-box:hover { box-shadow: 0 0 0 3px rgba(37,99,235,0.1); }
+
+/* ---- Bottom action buttons ---- */
+.btn-lg-custom { transition: all 0.18s; }
+.btn-save:hover   { transform: translateY(-1px); box-shadow: 0 4px 14px rgba(37,99,235,0.3); }
+.btn-submit:hover { transform: translateY(-1px); box-shadow: 0 4px 14px rgba(5,150,105,0.3); }
+
+/* ---- Profile card h1 — bottom divider ---- */
+.profile-card h1 { border-bottom: 1px solid #e2e8f0; padding-bottom: 10px; margin-bottom: 10px; }
+
+/* ---- Meta chips — navy/amber palette alignment ---- */
+.meta-chip   { background: rgba(12,24,41,0.07); color: #1e293b; border: 1px solid rgba(12,24,41,0.1); }
+.meta-chip i { color: #5e6ad2; }
+
+/* ---- Bil badge — navy + amber ---- */
+.bil-badge { background: #0c1829; color: #5e6ad2; font-size: 10.5px; }
+
+/* ---- KEPUTUSAN section — elevated shadow prominence ---- */
+div[style*="border:2px solid #1e3a8a"] {
+    box-shadow: 0 6px 28px rgba(30,58,138,0.18), 0 2px 8px rgba(30,58,138,0.08);
+}
+
+/* ---- Focus visible ---- */
+button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+    outline: 2px solid #5e6ad2;
+    outline-offset: 2px;
+}
+
+/* ══════════════════════════════════════════════════════════
+   LINEAR REDESIGN — typography, component & layout polish
+   ══════════════════════════════════════════════════════════ */
+
+/* Sharper card — hairline border, minimal shadow */
+.card, .workspace-card, .tab-section {
+    border-color: #dde3ec;
+    box-shadow: 0 1px 2px rgba(15,23,42,0.05), 0 2px 8px rgba(15,23,42,0.04);
+}
+
+/* Header — tighter, cleaner with blue accent line */
+.page-header-top {
+    border-bottom: 1px solid rgba(94,106,210,0.18);
+    box-shadow: 0 1px 0 rgba(94,106,210,0.08);
+}
+
+/* Header logo — Linear-style square mark */
+.header-logo {
+    background: #5e6ad2;
+    color: #fff;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 1.5px;
+    border-radius: 5px;
+    padding: 5px 10px;
+}
+
+/* Header title */
+.header-title {
+    font-size: 12px;
+    font-weight: 400;
+    color: #64748b;
+    letter-spacing: 0;
+}
+
+/* Sidebar — slightly lighter surface, blue active state */
+.sidebar { background: #0d1526; }
+.sidebar > ul > li > a { color: #8892a4; font-size: 12px; font-weight: 500; border-left: none; padding-left: 18px; }
+.sidebar > ul > li > a:hover,
+.sidebar > ul > li.open > a { background: rgba(94,106,210,0.1); color: #c7d2fe; border-left: none; }
+.sub-menu { background: #080f1c; }
+.sub-menu li a { color: #6b7a94; padding-left: 36px; }
+.sub-menu li a:hover,
+.sub-menu li.active a { background: rgba(94,106,210,0.08); color: #a5b4fc; }
+
+/* Breadcrumb — Inter, crisp */
+.breadcrumb-inline { font-size: 11.5px; font-weight: 400; }
+.breadcrumb-inline .cur { font-weight: 600; }
+
+/* Status bar title */
+.status-bar-left .sb-title { font-size: 14px; font-weight: 700; letter-spacing: -0.1px; }
+
+/* Step badge — clean pill */
+.step-badge {
+    background: #ede9fe;
+    color: #4338ca;
+    border-color: #c4b5fd;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0;
+}
+
+/* Profile card — blue top bar, tighter heading */
+.profile-card h1 {
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: -0.2px;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 9px;
+    margin-bottom: 9px;
+}
+.meta-chip { font-size: 11px; font-weight: 500; }
+
+/* Nav tabs — Linear style underline tabs */
+.nav-tabs-custom { background: #f8fafc; border-bottom: 1px solid #e2e8f0; }
+.nav-tabs-custom li a { font-size: 12px; font-weight: 500; padding: 10px 20px; color: #64748b; }
+.nav-tabs-custom li.active a { font-weight: 600; background: transparent; color: #0f172a; border-bottom: 2px solid #5e6ad2; }
+.nav-tabs-custom li:not(.active) a:hover { color: #0f172a; border-bottom: 2px solid rgba(94,106,210,0.3); background: transparent; }
+
+/* Tab body — tighter padding */
+.tab-body { padding: 18px 20px; }
+
+/* Senarai tabs */
+.senarai-tabs { background: #f8fafc; }
+.senarai-tabs a { font-weight: 500; color: #64748b; }
+.senarai-tabs a.active { color: #0f172a; border-bottom-color: #5e6ad2; font-weight: 600; }
+
+/* Table headers — clean cool gray */
+.senarai-table th { background: #f8fafc; color: #64748b; font-size: 10px; letter-spacing: 0.5px; }
+.senarai-table tbody tr:hover td { background: #f5f7fb; }
+.senarai-header { background: #f8fafc; }
+.senarai-header:hover { background: #f1f5f9; }
+
+/* Form table label cells — cool tone */
+.form-tbl td.lbl { background: #f8fafc; color: #475569; border-right: 1px solid #e8eef5; font-size: 11.5px; }
+.pemberat-tbl td:first-child { background: #f8fafc; color: #475569; }
+.detail-tbl td:first-child { background: #f8fafc; color: #475569; }
+
+/* Chip/badge — Inter */
+.chip-amber, .chip-blue { font-size: 10.5px; font-weight: 600; border-radius: 5px; padding: 2px 7px; }
+.chip-amber { background: #ede9fe; color: #4338ca; }
+
+/* Bil badge */
+.bil-badge { background: #1e3a8a; color: #bfdbfe; font-size: 10.5px; font-weight: 700; }
+
+/* Buttons — consistent Inter vocabulary */
+.btn-outline-sm { font-size: 11px; font-weight: 500; border-radius: 5px; }
+.btn-lg-custom { font-family: inherit; font-weight: 600; border-radius: 6px; letter-spacing: 0; }
+.btn-save { background: #5e6ad2; }
+.btn-save:hover { background: #4f5bbf; box-shadow: 0 3px 10px rgba(94,106,210,0.35); transform: none; }
+.btn-back { color: #475569; }
+.btn-report { color: #5e6ad2; border-color: #5e6ad2 !important; }
+.btn-report:hover { background: #eff0ff; }
+
+/* CKEditor toolbar — cool bg */
+.ck-toolbar { background: #f8fafc; border-color: #e2e8f0; }
+.ck-toolbar span:hover { background: #e8eef5; }
+
+/* Button simpan — blue instead of green */
+.btn-simpan {
+    background: linear-gradient(135deg, #5e6ad2 0%, #4f5bbf 100%);
+    box-shadow: 0 2px 8px rgba(94,106,210,0.28);
+}
+.btn-simpan:hover {
+    background: linear-gradient(135deg, #4f5bbf 0%, #3d4da8 100%);
+    box-shadow: 0 4px 12px rgba(94,106,210,0.38);
+    transform: none;
+}
+
+/* Picker confirm button */
+.picker-btn-confirm { background: #5e6ad2; }
+.picker-btn-confirm:hover { background: #4f5bbf; }
+
+/* Picker tags */
+.picker-tag { background: #5e6ad2; }
+
+/* Picker modal chip selected */
+.picker-modal-chip.selected { background: #5e6ad2; border-color: #4f5bbf; }
+.chip-grid .chip.selected { background: #5e6ad2; border-color: #4f5bbf; }
+
+/* Tindakan active state — Linear blue */
+.tindakan-btn.active { background: #1e3a8a; border-color: #1e3a8a; color: #bfdbfe; }
+.tindakan-btn:hover { border-color: #5e6ad2; color: #5e6ad2; box-shadow: 0 3px 12px rgba(94,106,210,0.18); }
+
+/* Rating btn active — deep blue */
+.rating-btn.active { background: #1e3a8a; border-color: #1e3a8a; color: #fff; }
+.rating-btn:hover { border-color: #5e6ad2; }
+
+/* Scrollbar — clean */
+::-webkit-scrollbar-thumb { background: #cbd5e1; }
+::-webkit-scrollbar-thumb:hover { background: #5e6ad2; }
+
+/* Edit modal save */
+.efm-save { background: #5e6ad2; }
+.efm-save:hover { background: #4f5bbf; }
+
+/* Ann fileinfo — subtle blue tint */
+.ann-fileinfo { background: #f5f7fb; }
+
+/* Ann-sec-label — color emphasis, no stripe */
+.ann-sec-label { color: #5e6ad2; font-size: 10px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; }
+
+/* Profile synopsis */
+.synopsis-scroll { font-size: 12.5px; line-height: 1.65; color: #475569; }
+
+/* Page footer */
+.page-footer { font-family: inherit; font-size: 11px; }
+
+/* Remove page-load orchestrated sequence (product ban) */
+.breadcrumb-inline, .status-bar, .profile-card, .workspace-card, .tab-section { animation: none; }
+
+/* ══ REVOLUTION — layout, density, typography ══ */
+
+/* Tighter, richer main content area */
+.main-content { background: #f3f6fb; padding: 16px 24px 40px; }
+
+/* Film title — stronger */
+.profile-card h1 { font-size: 16px; font-weight: 800; color: #0f172a; letter-spacing: -0.3px; }
+
+/* Status bar title — cleaner */
+.status-bar-left .sb-title { font-size: 15px; font-weight: 800; color: #0f172a; }
+
+/* Form table label cells — blue-tinted, crisper */
+.form-tbl td.lbl {
+    background: #f0f4ff;
+    color: #3730a3;
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: 0.15px;
+    border-right: 1px solid #dde5f7;
+}
+.pemberat-tbl td:first-child { background: #f0f4ff; color: #3730a3; }
+.detail-tbl td:first-child { background: #f0f4ff; color: #3730a3; }
+
+/* Section divider row (non-sec-hdr) */
+.form-tbl tr:first-child td[colspan="2"][style*="background:#f8fafc"] {
+    background: #f0f4ff !important; color: #3730a3 !important; font-size: 11px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase;
+}
+
+/* Card refinement — white, strong but minimal */
+.card, .tab-section, .workspace-card {
+    background: #ffffff;
+    border: 1px solid #dde5f7;
+    box-shadow: 0 1px 3px rgba(30,58,138,.05), 0 4px 16px rgba(30,58,138,.04);
+}
+
+/* Header accent line — deeper blue trace */
+.page-header-top {
+    border-bottom: 1px solid rgba(94,106,210,0.25);
+    box-shadow: 0 1px 0 rgba(94,106,210,0.1);
+}
+
+/* Sidebar active item — blue indicator without stripe */
+.sidebar > ul > li.open > a {
+    background: rgba(94,106,210,0.15) !important;
+    color: #c7d2fe !important;
+    font-weight: 600;
+}
+.sub-menu li.active a { color: #a5b4fc !important; background: rgba(94,106,210,0.1) !important; }
+
+/* nav-tabs-custom — pure underline, zero bg when inactive */
+.nav-tabs-custom { background: #fff; border-bottom: 1px solid #e8edf5; }
+.nav-tabs-custom li a { padding: 11px 22px; color: #64748b; font-weight: 500; }
+.nav-tabs-custom li.active a {
+    background: transparent; color: #1e3a8a; font-weight: 700;
+    border-bottom: 2px solid #1e3a8a;
+}
+.nav-tabs-custom li:not(.active) a:hover {
+    color: #1e3a8a; border-bottom: 2px solid rgba(30,58,138,0.3); background: transparent;
+}
+
+/* Senarai table — cleaner row hover */
+.senarai-table tbody tr:hover td { background: #f0f4ff; }
+.senarai-table tbody tr:hover td:first-child { box-shadow: inset 3px 0 0 #5e6ad2; }
+.senarai-table th { background: #f0f4ff; color: #4338ca; font-size: 10px; letter-spacing: 0.6px; }
+
+/* Senarai header */
+.senarai-header { background: #f0f4ff; }
+.senarai-header:hover { background: #e8eeff; }
+.senarai-tabs { background: #f8faff; }
+
+/* Profile synopsis */
+.profile-card { border-top: 3px solid #1e3a8a; }
+
+/* Meta chips — blue system */
+.meta-chip { background: #eff4ff; color: #1e3a8a; border: 1px solid #c7d2fe; }
+.meta-chip i { color: #5e6ad2; }
+
+/* Status step badge */
+.step-badge { background: #eff4ff; color: #1e3a8a; border-color: #a5b4fc; font-weight: 700; }
+
+/* Bottom actions — clean bar */
+.bottom-actions { border-top: 1px solid #e2e8f0; padding-top: 16px; margin-top: 8px; }
+.btn-save { background: #1e3a8a; }
+.btn-save:hover { background: #1e40af; box-shadow: 0 3px 12px rgba(30,58,138,0.35); }
+.btn-submit { background: #059669; }
+
+/* Decision lbl cells — blue accent */
+td[style*="background:#eef0ff"] { background: #f0f4ff !important; }
+
+/* Footer */
+.page-footer { background: #f0f4ff; border-top: 1px solid #dde5f7; color: #6475a8; }
+
+/* Annotation save button — deep blue */
+.btn-simpan { background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%); box-shadow: 0 2px 8px rgba(30,58,138,.28); }
+.btn-simpan:hover { background: linear-gradient(135deg, #1e40af 0%, #1d4ed8 100%); }
+
+/* Picker confirm — consistent blue */
+.picker-btn-confirm { background: #1e3a8a; }
+.picker-btn-confirm:hover { background: #1e40af; }
+
+/* BB hero — richer dark blue gradient */
+.bb-hero { background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%); border: none; }
+.bb-hero-badge { background: rgba(191,219,254,0.1); border-color: rgba(191,219,254,0.3); color: #bfdbfe; }
+
+/* Scrollbar match */
+::-webkit-scrollbar-thumb { background: #c7d2fe; }
+::-webkit-scrollbar-thumb:hover { background: #5e6ad2; }
+
+/* ══════════════════════════════════════════════════════════
+   PEARL — White multicolor, easy on the eyes.
+   Canvas: #f6f4ee warm pearl · Surface: #ffffff
+   Ink: #0f172a · Hairline: #e2e8f0
+   Accents (committed multi-palette):
+     teal     #6366f1   — narrative / PITA
+     coral    #8b5cf6   — classification / ASAS
+     indigo   #06b6d4   — people / LANTIK
+     amber    #f59e0b   — verdict / KEPUTUSAN
+     sage     #10b981   — approve / lulus
+     terracotta #f43f5e — reject / tut
+   ══════════════════════════════════════════════════════════ */
+
+/* Page canvas — pure white base */
+body {
+    background: #ffffff !important;
+    color: #0f172a !important;
+}
+.main-content {
+    background: #ffffff !important;
+    padding: 16px 24px 48px !important;
+}
+
+/* Breadcrumb */
+.breadcrumb-inline { color: #94a3b8 !important; }
+.breadcrumb-inline a { color: #94a3b8 !important; }
+.breadcrumb-inline a:hover { color: #6366f1 !important; }
+.breadcrumb-inline .sep { color: #94a3b8 !important; }
+.breadcrumb-inline .cur { color: #0f172a !important; }
+
+/* Cards — pure white surface, warm hairline, soft layered shadow */
+.card, .workspace-card, .tab-section {
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0 !important;
+    box-shadow: 0 1px 0 rgba(15,23,42,0.02),
+                0 2px 6px rgba(15,23,42,0.05),
+                0 12px 28px rgba(15,23,42,0.06) !important;
+}
+
+/* Status bar */
+.status-bar { background: #ffffff !important; }
+.status-bar-left .sb-title { color: #0f172a !important; }
+.status-bar-left .sb-ref { color: #94a3b8 !important; }
+
+/* Step badge — teal */
+.step-badge {
+    background: rgba(99,102,241,0.08) !important;
+    color: #6366f1 !important;
+    border-color: rgba(99,102,241,0.28) !important;
+}
+.step-progress-bar { background: rgba(99,102,241,0.18) !important; }
+
+/* Outline buttons */
+.btn-outline-sm {
+    background: #fbfaf5 !important;
+    border-color: #cbd5e1 !important;
+    color: #475569 !important;
+}
+.btn-outline-sm:hover {
+    background: rgba(99,102,241,0.06) !important;
+    border-color: #6366f1 !important;
+    color: #6366f1 !important;
+}
+
+/* Profile card — teal accent rail */
+.profile-card {
+    background: #ffffff !important;
+    border-top: 3px solid #6366f1 !important;
+}
+.profile-card h1 {
+    color: #0f172a !important;
+    border-bottom-color: #e2e8f0 !important;
+}
+.synopsis-scroll { color: #475569 !important; }
+.meta-chip {
+    background: rgba(99,102,241,0.08) !important;
+    color: #4f46e5 !important;
+    border-color: rgba(99,102,241,0.22) !important;
+}
+.meta-chip i { color: #6366f1 !important; }
+
+/* Annotation panel — soft cream rail */
+.ws-ann-col {
+    background: #f8fafc !important;
+    border-left-color: #e2e8f0 !important;
+}
+.ann-fileinfo {
+    background: #f1f5f9 !important;
+    border-bottom-color: #cbd5e1 !important;
+}
+.ann-fileinfo-row { color: #475569 !important; }
+.ann-fileinfo-row i { color: #f59e0b !important; }
+.ann-sec-label { color: #f59e0b !important; border-bottom-color: #e2e8f0 !important; }
+.ann-fields { border-bottom-color: #e2e8f0 !important; }
+.ann-field-label { color: #94a3b8 !important; }
+
+/* Ann stamp + inputs */
+.ann-stamp-row { border-bottom-color: #e2e8f0 !important; }
+.ts-input,
+.ann-select,
+.ann-textarea {
+    background: #ffffff !important;
+    border-color: #cbd5e1 !important;
+    color: #0f172a !important;
+}
+.ann-select:focus,
+.ann-textarea:focus,
+.ts-input:focus {
+    border-color: #f59e0b !important;
+    box-shadow: 0 0 0 3px rgba(245,158,11,0.14) !important;
+}
+
+/* Ahli pick button */
+.ahli-pick-btn {
+    background: #ffffff !important;
+    border-color: #cbd5e1 !important;
+    color: #94a3b8 !important;
+}
+.ahli-pick-btn:hover {
+    border-color: #06b6d4 !important;
+    background: rgba(6,182,212,0.05) !important;
+    color: #06b6d4 !important;
+}
+.ahli-pick-btn.has-val { color: #0f172a !important; }
+
+/* Simpan button — amber primary */
+.btn-simpan {
+    background: #f59e0b !important;
+    color: #fff !important;
+    box-shadow: 0 2px 10px rgba(245,158,11,0.28) !important;
+}
+.btn-simpan:hover {
+    background: #d97706 !important;
+    box-shadow: 0 4px 16px rgba(245,158,11,0.35) !important;
+}
+.ann-save-row { background: #f8fafc !important; }
+
+/* Chip grid */
+.chip-grid {
+    background: #ffffff !important;
+    border-color: #cbd5e1 !important;
+}
+.chip-grid .chip {
+    background: #f8fafc !important;
+    border-color: #cbd5e1 !important;
+    color: #475569 !important;
+}
+.chip-grid .chip:hover { border-color: #6366f1 !important; color: #6366f1 !important; background: rgba(99,102,241,0.05) !important; }
+.chip-grid .chip.selected { background: #6366f1 !important; border-color: #0c7d75 !important; color: #fff !important; }
+
+/* Segment buttons — preserve data-val severity ramp on .active */
+.seg-btn:not(.active) {
+    background: #ffffff !important;
+    border-color: #cbd5e1 !important;
+    color: #475569 !important;
+}
+.seg-btn:not(.active):hover { background: #f8fafc !important; border-color: #06b6d4 !important; color: #06b6d4 !important; }
+
+/* Keputusan buttons — sage approve / terracotta reject */
+.keputusan-btn {
+    background: #ffffff !important;
+    border-color: #cbd5e1 !important;
+    color: #475569 !important;
+}
+.keputusan-btn:hover { border-color: #10b981 !important; background: #f8fafc !important; }
+.keputusan-btn .kep-badge { background: #f0ebda !important; color: #94a3b8 !important; }
+.keputusan-btn.active { border-color: #10b981 !important; background: rgba(16,185,129,0.10) !important; color: #047857 !important; }
+.keputusan-btn.active .kep-badge { background: #10b981 !important; color: #fff !important; }
+.keputusan-tut.active { border-color: #f43f5e !important; background: rgba(244,63,94,0.10) !important; color: #e11d48 !important; }
+.keputusan-tut.active .kep-badge { background: #f43f5e !important; color: #fff !important; }
+
+/* Rating buttons — indigo */
+.rating-btn {
+    background: #ffffff !important;
+    border-color: #cbd5e1 !important;
+    color: #475569 !important;
+}
+.rating-btn:hover { border-color: #06b6d4 !important; color: #06b6d4 !important; }
+.rating-btn.active { background: #06b6d4 !important; border-color: #0891b2 !important; color: #fff !important; }
+
+/* Picker box / edit */
+.picker-box {
+    background: #ffffff !important;
+    border-color: #cbd5e1 !important;
+}
+.picker-box:hover {
+    border-color: #06b6d4 !important;
+    box-shadow: 0 0 0 3px rgba(6,182,212,0.12) !important;
+}
+.picker-empty { color: #94a3b8 !important; }
+.picker-edit-btn {
+    background: #f8fafc !important;
+    border-color: #cbd5e1 !important;
+    color: #94a3b8 !important;
+}
+.picker-edit-btn:hover { border-color: #06b6d4 !important; color: #06b6d4 !important; background: rgba(6,182,212,0.06) !important; }
+
+/* Picker modal */
+.picker-modal {
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0 !important;
+    box-shadow: 0 24px 60px rgba(15,23,42,0.18), 0 8px 18px rgba(15,23,42,0.08) !important;
+}
+.picker-modal-header { border-bottom-color: #e2e8f0 !important; }
+.picker-modal-title { color: #0f172a !important; }
+.picker-modal-close { color: #94a3b8 !important; }
+.picker-modal-close:hover { background: #f1f5f9 !important; color: #0f172a !important; }
+.picker-modal-search { border-bottom-color: #e2e8f0 !important; }
+.picker-modal-search input {
+    background: #f8fafc !important;
+    border-color: #cbd5e1 !important;
+    color: #0f172a !important;
+}
+.picker-modal-search input:focus { border-color: #06b6d4 !important; box-shadow: 0 0 0 3px rgba(6,182,212,0.12) !important; }
+.picker-modal-chip {
+    background: #f8fafc !important;
+    border-color: #cbd5e1 !important;
+    color: #475569 !important;
+}
+.picker-modal-chip:hover { border-color: #06b6d4 !important; color: #06b6d4 !important; }
+.picker-modal-chip.selected { background: #06b6d4 !important; border-color: #0891b2 !important; color: #fff !important; }
+.picker-modal-footer { border-top-color: #e2e8f0 !important; }
+.picker-count { color: #94a3b8 !important; }
+.picker-btn-cancel {
+    background: #ffffff !important;
+    border-color: #cbd5e1 !important;
+    color: #475569 !important;
+}
+.picker-btn-cancel:hover { background: #f1f5f9 !important; }
+.picker-btn-confirm { background: #06b6d4 !important; color: #fff !important; }
+.picker-btn-confirm:hover { background: #0891b2 !important; }
+.picker-overlay { background: rgba(15,23,42,0.40) !important; backdrop-filter: blur(2px) !important; }
+
+/* Tindakan buttons — coral */
+.tindakan-btn {
+    background: #ffffff !important;
+    border-color: #cbd5e1 !important;
+    color: #94a3b8 !important;
+}
+.tindakan-btn:hover {
+    border-color: #8b5cf6 !important;
+    color: #7c3aed !important;
+    box-shadow: 0 4px 14px rgba(139,92,246,0.16) !important;
+}
+.tindakan-btn.active { background: rgba(139,92,246,0.10) !important; border-color: #8b5cf6 !important; color: #7c3aed !important; }
+
+/* Adegan chips — terracotta */
+.adegan-chip {
+    background: #f8fafc !important;
+    border-color: #cbd5e1 !important;
+    color: #475569 !important;
+}
+.adegan-chip:hover { border-color: #f43f5e !important; color: #e11d48 !important; }
+.adegan-chip.active { background: #f43f5e !important; border-color: #be123c !important; color: #fff !important; }
+
+/* Senarai table — soft cream header, teal accents */
+.senarai-header { background: #ffffff !important; border-bottom-color: #e2e8f0 !important; }
+.senarai-header:hover { background: #f8fafc !important; }
+.sh-title { color: #0f172a !important; }
+.senarai-tabs { background: #ffffff !important; border-bottom-color: #e2e8f0 !important; }
+.senarai-tabs a { color: #94a3b8 !important; }
+.senarai-tabs a.active { color: #6366f1 !important; border-bottom-color: #6366f1 !important; }
+.senarai-table th {
+    background: #e0e7ff !important;
+    color: #3730a3 !important;
+    border-bottom: 2px solid #6366f1 !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.06em !important;
+    text-transform: uppercase !important;
+    font-size: 11px !important;
+}
+.senarai-table td { border-bottom-color: #e2e8f0 !important; color: #0f172a !important; }
+.senarai-table tbody tr:hover td { background: rgba(99,102,241,0.04) !important; }
+.senarai-table tbody tr:hover td:first-child { box-shadow: inset 3px 0 0 #6366f1 !important; }
+.senarai-body { background: #ffffff !important; }
+
+/* Bil badge — amber */
+.bil-badge { background: rgba(245,158,11,0.13) !important; color: #b45309 !important; }
+
+/* Timestamp link — teal */
+.ts-link { color: #6366f1 !important; }
+.ts-link:hover { color: #4338ca !important; }
+
+/* CF edit button */
+.btn-cf-edit { color: #94a3b8 !important; }
+.btn-cf-edit:hover { color: #f59e0b !important; background: rgba(245,158,11,0.10) !important; }
+
+/* Chip badges */
+.chip-blue { background: rgba(6,182,212,0.13) !important; color: #0e7490 !important; }
+.chip-amber { background: rgba(245,158,11,0.13) !important; color: #b45309 !important; }
+
+/* Play / delete small buttons */
+.btn-play-sm { background: #10b981 !important; color: #fff !important; }
+.btn-play-sm:hover { background: #059669 !important; }
+.btn-del-sm { background: #f43f5e !important; color: #fff !important; }
+.btn-del-sm:hover { background: #e11d48 !important; }
+.ket-text { color: #475569 !important; }
+
+/* Nav tabs — indigo underline */
+.nav-tabs-custom { background: #ffffff !important; border-bottom-color: #e2e8f0 !important; }
+.nav-tabs-custom li a { color: #94a3b8 !important; }
+.nav-tabs-custom li.active a {
+    background: transparent !important;
+    color: #0f172a !important;
+    border-bottom: 2px solid #06b6d4 !important;
+}
+.nav-tabs-custom li:not(.active) a:hover { color: #0f172a !important; border-bottom: 2px solid rgba(6,182,212,0.4) !important; }
+
+/* Tab body */
+.tab-body { background: #ffffff !important; }
+
+/* Form table — white base, faint cool gray labels */
+.form-tbl td { border-bottom-color: #e2e8f0 !important; color: #0f172a !important; background: #ffffff !important; }
+.form-tbl td.lbl {
+    background: #f8fafc !important;
+    color: #475569 !important;
+    border-right-color: #e2e8f0 !important;
+    font-size: 11px !important;
+    font-weight: 600 !important;
+}
+.form-tbl tr.sec-hdr td {
+    background: linear-gradient(90deg, #f8fafc 0%, #ffffff 100%) !important;
+    color: #f59e0b !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.04em !important;
+    text-transform: uppercase !important;
+}
+.pemberat-tbl td { border-bottom-color: #e2e8f0 !important; color: #0f172a !important; background: #ffffff !important; }
+.pemberat-tbl td:first-child { background: #f8fafc !important; color: #475569 !important; font-weight: 600 !important; }
+.detail-tbl td { border-bottom-color: #e2e8f0 !important; color: #0f172a !important; background: #ffffff !important; }
+.detail-tbl td:first-child { background: #f8fafc !important; color: #475569 !important; font-weight: 600 !important; }
+
+/* Form controls */
+.form-control {
+    background: #ffffff !important;
+    border-color: #cbd5e1 !important;
+    color: #0f172a !important;
+}
+.form-control:focus {
+    border-color: #6366f1 !important;
+    box-shadow: 0 0 0 3px rgba(99,102,241,0.14) !important;
+}
+
+/* Multi-pill box */
+.multi-pill-box {
+    background: #ffffff !important;
+    border-color: #cbd5e1 !important;
+}
+.pill { background: rgba(6,182,212,0.13) !important; color: #0e7490 !important; }
+.pill .x { color: #06b6d4 !important; }
+
+/* BB hero — warm cream gradient, teal accent */
+.bb-hero {
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%) !important;
+    border: 1px solid #cbd5e1 !important;
+}
+.bb-hero-title { color: #0f172a !important; }
+.bb-hero-badge { background: rgba(99,102,241,0.10) !important; border-color: rgba(99,102,241,0.25) !important; color: #4f46e5 !important; }
+.bb-featured { background: #ffffff !important; border-color: #e2e8f0 !important; }
+.bb-stat { border-right-color: #e2e8f0 !important; }
+.bb-stat-val { color: #0f172a !important; }
+.bb-stat-lbl { color: #94a3b8 !important; }
+.bb-section-title { color: #94a3b8 !important; border-bottom-color: #e2e8f0 !important; font-weight: 600 !important; }
+.bb-section-title i { color: #94a3b8 !important; }
+.bb-credits { background: #f8fafc !important; border-color: #e2e8f0 !important; }
+.bb-credits-row { border-bottom-color: #e2e8f0 !important; }
+.bb-credits-role { color: #94a3b8 !important; }
+.bb-credits-name { color: #0f172a !important; }
+.bb-doc-card { background: #ffffff !important; border-color: #e2e8f0 !important; }
+.bb-doc-card:hover { border-color: #6366f1 !important; background: rgba(99,102,241,0.04) !important; }
+.bb-doc-icon { background: rgba(99,102,241,0.10) !important; color: #4f46e5 !important; }
+.bb-doc-sublabel { color: #94a3b8 !important; }
+.bb-doc-name { color: #0f172a !important; }
+.bb-doc-meta { color: #94a3b8 !important; }
+.bb-doc-arrow { color: #94a3b8 !important; }
+.bb-comment { background: rgba(245,158,11,0.07) !important; border-color: rgba(245,158,11,0.25) !important; }
+.bb-comment-label { color: #b45309 !important; }
+.bb-comment-text { color: #0f172a !important; }
+
+/* Timeline */
+.kron-item:not(:last-child)::before { background: linear-gradient(to bottom, #cbd5e1, #e2e8f0) !important; }
+.kron-circle { outline-color: #ffffff !important; }
+.kron-time { color: #94a3b8 !important; }
+.kron-user { color: #0f172a !important; font-weight: 600 !important; }
+.kron-desc { color: #475569 !important; }
+
+/* Modal steps */
+.m-num { color: #94a3b8 !important; }
+.m-step-active { background: rgba(99,102,241,0.06) !important; border-color: rgba(99,102,241,0.22) !important; }
+.m-step-active .m-num { color: #6366f1 !important; }
+.m-ttl { color: #94a3b8 !important; }
+.m-step-active .m-ttl { color: #0f172a !important; }
+.m-dsc { color: #94a3b8 !important; }
+.m-step-active .m-dsc { color: #475569 !important; }
+.m-arrow { color: #cbd5e1 !important; }
+
+/* Edit field modal */
+#efModal .efm-box {
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0 !important;
+    box-shadow: 0 24px 60px rgba(15,23,42,0.18), 0 8px 18px rgba(15,23,42,0.08) !important;
+}
+.efm-title { color: #0f172a !important; }
+.efm-label { color: #94a3b8 !important; }
+.efm-input {
+    background: #f8fafc !important;
+    border-color: #cbd5e1 !important;
+    color: #0f172a !important;
+}
+.efm-input:focus { border-color: #f43f5e !important; box-shadow: 0 0 0 3px rgba(244,63,94,0.14) !important; }
+.efm-chip {
+    background: #f8fafc !important;
+    border-color: #cbd5e1 !important;
+    color: #475569 !important;
+}
+.efm-chip:hover { border-color: #f43f5e !important; color: #e11d48 !important; }
+.efm-chip.active { background: #f43f5e !important; border-color: #be123c !important; color: #fff !important; }
+.efm-cancel {
+    background: #ffffff !important;
+    border-color: #cbd5e1 !important;
+    color: #475569 !important;
+}
+.efm-cancel:hover { background: #f1f5f9 !important; }
+.efm-save { background: #f43f5e !important; color: #fff !important; }
+.efm-save:hover { background: #be123c !important; }
+
+/* CKEditor */
+.ck-toolbar { background: #f8fafc !important; border-color: #cbd5e1 !important; color: #475569 !important; }
+.ck-toolbar span { color: #475569 !important; }
+.ck-toolbar span:hover { background: #e2e8f0 !important; }
+.ck-toolbar span.ck-active { background: rgba(99,102,241,0.13) !important; color: #4f46e5 !important; }
+.ck-toolbar .ck-sep { border-left-color: #cbd5e1 !important; }
+.ck-body {
+    background: #ffffff !important;
+    border-color: #cbd5e1 !important;
+    color: #0f172a !important;
+}
+.ck-body:focus { border-color: #6366f1 !important; box-shadow: 0 0 0 3px rgba(99,102,241,0.10) !important; }
+.ck-dropdown { background: #ffffff !important; border-color: #cbd5e1 !important; box-shadow: 0 8px 24px rgba(15,23,42,0.10) !important; }
+.ck-dd-item { color: #0f172a !important; }
+.ck-dd-item:hover { background: #f8fafc !important; }
+
+/* Lantik panel — indigo zone */
+.lantik-panel { border-color: #e2e8f0 !important; background: #f8fafc !important; }
+.lantik-panel label { color: #475569 !important; font-weight: 600 !important; }
+.panel-list {
+    background: #ffffff !important;
+    border-color: #cbd5e1 !important;
+    color: #0f172a !important;
+}
+
+/* Bottom action buttons */
+.btn-default { background: #ffffff !important; border-color: #cbd5e1 !important; color: #475569 !important; }
+.btn-default:hover { background: #f8fafc !important; border-color: #94a3b8 !important; color: #0f172a !important; }
+.btn-back { background: #ffffff !important; border-color: #cbd5e1 !important; color: #475569 !important; }
+.btn-back:hover { background: #f8fafc !important; border-color: #94a3b8 !important; }
+.btn-save { background: #6366f1 !important; color: #fff !important; }
+.btn-save:hover { background: #4338ca !important; box-shadow: 0 4px 16px rgba(99,102,241,0.32) !important; }
+.btn-report { background: transparent !important; color: #f59e0b !important; border-color: rgba(245,158,11,0.4) !important; }
+.btn-report:hover { background: rgba(245,158,11,0.07) !important; border-color: #f59e0b !important; }
+.btn-submit { background: #10b981 !important; color: #fff !important; }
+.btn-submit:hover { background: #059669 !important; box-shadow: 0 4px 16px rgba(16,185,129,0.32) !important; }
+.bottom-actions { border-top-color: #e2e8f0 !important; background: #f8fafc !important; }
+
+/* Footer */
+.page-footer { background: #ffffff !important; border-top-color: #e2e8f0 !important; color: #94a3b8 !important; }
+
+/* Scrollbars — warm, subtle */
+::-webkit-scrollbar-track { background: #f1f5f9 !important; }
+::-webkit-scrollbar-thumb { background: #cbd5e1 !important; border-radius: 4px !important; }
+::-webkit-scrollbar-thumb:hover { background: #94a3b8 !important; }
+
+/* Focus rings — teal default */
+button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+    outline: 2px solid #6366f1 !important;
+    outline-offset: 2px !important;
+}
+
+/* Aliran modal */
+#aliranModal > div { background: #ffffff !important; border: 1px solid #e2e8f0 !important; box-shadow: 0 24px 60px rgba(15,23,42,0.20) !important; }
+#aliranModal > div > div:first-child {
+    background: linear-gradient(90deg, #f8fafc 0%, #fef3c7 100%) !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+    color: #0f172a !important;
+}
+
+/* Inline bold text in tables */
+.form-tbl strong, .detail-tbl strong, .pemberat-tbl strong { color: #0f172a !important; }
+
+/* KEPUTUSAN wrapper — amber rail */
+div[style*="border:2px solid #1e3a8a"] {
+    border: 1px solid #cbd5e1 !important;
+    border-top: 3px solid #f59e0b !important;
+    background: linear-gradient(180deg, #f8fafc 0%, #ffffff 60%) !important;
+    box-shadow: 0 8px 24px rgba(245,158,11,0.08) !important;
+}
+td[style*="background:#eef0ff"], td[style*="background:#f0f4ff"] {
+    background: #f8fafc !important;
+    color: #0f172a !important;
+}
+
+/* Section banners — rotating accents per pillar */
+[style*="background:#0c1829"],
+[style*="background: #0c1829"] {
+    background: linear-gradient(90deg, #f8fafc 0%, #fef3c7 100%) !important;
+    color: #f59e0b !important;
+    border-bottom: 2px solid #f59e0b !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.06em !important;
+    text-transform: uppercase !important;
+}
+
+/* Generic inline overrides — keep whites white, dark text dark */
+[style*="background:#fff"],
+[style*="background: #fff"],
+[style*="background:#ffffff"],
+[style*="background: #ffffff"] {
+    background: #ffffff !important;
+}
+[style*="background:#f1f5f9"],
+[style*="background: #f1f5f9"],
+[style*="background:#f8fafc"],
+[style*="background: #f8fafc"] {
+    background: #f8fafc !important;
+}
+[style*="color:#1e293b"],
+[style*="color: #1e293b"],
+[style*="color:#0f172a"],
+[style*="color:#334155"] {
+    color: #0f172a !important;
+}
+[style*="color:#475569"],
+[style*="color:#64748b"],
+[style*="color:#94a3b8"] {
+    color: #475569 !important;
+}
+
+/* Page-load reveal */
+@keyframes pearlFadeUp {
+    from { opacity: 0; transform: translateY(4px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+.card, .workspace-card, .tab-section {
+    animation: pearlFadeUp 0.36s cubic-bezier(0.22,1,0.36,1) both;
+}
+.workspace-card { animation-delay: 0.05s; }
+.tab-section { animation-delay: 0.1s; }
+
+/* ── Page header — soft pearl ── */
+.page-header-top {
+    background: #ffffff !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+    box-shadow: 0 1px 0 rgba(15,23,42,0.02) !important;
+}
+.page-header-top .header-logo {
+    background: linear-gradient(135deg, #6366f1 0%, #4338ca 100%) !important;
+    color: #ffffff !important;
+    box-shadow: 0 2px 8px rgba(99,102,241,0.25) !important;
+}
+.page-header-top .header-title { color: #475569 !important; }
+.page-header-top .notif {
+    color: #475569 !important;
+    background: transparent !important;
+}
+.page-header-top .notif:hover { background: #f8fafc !important; color: #0f172a !important; }
+.page-header-top .notif .badge {
+    background: #f43f5e !important;
+    color: #fff !important;
+}
+.page-header-top .header-user {
+    color: #0f172a !important;
+    background: transparent !important;
+}
+.page-header-top .header-user:hover { background: #f8fafc !important; }
+.page-header-top .header-user .avatar {
+    background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%) !important;
+    color: #ffffff !important;
+}
+.sidebar-toggle-btn {
+    background: transparent !important;
+    color: #94a3b8 !important;
+}
+.sidebar-toggle-btn:hover { background: #f8fafc !important; color: #6366f1 !important; }
+
+/* ── Sidebar — cream, multicolor accent items ── */
+.sidebar {
+    background: #f8fafc !important;
+    border-right: 1px solid #e2e8f0 !important;
+}
+.sidebar > ul > li > a {
+    color: #475569 !important;
+    border-left: 3px solid transparent !important;
+}
+.sidebar > ul > li > a:hover,
+.sidebar > ul > li.open > a {
+    background: #ffffff !important;
+    color: #6366f1 !important;
+    border-left-color: #6366f1 !important;
+}
+.sidebar > ul > li.active > a,
+.sidebar .sub-menu li.active > a {
+    background: rgba(99,102,241,0.10) !important;
+    color: #4338ca !important;
+    font-weight: 600 !important;
+    border-left-color: #6366f1 !important;
+}
+.sidebar .sub-menu { background: transparent !important; }
+.sidebar .sub-menu > li > a {
+    color: #94a3b8 !important;
+    background: transparent !important;
+}
+.sidebar .sub-menu > li > a:hover { color: #6366f1 !important; background: #ffffff !important; }
+
+/* ── Inline #1e3a8a banner overrides — PITA (teal) + KEPUTUSAN (amber) ── */
+div[style*="background:#1e3a8a"],
+div[style*="background: #1e3a8a"] {
+    background: linear-gradient(90deg, #eef2ff 0%, #ffffff 100%) !important;
+    color: #4f46e5 !important;
+    border-bottom: 2px solid #6366f1 !important;
+}
+/* KEPUTUSAN TAPISAN banner — amber accent (inside amber-rail wrapper) */
+div[style*="border:2px solid #1e3a8a"] > div[style*="background:#1e3a8a"]:first-child {
+    background: linear-gradient(90deg, #fffbeb 0%, #ffffff 100%) !important;
+    color: #b45309 !important;
+    border-bottom-color: #f59e0b !important;
+}
+
+/* Form-table section headers — alternate accents per pillar */
+.form-tbl tr.sec-hdr td {
+    background: linear-gradient(90deg, #f8fafc 0%, #fef3c7 100%) !important;
+    color: #f59e0b !important;
+    border-bottom: 1px solid #cbd5e1 !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.06em !important;
+    text-transform: uppercase !important;
+    padding: 9px 14px !important;
+}
+/* ASAS KLASIFIKASI (first sec-hdr in left tbl) — coral */
+.form-tbl tr.sec-hdr:nth-of-type(1) td {
+    background: linear-gradient(90deg, #f5f3ff 0%, #ffffff 100%) !important;
+    color: #7c3aed !important;
+    border-bottom-color: #8b5cf6 !important;
+}
+/* LANTIK AHLI PANEL — indigo (table has inline border-top:2px solid #e2e8f0) */
+table.form-tbl[style*="border-top"] tr.sec-hdr td,
+table.form-tbl[style*="border-top"] tr.sec-hdr:nth-of-type(1) td {
+    background: linear-gradient(90deg, #ecfeff 0%, #ffffff 100%) !important;
+    color: #0e7490 !important;
+    border-bottom: 1px solid #06b6d4 !important;
+}
+
+/* Hardcoded #1e3a8a class overrides (older layers) */
+.btn-save { background: #6366f1 !important; }
+.btn-save:hover { background: #4338ca !important; }
+.picker-btn-confirm { background: #06b6d4 !important; }
+.picker-btn-confirm:hover { background: #0891b2 !important; }
+.tindakan-btn.active { background: rgba(139,92,246,0.10) !important; border-color: #8b5cf6 !important; color: #7c3aed !important; }
+.rating-btn.active { background: #06b6d4 !important; border-color: #0891b2 !important; color: #fff !important; }
+.bil-badge { background: rgba(245,158,11,0.15) !important; color: #b45309 !important; }
+
+/* Pill chips inside .form-tbl (Genre/Tema selected pills) — multicolor by zone */
+.form-tbl .pill,
+.form-tbl span[style*="background:#1e3a8a"],
+.form-tbl span[style*="background: #1e3a8a"] {
+    background: rgba(139,92,246,0.13) !important;
+    color: #7c3aed !important;
+    border: 1px solid rgba(139,92,246,0.28) !important;
+}
+
+/* Meta-chip in profile — keep teal */
+.meta-chip[style*="background:#1e3a8a"] {
+    background: rgba(99,102,241,0.10) !important;
+    color: #4f46e5 !important;
+}
+
+/* Keterangan Ketua Unit header td — neutral slate */
+.form-tbl tr:first-child td[colspan="2"][style*="background:#f8fafc"] {
+    background: #f8fafc !important;
+    color: #475569 !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+    border-left: 3px solid #94a3b8 !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.04em !important;
+    text-transform: uppercase !important;
+}
+
+/* KEPUTUSAN section label cells (inline #eef0ff bg) — strong cool gray label */
+td.lbl[style*="background:#eef0ff"],
+td.lbl[style*="background: #eef0ff"] {
+    background: #f8fafc !important;
+    color: #334155 !important;
+    border-right: 1px solid #e2e8f0 !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.04em !important;
+}
+
+/* Pemberat-tbl first column (severity field name) */
+.pemberat-tbl td:first-child {
+    background: #f8fafc !important;
+    color: #334155 !important;
+    font-weight: 700 !important;
+    border-right: 1px solid #e2e8f0 !important;
+    font-size: 11.5px !important;
+}
+</style>
+</head>
+<body>
+
+<!-- ========== HEADER ========== -->
+<div class="page-header-top">
+    <div class="header-left">
+        <button class="sidebar-toggle-btn" onclick="toggleSidebarPanel()" title="Tunjuk/Sembunyi Panel"><i class="fa fa-bars"></i></button>
+        <div class="header-logo">iLPF</div>
+        <span class="header-title">Sistem Pengurusan Penapisan Filem (iLPF) &mdash; Staging Mode</span>
+    </div>
+    <div class="header-right">
+        <a class="notif"><i class="fa fa-bell"></i> Tugasan Panggung <span class="badge">5</span></a>
+        <a class="notif"><i class="fa fa-calendar"></i> Cuti / Mesyuarat Luar <span class="badge">2</span></a>
+        <div class="header-user">
+            <div class="avatar">A</div>
+            <span>AZIDI BIN ABDUL KHAHAR</span>
+            <i class="fa fa-angle-down"></i>
+        </div>
+    </div>
+</div>
+
+<div class="container-main">
+
+    <!-- ========== SIDEBAR ========== -->
+    <div class="sidebar">
+        <ul>
+            <li><a href="#"><i class="fa fa-tachometer fa-fw"></i> Utama</a></li>
+            <li class="open">
+                <a onclick="toggleSidebar(this)"><i class="fa fa-file-o fa-fw"></i> Permohonan <i class="fa fa-angle-down" style="float:right;margin-top:2px;"></i></a>
+                <ul class="sub-menu open">
+                    <li class="active"><a href="#">Perakuan A</a></li>
+                    <li><a href="#">Iklan</a></li>
+                    <li><a href="#">Bahan Publisiti</a></li>
+                    <li><a href="#">Cetak Semula</a></li>
+                </ul>
+            </li>
+            <li>
+                <a onclick="toggleSidebar(this)"><i class="fa fa-television fa-fw"></i> Stesen TV <i class="fa fa-angle-down" style="float:right;margin-top:2px;"></i></a>
+                <ul class="sub-menu">
+                    <li><a href="#">Stesen TV Awesome</a></li>
+                    <li><a href="#">Stesen TV RTM</a></li>
+                    <li><a href="#">Stesen TV Al-Hijrah</a></li>
+                    <li><a href="#">Stesen Unifi TV</a></li>
+                    <li><a href="#">Stesen TV Sarawak</a></li>
+                    <li><a href="#">Stesen Suke TV</a></li>
+                    <li><a href="#">Stesen ENJOY TV</a></li>
+                </ul>
+            </li>
+            <li>
+                <a onclick="toggleSidebar(this)"><i class="fa fa-calendar fa-fw"></i> Cuti <i class="fa fa-angle-down" style="float:right;margin-top:2px;"></i></a>
+                <ul class="sub-menu">
+                    <li><a href="#">Mohon Cuti</a></li>
+                    <li><a href="#">Senarai Permohonan Cuti</a></li>
+                    <li><a href="#">Mesyuarat / Latihan</a></li>
+                </ul>
+            </li>
+            <li>
+                <a onclick="toggleSidebar(this)"><i class="fa fa-book fa-fw"></i> Sejarah <i class="fa fa-angle-down" style="float:right;margin-top:2px;"></i></a>
+                <ul class="sub-menu">
+                    <li><a href="#">Sejarah iLPF</a></li>
+                    <li><a href="#">Sejarah eFilem</a></li>
+                </ul>
+            </li>
+            <li>
+                <a onclick="toggleSidebar(this)"><i class="fa fa-file-text-o fa-fw"></i> Laporan <i class="fa fa-angle-down" style="float:right;margin-top:2px;"></i></a>
+                <ul class="sub-menu">
+                    <li><a href="#">Laporan Penapisan</a></li>
+                    <li><a href="#">Laporan Bahan Publisiti</a></li>
+                    <li><a href="#">Laporan Prestasi ALPF</a></li>
+                </ul>
+            </li>
+            <li>
+                <a onclick="toggleSidebar(this)"><i class="fa fa-map fa-fw"></i> Manual Pengguna <i class="fa fa-angle-down" style="float:right;margin-top:2px;"></i></a>
+                <ul class="sub-menu">
+                    <li><a href="#">ALPF</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <!-- ========== MAIN CONTENT ========== -->
+    <div class="main-content">
+
+        <!-- Breadcrumb (minimal inline) -->
+        <div class="breadcrumb-inline">
+            <a href="#">Halaman Utama</a>
+            <span class="sep">›</span>
+            <a href="#">Senarai Permohonan</a>
+            <span class="sep">›</span>
+            <span class="cur">Tapisan</span>
+        </div>
+
+        <!-- Status Bar -->
+        <div class="card status-bar">
+            <div class="status-bar-left">
+                <span class="sb-title">PERAKUAN A PITA</span>
+                <span class="sb-ref">PCBM20260396966</span>
+            </div>
+            <div class="status-bar-center">
+                <div style="text-align:center;">
+                    <span class="step-badge">Langkah 7 / 11 &mdash; Tapisan &amp; Laporan</span>
+                    <div class="step-progress-bar"><div class="step-progress-fill" style="width:63.6%;"></div></div>
+                </div>
+            </div>
+            <div class="status-bar-right">
+                <button class="btn-outline-sm" onclick="openAliranModal()"><i class="fa fa-sitemap"></i> Aliran Proses</button>
+                <button class="btn-outline-sm"><i class="fa fa-search"></i> Sejarah ILPF</button>
+                <button class="btn-outline-sm"><i class="fa fa-search"></i> Sejarah EFilem</button>
+            </div>
+        </div>
+
+        <!-- MODAL: Aliran Proses -->
+        <div id="aliranModal" style="display:none;position:fixed;inset:0;z-index:999;background:rgba(0,0,0,0.5);align-items:center;justify-content:center;">
+            <div style="background:#fff;width:90%;max-width:900px;border-radius:8px;overflow:hidden;box-shadow:0 10px 40px rgba(0,0,0,0.3);">
+                <!-- Modal header -->
+                <div style="background:#0f172a;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;">
+                    <div>
+                        <span style="color:#fff;font-weight:700;font-size:15px;">PERAKUAN A PITA</span>
+                        &nbsp;
+                        <span style="color:#c6cfda;font-size:12px;">Aliran Proses</span>
+                    </div>
+                    <button onclick="closeAliranModal()" style="background:none;border:none;color:#fff;font-size:20px;cursor:pointer;line-height:1;">&times;</button>
+                </div>
+                <!-- Steps -->
+                <div style="padding:24px 20px;overflow-x:auto;">
+                    <div style="display:flex;gap:0;min-width:700px;">
+                        <div class="m-step">
+                            <div class="m-num">1</div>
+                            <div class="m-ttl">Permohonan</div>
+                            <div class="m-dsc">Syarikat menghantar permohonan</div>
+                        </div>
+                        <div class="m-arrow">&#8250;</div>
+                        <div class="m-step">
+                            <div class="m-num">2</div>
+                            <div class="m-ttl">Pembayaran</div>
+                            <div class="m-dsc">Syarikat menyemak invois dan membuat pembayaran</div>
+                        </div>
+                        <div class="m-arrow">&#8250;</div>
+                        <div class="m-step">
+                            <div class="m-num">3</div>
+                            <div class="m-ttl">Pengesahan Bayaran</div>
+                            <div class="m-dsc">Unit bayaran menyemak dan mengesahkan bayaran</div>
+                        </div>
+                        <div class="m-arrow">&#8250;</div>
+                        <div class="m-step">
+                            <div class="m-num">4</div>
+                            <div class="m-ttl">Pengesahan Media</div>
+                            <div class="m-dsc">Unit Pita menerima dan menyemak bahan media</div>
+                        </div>
+                        <div class="m-arrow">&#8250;</div>
+                        <div class="m-step">
+                            <div class="m-num">5</div>
+                            <div class="m-ttl">Penukaran Format &amp; Muat Naik</div>
+                            <div class="m-dsc">Unit Pita menukar format dan muat naik bahan media</div>
+                        </div>
+                        <div class="m-arrow">&#8250;</div>
+                        <div class="m-step">
+                            <div class="m-num">6</div>
+                            <div class="m-ttl">Lantikan Panel</div>
+                            <div class="m-dsc">Penyelaras melantik Ketua Panel</div>
+                        </div>
+                        <div class="m-arrow">&#8250;</div>
+                        <div class="m-step m-step-active">
+                            <div class="m-num">7</div>
+                            <div class="m-ttl">Tapisan &amp; Laporan</div>
+                            <div class="m-dsc">Ketua Panel menonton dan menyediakan laporan</div>
+                        </div>
+                        <div class="m-arrow">&#8250;</div>
+                        <div class="m-step">
+                            <div class="m-num">8</div>
+                            <div class="m-ttl">Pengesahan Laporan</div>
+                            <div class="m-dsc">Pengerusi menyemak dan mengesahkan laporan</div>
+                        </div>
+                        <div class="m-arrow">&#8250;</div>
+                        <div class="m-step">
+                            <div class="m-num">9</div>
+                            <div class="m-ttl">Pembayaran Tambahan</div>
+                            <div class="m-dsc">Syarikat menyemak invois dan membuat pembayaran tambahan</div>
+                        </div>
+                        <div class="m-arrow">&#8250;</div>
+                        <div class="m-step">
+                            <div class="m-num">10</div>
+                            <div class="m-ttl">Pengesahan Bayaran Tambahan</div>
+                            <div class="m-dsc">Unit bayaran menyemak dan mengesahkan bayaran</div>
+                        </div>
+                        <div class="m-arrow">&#8250;</div>
+                        <div class="m-step">
+                            <div class="m-num">11</div>
+                            <div class="m-ttl">Selesai</div>
+                            <div class="m-dsc">Syarikat mencetak laporan tapisan dan Perakuan A</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Footer -->
+                <div style="background:#f8fafc;border-top:1px solid #e2e8f0;padding:10px 20px;text-align:right;">
+                    <button onclick="closeAliranModal()" class="btn btn-default btn-sm">Tutup</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Profile Card -->
+        <div class="card profile-card">
+            <h1>DUMMY PITA 10032026 CKEDITOR 002</h1>
+            <div class="synopsis-scroll">
+                Pada suatu hari, seorang petani tua bernama Murugan tinggal di sebuah kampung kecil di selatan India bersama anak lelakinya yang malas bernama Karthik, dan setiap hari Murugan bekerja keras di sawah dari pagi hingga petang tanpa mengeluh, namun Karthik hanya duduk di rumah dan bermain tanpa mahu membantu, lalu suatu petang Murugan berpura-pura sakit dan berkata kepada Karthik bahawa dia telah menyembunyikan emas di suatu tempat dalam sawah mereka, maka dengan penuh semangat Karthik mula menggali seluruh sawah itu untuk mencari emas tetapi tidak menjumpai apa-apa, kemudian Murugan yang sudah sembuh berkata kepada anaknya, &ldquo;Tanah yang kau gali itulah emasnya,&rdquo; lalu mereka menanam benih di atas tanah yang sudah digali itu dan pada musim menuai, hasil tanaman mereka melimpah ruah, dan barulah Karthik sedar bahawa kerja keras adalah harta yang paling berharga dalam hidup.
+            </div>
+            <div class="meta-tags">
+                <span class="meta-chip"><i class="fa fa-tv"></i> UNTUK TAYANGAN TV SAHAJA (BUKAN VOD)</span>
+                <span class="meta-chip"><i class="fa fa-video-camera"></i> CEREKA</span>
+                <span class="meta-chip"><i class="fa fa-film"></i> PITA</span>
+                <span class="meta-chip"><i class="fa fa-clock-o"></i> 2 JAM 56 MINIT</span>
+                <span class="meta-chip"><i class="fa fa-globe"></i> TEMPATAN</span>
+                <span class="meta-chip"><i class="fa fa-film"></i> DVD</span>
+                <span class="meta-chip"><i class="fa fa-film"></i> MP4</span>
+            </div>
+        </div>
+
+        <!-- Video Workspace -->
+        <div class="workspace-card">
+            <!-- Left: Video -->
+            <div class="ws-video-col">
+                <video id="mainVideo" preload="auto" style="width:100%;display:block;background:#000;flex:1;">
+                    <source src="files/video_fast.mp4" type="video/mp4">
+                </video>
+                <!-- iLPF watermark overlay -->
+                <div class="ilpf-watermark">
+                    <div class="wm-inner">iLPF</div>
+                    <div class="wm-sub">Untuk<br>Kegunaan<br>Lembaga<br>Penapisan Filem</div>
+                </div>
+                <!-- Custom controls bar -->
+                <div class="vid-controls">
+                    <button id="playBtn" class="vid-btn" onclick="togglePlay()"><i class="fa fa-play" id="playIcon"></i></button>
+                    <span id="vidCurrentTime" class="vid-time">0:00</span>
+                    <div id="progressTrack">
+                        <div class="vid-rail">
+                            <div id="progressFill">
+                                <div class="vid-thumb"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <span id="vidDuration" class="vid-time">0:00</span>
+                    <button class="vid-btn" onclick="toggleMute()"><i class="fa fa-volume-up" id="volIcon"></i></button>
+                    <button class="vid-btn" onclick="toggleFullscreen()"><i class="fa fa-expand"></i></button>
+                </div>
+            </div>
+
+            <!-- Right: Annotation Panel -->
+            <div class="ws-ann-col">
+                <!-- File Info -->
+                <div class="ann-fileinfo">
+                    <div class="ann-fileinfo-row">
+                        <i class="fa fa-video-camera"></i>
+                        <span>ILPF SAMPEL VIDEO 2 JAM 540.MP4</span>
+                    </div>
+                    <div class="ann-fileinfo-row">
+                        <i class="fa fa-calendar"></i>
+                        <span>10/03/2026 10:51 AM</span>
+                    </div>
+                </div>
+
+                <!-- Rekod Tempoh -->
+                <div class="ann-sec-label"><i class="fa fa-clock-o"></i> &nbsp;REKOD TEMPOH</div>
+                <div class="ann-stamp-row">
+                    <div class="ann-stamp-col">
+                        <button class="ts-btn-mula" onclick="stampMula()">
+                            <i class="fa fa-play"></i> MULA
+                        </button>
+                        <input id="inputMula" class="ts-input" type="text" value="00:00:00" readonly>
+                    </div>
+                    <div class="ann-stamp-col">
+                        <button class="ts-btn-stop" onclick="stampBerhenti()">
+                            <i class="fa fa-stop"></i> BERHENTI
+                        </button>
+                        <input id="inputBerhenti" class="ts-input" type="text" value="00:00:00" readonly>
+                    </div>
+                </div>
+
+                <!-- Fields -->
+                <div class="ann-fields">
+                    <div>
+                        <div class="ann-field-label">Tindakan</div>
+                        <div class="tindakan-group" id="tindakan-group">
+                            <button type="button" class="tindakan-btn active" data-val="Potongkan" onclick="selectTindakan(this)">
+                                <i class="fa fa-scissors"></i>Potong
+                            </button>
+                            <button type="button" class="tindakan-btn" data-val="Senyapkan" onclick="selectTindakan(this)">
+                                <i class="fa fa-volume-off"></i>Senyap
+                            </button>
+                            <button type="button" class="tindakan-btn" data-val="Kaburkan" onclick="selectTindakan(this)">
+                                <i class="fa fa-low-vision"></i>Kabur
+                            </button>
+                            <button type="button" class="tindakan-btn" data-val="Padamkan" onclick="selectTindakan(this)">
+                                <i class="fa fa-trash"></i>Padam
+                            </button>
+                            <button type="button" class="tindakan-btn" data-val="Lain-lain" onclick="selectTindakan(this)">
+                                <i class="fa fa-ellipsis-h"></i>Lain
+                            </button>
+                        </div>
+                        <input type="hidden" id="selTindakan" value="Potongkan">
+                    </div>
+                    <div>
+                        <div class="ann-field-label">Adegan</div>
+                        <div class="adegan-grid" id="adegan-grid">
+                            <span class="adegan-chip active" data-val="Ganas" onclick="selectAdegan(this)">Ganas</span>
+                            <span class="adegan-chip" data-val="Seram" onclick="selectAdegan(this)">Seram</span>
+                            <span class="adegan-chip" data-val="Ngeri" onclick="selectAdegan(this)">Ngeri</span>
+                            <span class="adegan-chip" data-val="Seksual" onclick="selectAdegan(this)">Seksual</span>
+                            <span class="adegan-chip" data-val="Kebogelan" onclick="selectAdegan(this)">Kebogelan</span>
+                            <span class="adegan-chip" data-val="Dadah" onclick="selectAdegan(this)">Dadah</span>
+                            <span class="adegan-chip" data-val="Rokok" onclick="selectAdegan(this)">Rokok</span>
+                            <span class="adegan-chip" data-val="Arak" onclick="selectAdegan(this)">Arak</span>
+                            <span class="adegan-chip" data-val="Bahasa: Dialog &amp; Sarikata" onclick="selectAdegan(this)">Bahasa / Sarikata</span>
+                            <span class="adegan-chip" data-val="Lain-lain" onclick="selectAdegan(this)">Lain-lain</span>
+                        </div>
+                        <input type="hidden" id="selAdegan" value="Ganas">
+                    </div>
+                    <div>
+                        <div class="ann-field-label">Keterangan Tindakan</div>
+                        <textarea id="txtKeterangan" class="ann-textarea" placeholder="Nyatakan keterangan tindakan..."></textarea>
+                    </div>
+                </div>
+
+                <!-- Save -->
+                <div class="ann-save-row">
+                    <button class="btn-simpan" onclick="simpanPengubahan()">
+                        <i class="fa fa-check"></i> SIMPAN PENGUBAHAN
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Senarai Pengubahan -->
+        <div class="card" style="padding:0;">
+            <div class="senarai-header" onclick="toggleSenarai()">
+                <span class="sh-title">
+                    <i class="fa fa-list"></i>
+                    SENARAI PENGUBAHAN YANG DITAPIS : ILPF SAMPEL VIDEO 2 JAM 540.MP4
+                </span>
+                <span class="sh-toggle"><i class="fa fa-angle-up" id="senarai-icon"></i></span>
+            </div>
+            <div id="senarai-content">
+                <div class="senarai-tabs">
+                    <a class="active" onclick="showSenTab('pen',this)">Pengubahan</a>
+                </div>
+                <div class="senarai-body">
+                    <div id="sen-pen">
+                        <table class="senarai-table">
+                            <thead>
+                                <tr>
+                                    <th style="width:44px;text-align:center;">Bil</th>
+                                    <th style="width:92px;white-space:nowrap;">Aktiviti</th>
+                                    <th>Dan</th>
+                                    <th>Hingga</th>
+                                    <th>Tindakan</th>
+                                    <th>Adegan</th>
+                                    <th>Keterangan Tindakan</th>
+                                </tr>
+                            </thead>
+                            <tbody id="senTbody">
+                                <tr>
+                                    <td style="text-align:center;"><span class="bil-badge">1</span></td>
+                                    <td>
+                                        <button class="btn-play-sm" onclick="playSegment('00:03:12','00:03:40')"><i class="fa fa-play"></i></button>
+                                        <button class="btn-del-sm" onclick="hapusPengubahan(this)"><i class="fa fa-trash"></i></button>
+                                    </td>
+                                    <td>
+                                        <a class="ts-link" href="#" onclick="playSegment('00:03:12','00:03:40');return false;">00:03:12</a><button class="btn-cf-edit" data-field="mula" onclick="openEditModal(this)" title="Edit"><i class="fa fa-pencil"></i></button>
+                                    </td>
+                                    <td>
+                                        <a class="ts-link" href="#" onclick="playSegment('00:03:12','00:03:40');return false;">00:03:40</a><button class="btn-cf-edit" data-field="berhenti" onclick="openEditModal(this)" title="Edit"><i class="fa fa-pencil"></i></button>
+                                    </td>
+                                    <td><span class="chip-blue">KABURKAN</span></td>
+                                    <td>
+                                        <span class="chip-amber">KEBOGELAN</span><button class="btn-cf-edit" data-field="adegan" onclick="openEditModal(this)" title="Edit"><i class="fa fa-pencil"></i></button>
+                                    </td>
+                                    <td><span class="ket-text">maklumat bodoh, tapi tidak sesuai</span><button class="btn-cf-edit" data-field="ket" onclick="openEditModal(this)" title="Edit"><i class="fa fa-pencil"></i></button></td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:center;"><span class="bil-badge">2</span></td>
+                                    <td>
+                                        <button class="btn-play-sm" onclick="playSegment('00:09:45','00:10:14')"><i class="fa fa-play"></i></button>
+                                        <button class="btn-del-sm" onclick="hapusPengubahan(this)"><i class="fa fa-trash"></i></button>
+                                    </td>
+                                    <td>
+                                        <a class="ts-link" href="#" onclick="playSegment('00:09:45','00:10:14');return false;">00:09:45</a><button class="btn-cf-edit" data-field="mula" onclick="openEditModal(this)" title="Edit"><i class="fa fa-pencil"></i></button>
+                                    </td>
+                                    <td>
+                                        <a class="ts-link" href="#" onclick="playSegment('00:09:45','00:10:14');return false;">00:10:14</a><button class="btn-cf-edit" data-field="berhenti" onclick="openEditModal(this)" title="Edit"><i class="fa fa-pencil"></i></button>
+                                    </td>
+                                    <td><span class="chip-blue">KABURKAN</span></td>
+                                    <td>
+                                        <span class="chip-amber">SEKSUAL</span><button class="btn-cf-edit" data-field="adegan" onclick="openEditModal(this)" title="Edit"><i class="fa fa-pencil"></i></button>
+                                    </td>
+                                    <td><span class="ket-text">terlalu tidak bersesuaian</span><button class="btn-cf-edit" data-field="ket" onclick="openEditModal(this)" title="Edit"><i class="fa fa-pencil"></i></button></td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:center;"><span class="bil-badge">3</span></td>
+                                    <td>
+                                        <button class="btn-play-sm" onclick="playSegment('00:15:22','00:15:50')"><i class="fa fa-play"></i></button>
+                                        <button class="btn-del-sm" onclick="hapusPengubahan(this)"><i class="fa fa-trash"></i></button>
+                                    </td>
+                                    <td>
+                                        <a class="ts-link" href="#" onclick="playSegment('00:15:22','00:15:50');return false;">00:15:22</a><button class="btn-cf-edit" data-field="mula" onclick="openEditModal(this)" title="Edit"><i class="fa fa-pencil"></i></button>
+                                    </td>
+                                    <td>
+                                        <a class="ts-link" href="#" onclick="playSegment('00:15:22','00:15:50');return false;">00:15:50</a><button class="btn-cf-edit" data-field="berhenti" onclick="openEditModal(this)" title="Edit"><i class="fa fa-pencil"></i></button>
+                                    </td>
+                                    <td><span class="chip-blue">POTONGAN</span></td>
+                                    <td>
+                                        <span class="chip-amber">SERAM</span><button class="btn-cf-edit" data-field="adegan" onclick="openEditModal(this)" title="Edit"><i class="fa fa-pencil"></i></button>
+                                    </td>
+                                    <td><span class="ket-text">adegan seram berlebihan</span><button class="btn-cf-edit" data-field="ket" onclick="openEditModal(this)" title="Edit"><i class="fa fa-pencil"></i></button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="sen-jus" style="display:none;">
+                        <p style="color:#94a3b8;font-size:12px;padding:16px;">Tiada justifikasi direkodkan.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tabs Section -->
+        <div class="tab-section">
+            <ul class="nav-tabs-custom">
+                <li class="active"><a onclick="showTab('tab_tindakan', this)">Tindakan</a></li>
+                <li><a onclick="showTab('tab_permohonan', this)">Butir-Butir Permohonan</a></li>
+                <li><a onclick="showTab('tab_kronologi', this)">Kronologi</a></li>
+            </ul>
+
+            <div class="tab-body">
+
+                <!-- TAB: TINDAKAN -->
+                <div class="tab-pane active" id="tab_tindakan">
+
+                    <table class="form-tbl">
+                        <tr><td colspan="2" style="background:#f8fafc;font-weight:600;color:#475569;border-bottom:1px solid #f1f5f9;">Keterangan Ketua Unit</td></tr>
+                    </table>
+
+                    <!-- TWO-COLUMN LAYOUT -->
+                    <div style="display:flex;align-items:flex-start;gap:0;border:1px solid #e2e8f0;border-radius:6px;overflow:hidden;margin-bottom:16px;">
+
+                        <!-- LEFT: metadata -->
+                        <div style="width:38%;min-width:260px;flex-shrink:0;border-left:2px solid #e2e8f0;order:2;">
+
+                            <table class="form-tbl" style="margin-bottom:0;">
+                                <tr class="sec-hdr"><td colspan="2">ASAS KLASIFIKASI</td></tr>
+                                <tr>
+                                    <td class="lbl">GENRE <span class="req">*</span></td>
+                                    <td>
+                                        <div class="picker-box" onclick="openPicker('genre')">
+                                            <div class="picker-tags" id="genre-display">
+                                                <span class="picker-tag">Animasi</span>
+                                                <span class="picker-tag">Bual bicara</span>
+                                                <span class="picker-tag">Biografi</span>
+                                                <span class="picker-tag">Berita</span>
+                                                <span class="picker-tag">Lain-lain</span>
+                                            </div>
+                                            <button type="button" class="picker-edit-btn" onclick="openPicker('genre');event.stopPropagation()"><i class="fa fa-pencil"></i> Pilih</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="lbl">TEMA <span class="req">*</span></td>
+                                    <td>
+                                        <div class="picker-box" onclick="openPicker('tema')">
+                                            <div class="picker-tags" id="tema-display">
+                                                <span class="picker-tag">Alam Ghaib</span>
+                                                <span class="picker-tag">Keadilan</span>
+                                                <span class="picker-tag">Masakan</span>
+                                            </div>
+                                            <button type="button" class="picker-edit-btn" onclick="openPicker('tema');event.stopPropagation()"><i class="fa fa-pencil"></i> Pilih</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <table class="form-tbl" style="margin-bottom:0;border-top:2px solid #e2e8f0;">
+                                <tr class="sec-hdr"><td colspan="2">LANTIK AHLI PANEL</td></tr>
+                                <tr>
+                                    <td class="lbl">KETUA PANEL <span class="req">*</span></td>
+                                    <td>
+                                        <input type="text" class="ann-select" style="width:100%;box-sizing:border-box;" list="ketua-panel-list" value="AZIDI BIN ABDUL KHAHAR" placeholder="Nama Ketua Panel...">
+                                        <datalist id="ketua-panel-list">
+                                            <option value="AZIDI BIN ABDUL KHAHAR">
+                                            <option value="FARIDAH BINTI OMAR">
+                                            <option value="KAMAL BIN HASSAN">
+                                            <option value="NORAINI BINTI ZAINAL">
+                                        </datalist>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="lbl">AHLI PANEL</td>
+                                    <td>
+                                        <table style="width:100%;border-collapse:collapse;" id="ahli-panel-tbl">
+                                            <thead>
+                                                <tr style="background:#f8fafc;font-size:11px;color:#64748b;font-weight:600;">
+                                                    <th style="padding:6px 8px;border:1px solid #e2e8f0;text-align:left;">#</th>
+                                                    <th style="padding:6px 8px;border:1px solid #e2e8f0;text-align:left;">NAMA AHLI</th>
+                                                    <th style="padding:6px 8px;border:1px solid #e2e8f0;text-align:left;">JAWATAN</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="ahli-panel-tbody">
+                                                <tr>
+                                                    <td style="padding:6px 8px;border:1px solid #e2e8f0;text-align:center;font-size:12px;width:28px;">1</td>
+                                                    <td style="padding:6px 8px;border:1px solid #e2e8f0;">
+                                                        <button type="button" class="ahli-pick-btn" onclick="openAhliPicker(0)">
+                                                            <span id="ahli-name-0">-- Sila Pilih --</span>
+                                                            <i class="fa fa-user-plus" style="opacity:0.45;flex-shrink:0;margin-left:6px;"></i>
+                                                        </button>
+                                                    </td>
+                                                    <td style="padding:6px 8px;border:1px solid #e2e8f0;font-size:12px;color:#475569;white-space:nowrap;">Ahli Panel</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding:6px 8px;border:1px solid #e2e8f0;text-align:center;font-size:12px;width:28px;">2</td>
+                                                    <td style="padding:6px 8px;border:1px solid #e2e8f0;">
+                                                        <button type="button" class="ahli-pick-btn" onclick="openAhliPicker(1)">
+                                                            <span id="ahli-name-1">-- Sila Pilih --</span>
+                                                            <i class="fa fa-user-plus" style="opacity:0.45;flex-shrink:0;margin-left:6px;"></i>
+                                                        </button>
+                                                    </td>
+                                                    <td style="padding:6px 8px;border:1px solid #e2e8f0;font-size:12px;color:#475569;white-space:nowrap;">Ahli Panel</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+
+                        </div><!-- end left -->
+
+                        <!-- RIGHT: editors -->
+                        <div style="flex:1;min-width:0;order:1;">
+                            <div style="background:#1e3a8a;color:#bfdbfe;font-weight:700;font-size:10.5px;padding:7px 14px;letter-spacing:1px;text-transform:uppercase;">PITA</div>
+
+                            <div style="padding:12px 14px 10px;">
+                                <div style="font-size:11px;font-weight:700;color:#475569;margin-bottom:6px;text-transform:uppercase;letter-spacing:0.3px;">SINOPSIS <span class="req">*</span></div>
+                                <div class="ck-toolbar">
+                                    <span title="Bold"><b>B</b></span>
+                                    <span title="Italic"><i>I</i></span>
+                                    <span title="Underline"><u>U</u></span>
+                                    <div class="ck-sep"></div>
+                                    <span title="Strikethrough"><i class="fa fa-strikethrough"></i></span>
+                                    <div class="ck-sep"></div>
+                                    <span title="Bullet List"><i class="fa fa-list-ul"></i></span>
+                                    <span title="Numbered List"><i class="fa fa-list-ol"></i></span>
+                                    <div class="ck-sep"></div>
+                                    <span title="Link"><i class="fa fa-link"></i></span>
+                                    <span title="Image"><i class="fa fa-picture-o"></i></span>
+                                    <div class="ck-sep"></div>
+                                    <span>Styles</span>
+                                    <div class="ck-sep"></div>
+                                    <span>Format</span>
+                                    <div class="ck-sep"></div>
+                                    <span>Font</span>
+                                    <div class="ck-sep"></div>
+                                    <span>Size</span>
+                                    <div class="ck-sep"></div>
+                                    <span title="Text Color"><b>A</b></span>
+                                </div>
+                                <div class="ck-body" contenteditable="true">
+                                    Pada suatu hari, seorang petani tua bernama Murugan tinggal di sebuah kampung kecil di selatan India bersama anak lelakinya yang malas bernama Karthik, dan setiap hari Murugan bekerja keras di sawah dari pagi hingga petang tanpa mengeluh...
+                                </div>
+                            </div>
+
+                            <div style="padding:10px 14px 12px;border-top:1px solid #f1f5f9;">
+                                <div style="font-size:11px;font-weight:700;color:#475569;margin-bottom:6px;text-transform:uppercase;letter-spacing:0.3px;">DIALOG / SARI KATA <span class="req">*</span></div>
+                                <div class="ck-toolbar">
+                                    <span title="Bold"><b>B</b></span>
+                                    <span title="Italic"><i>I</i></span>
+                                    <span title="Underline"><u>U</u></span>
+                                    <div class="ck-sep"></div>
+                                    <span title="Strikethrough"><i class="fa fa-strikethrough"></i></span>
+                                    <div class="ck-sep"></div>
+                                    <span title="Bullet List"><i class="fa fa-list-ul"></i></span>
+                                    <span title="Numbered List"><i class="fa fa-list-ol"></i></span>
+                                    <div class="ck-sep"></div>
+                                    <span title="Link"><i class="fa fa-link"></i></span>
+                                    <span title="Image"><i class="fa fa-picture-o"></i></span>
+                                    <div class="ck-sep"></div>
+                                    <span>Styles</span>
+                                    <div class="ck-sep"></div>
+                                    <span>Format</span>
+                                    <div class="ck-sep"></div>
+                                    <span>Font</span>
+                                    <div class="ck-sep"></div>
+                                    <span>Size</span>
+                                    <div class="ck-sep"></div>
+                                    <span title="Text Color"><b>A</b></span>
+                                </div>
+                                <div class="ck-body" contenteditable="true" style="min-height:130px;">
+                                    <ol>
+                                        <li>Dialog dalam bahasa Melayu dengan sedikit penggunaan Bahasa Inggeris.</li>
+                                        <li>Tiada sari kata disediakan.</li>
+                                        <li>Penggunaan bahasa adalah selaras dengan GPPF KDN 2024.</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div><!-- end right -->
+
+                    </div><!-- end two-column -->
+
+                    <!-- FULL-WIDTH: decision section (emphasized) -->
+                    <div style="border:2px solid #1e3a8a;border-radius:6px;overflow:hidden;margin-bottom:16px;">
+                        <div style="background:#1e3a8a;color:#bfdbfe;font-weight:700;font-size:10.5px;padding:7px 14px;letter-spacing:1px;text-transform:uppercase;">KEPUTUSAN TAPISAN</div>
+                        <table class="form-tbl" style="margin-bottom:0;">
+                            <tr>
+                                <td class="lbl" style="background:#eef0ff;">HANTAR UNTUK PENGESAHAN <span class="req">*</span></td>
+                                <td>
+                                    <div class="seg-group" id="approval_status_group">
+                                        <button type="button" class="seg-btn" data-val="1" onclick="selectApproval(this)">YA</button>
+                                        <button type="button" class="seg-btn active" data-val="0" onclick="selectApproval(this)">TIDAK</button>
+                                    </div>
+                                    <input type="hidden" id="approval_status" value="0">
+                                </td>
+                            </tr>
+                            <tr id="row_keputusan" style="display:none;">
+                                <td class="lbl" style="background:#eef0ff;">KEPUTUSAN <span class="req">*</span></td>
+                                <td>
+                                    <div class="keputusan-group" id="keputusan-group">
+                                        <button type="button" class="keputusan-btn" data-val="2" onclick="selectKeputusan(this)">LULUS BERSIH <span class="kep-badge">LBP</span></button>
+                                        <button type="button" class="keputusan-btn" data-val="3" onclick="selectKeputusan(this)">LULUS DENGAN PENGUBAHAN <span class="kep-badge">LDP</span></button>
+                                        <button type="button" class="keputusan-btn keputusan-tut" data-val="4" onclick="selectKeputusan(this)">TIDAK LULUS TAYANGAN <span class="kep-badge">TUT</span></button>
+                                    </div>
+                                    <input type="hidden" id="keputusan-val" value="">
+                                </td>
+                            </tr>
+                            <tr id="row_tut" style="display:none;">
+                                <td class="lbl" style="background:#eef0ff;">ALASAN KEPUTUSAN TUT <span class="req">*</span></td>
+                                <td><textarea class="form-control" rows="4" placeholder="Nyatakan alasan keputusan TUT..."></textarea></td>
+                            </tr>
+                            <tr id="row_pemberat" style="display:none;">
+                                <td class="lbl" style="background:#eef0ff;">PEMBERAT <span class="req">*</span></td>
+                                <td>
+                                    <table class="pemberat-tbl">
+                                        <tr><td>GANAS</td><td><div class="seg-group" data-field="ganas"><button class="seg-btn active" data-val="Tiada">Tiada</button><button class="seg-btn" data-val="Sangat ringan">Sgt Ringan</button><button class="seg-btn" data-val="Ringan">Ringan</button><button class="seg-btn" data-val="Sederhana">Sederhana</button><button class="seg-btn" data-val="Berat">Berat</button><button class="seg-btn" data-val="Sangat berat">Sgt Berat</button><button class="seg-btn" data-val="Keterlaluan">Keterlaluan</button></div></td></tr>
+                                        <tr><td>SERAM</td><td><div class="seg-group" data-field="seram"><button class="seg-btn active" data-val="Tiada">Tiada</button><button class="seg-btn" data-val="Sangat ringan">Sgt Ringan</button><button class="seg-btn" data-val="Ringan">Ringan</button><button class="seg-btn" data-val="Sederhana">Sederhana</button><button class="seg-btn" data-val="Berat">Berat</button><button class="seg-btn" data-val="Sangat berat">Sgt Berat</button><button class="seg-btn" data-val="Keterlaluan">Keterlaluan</button></div></td></tr>
+                                        <tr><td>NGERI</td><td><div class="seg-group" data-field="ngeri"><button class="seg-btn active" data-val="Tiada">Tiada</button><button class="seg-btn" data-val="Sangat ringan">Sgt Ringan</button><button class="seg-btn" data-val="Ringan">Ringan</button><button class="seg-btn" data-val="Sederhana">Sederhana</button><button class="seg-btn" data-val="Berat">Berat</button><button class="seg-btn" data-val="Sangat berat">Sgt Berat</button><button class="seg-btn" data-val="Keterlaluan">Keterlaluan</button></div></td></tr>
+                                        <tr><td>SEKSUAL</td><td><div class="seg-group" data-field="seksual"><button class="seg-btn active" data-val="Tiada">Tiada</button><button class="seg-btn" data-val="Sangat ringan">Sgt Ringan</button><button class="seg-btn" data-val="Ringan">Ringan</button><button class="seg-btn" data-val="Sederhana">Sederhana</button><button class="seg-btn" data-val="Berat">Berat</button><button class="seg-btn" data-val="Sangat berat">Sgt Berat</button><button class="seg-btn" data-val="Keterlaluan">Keterlaluan</button></div></td></tr>
+                                        <tr><td>KEBOGELAN</td><td><div class="seg-group" data-field="kebogelan"><button class="seg-btn active" data-val="Tiada">Tiada</button><button class="seg-btn" data-val="Sangat ringan">Sgt Ringan</button><button class="seg-btn" data-val="Ringan">Ringan</button><button class="seg-btn" data-val="Sederhana">Sederhana</button><button class="seg-btn" data-val="Berat">Berat</button><button class="seg-btn" data-val="Sangat berat">Sgt Berat</button><button class="seg-btn" data-val="Keterlaluan">Keterlaluan</button></div></td></tr>
+                                        <tr><td>DADAH</td><td><div class="seg-group" data-field="dadah"><button class="seg-btn active" data-val="Tiada">Tiada</button><button class="seg-btn" data-val="Sangat ringan">Sgt Ringan</button><button class="seg-btn" data-val="Ringan">Ringan</button><button class="seg-btn" data-val="Sederhana">Sederhana</button><button class="seg-btn" data-val="Berat">Berat</button><button class="seg-btn" data-val="Sangat berat">Sgt Berat</button><button class="seg-btn" data-val="Keterlaluan">Keterlaluan</button></div></td></tr>
+                                        <tr><td>ROKOK</td><td><div class="seg-group" data-field="rokok"><button class="seg-btn active" data-val="Tiada">Tiada</button><button class="seg-btn" data-val="Sangat ringan">Sgt Ringan</button><button class="seg-btn" data-val="Ringan">Ringan</button><button class="seg-btn" data-val="Sederhana">Sederhana</button><button class="seg-btn" data-val="Berat">Berat</button><button class="seg-btn" data-val="Sangat berat">Sgt Berat</button><button class="seg-btn" data-val="Keterlaluan">Keterlaluan</button></div></td></tr>
+                                        <tr><td>ARAK</td><td><div class="seg-group" data-field="arak"><button class="seg-btn active" data-val="Tiada">Tiada</button><button class="seg-btn" data-val="Sangat ringan">Sgt Ringan</button><button class="seg-btn" data-val="Ringan">Ringan</button><button class="seg-btn" data-val="Sederhana">Sederhana</button><button class="seg-btn" data-val="Berat">Berat</button><button class="seg-btn" data-val="Sangat berat">Sgt Berat</button><button class="seg-btn" data-val="Keterlaluan">Keterlaluan</button></div></td></tr>
+                                        <tr><td>BAHASA: DIALOG &amp; SARI KATA</td><td><div class="seg-group" data-field="bahasa"><button class="seg-btn active" data-val="Tiada">Tiada</button><button class="seg-btn" data-val="Sangat ringan">Sgt Ringan</button><button class="seg-btn" data-val="Ringan">Ringan</button><button class="seg-btn" data-val="Sederhana">Sederhana</button><button class="seg-btn" data-val="Berat">Berat</button><button class="seg-btn" data-val="Sangat berat">Sgt Berat</button><button class="seg-btn" data-val="Keterlaluan">Keterlaluan</button></div></td></tr>
+                                        <tr>
+                                            <td>LAIN-LAIN<br><input type="text" class="form-control" placeholder="Nyatakan" style="margin-top:5px;"></td>
+                                            <td><div class="seg-group" data-field="lain"><button class="seg-btn active" data-val="Tiada">Tiada</button><button class="seg-btn" data-val="Sangat ringan">Sgt Ringan</button><button class="seg-btn" data-val="Ringan">Ringan</button><button class="seg-btn" data-val="Sederhana">Sederhana</button><button class="seg-btn" data-val="Berat">Berat</button><button class="seg-btn" data-val="Sangat berat">Sgt Berat</button><button class="seg-btn" data-val="Keterlaluan">Keterlaluan</button></div></td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr id="row_klasifikasi" style="display:none;">
+                                <td class="lbl" style="background:#eef0ff;">KLASIFIKASI <span class="req">*</span></td>
+                                <td>
+                                    <div class="rating-group" id="klasifikasi-group">
+                                        <button class="rating-btn" data-val="U">U</button>
+                                        <button class="rating-btn active" data-val="P12">P12</button>
+                                        <button class="rating-btn" data-val="13">13</button>
+                                        <button class="rating-btn" data-val="16">16</button>
+                                        <button class="rating-btn" data-val="18">18</button>
+                                    </div>
+                                    <input type="hidden" id="klasifikasi-val" value="P12">
+                                </td>
+                            </tr>
+                            <tr id="row_alasan_ttk" style="display:none;">
+                                <td class="lbl" style="background:#eef0ff;">ALASAN TTK <span class="req">*</span></td>
+                                <td>
+                                    <div class="ck-toolbar">
+                                        <span title="Bold"><b>B</b></span>
+                                        <span title="Italic"><i>I</i></span>
+                                        <span title="Underline"><u>U</u></span>
+                                        <div class="ck-sep"></div>
+                                        <span title="Strikethrough"><i class="fa fa-strikethrough"></i></span>
+                                        <div class="ck-sep"></div>
+                                        <span title="Bullet List"><i class="fa fa-list-ul"></i></span>
+                                        <span title="Numbered List"><i class="fa fa-list-ol"></i></span>
+                                        <div class="ck-sep"></div>
+                                        <span title="Link"><i class="fa fa-link"></i></span>
+                                        <span title="Image"><i class="fa fa-picture-o"></i></span>
+                                        <div class="ck-sep"></div>
+                                        <span>Styles</span>
+                                        <div class="ck-sep"></div>
+                                        <span>Format</span>
+                                        <div class="ck-sep"></div>
+                                        <span>Font</span>
+                                        <div class="ck-sep"></div>
+                                        <span>Size</span>
+                                        <div class="ck-sep"></div>
+                                        <span title="Text Color"><b>A</b></span>
+                                    </div>
+                                    <div class="ck-body" contenteditable="true" style="min-height:120px;">
+                                        <p>Tajuk: Takdir Di Hujung Rindu. Kisah bermula dengan pertemuan tidak sengaja antara Tengku Adam, seorang pewaris empayar perniagaan yang dingin, dan Nurul Huda, seorang gadis kampung yang ceria namun dipenuhi keberanian. Mereka bertemu apabila kereta mewah Adam terbabit di tepi jalan kampung akibat masalah sekor kosong, dan Hudalah orang pertama yang datang mengulurkan bantuan dengan membawa bekal air teh manis dan karipap panas buatannya. Ketegangan timbul apabila ibu Adam, Puan Sri Salimah, tidak menyuarakan mahunya gadis kampung itu menjadi menantu...</p>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div><!-- end decision section -->
+
+                </div>
+
+                <!-- TAB: BUTIR-BUTIR PERMOHONAN -->
+                <div class="tab-pane" id="tab_permohonan">
+
+                    <!-- Hero: Film Title -->
+                    <div class="bb-hero">
+                        <div class="bb-hero-title">DUMMY PITA 10032026 CKEDITOR 002</div>
+                        <div class="bb-hero-badges">
+                            <span class="bb-hero-badge"><i class="fa fa-flag"></i> MALAYSIA</span>
+                            <span class="bb-hero-badge"><i class="fa fa-calendar"></i> 2026</span>
+                            <span class="bb-hero-badge"><i class="fa fa-language"></i> MELAYU</span>
+                            <span class="bb-hero-badge"><i class="fa fa-map-marker"></i> SEMENANJUNG</span>
+                        </div>
+                    </div>
+
+                    <!-- Quick Stats -->
+                    <div class="bb-featured">
+                        <div class="bb-stat">
+                            <div class="bb-stat-val">1</div>
+                            <div class="bb-stat-lbl">Bilangan Pita</div>
+                        </div>
+                        <div class="bb-stat">
+                            <div class="bb-stat-val">TIADA</div>
+                            <div class="bb-stat-lbl">Sarikata</div>
+                        </div>
+                        <div class="bb-stat">
+                            <div class="bb-stat-val sm">NETWORK TWENTY ONE</div>
+                            <div class="bb-stat-lbl">Pengedar</div>
+                        </div>
+                        <div class="bb-stat">
+                            <div class="bb-stat-val sm">CEREKA</div>
+                            <div class="bb-stat-lbl">Jenis</div>
+                        </div>
+                    </div>
+
+                    <!-- Production Credits -->
+                    <div class="bb-section-title"><i class="fa fa-users"></i> Kredit Produksi</div>
+                    <div class="bb-credits">
+                        <div class="bb-credits-row">
+                            <span class="bb-credits-role">Pelakon</span>
+                            <span class="bb-credits-name">NABILA HUDA, IKO UWAIS, CHRIS HEMSWORTH</span>
+                        </div>
+                        <div class="bb-credits-row">
+                            <span class="bb-credits-role">Pengarah</span>
+                            <span class="bb-credits-name">ERIK MATTI</span>
+                        </div>
+                        <div class="bb-credits-row">
+                            <span class="bb-credits-role">Penerbit</span>
+                            <span class="bb-credits-name">RAJA AZMI</span>
+                        </div>
+                        <div class="bb-credits-row">
+                            <span class="bb-credits-role">Pengedar</span>
+                            <span class="bb-credits-name">NETWORK TWENTY ONE</span>
+                        </div>
+                    </div>
+
+                    <!-- Supporting Documents -->
+                    <div class="bb-section-title"><i class="fa fa-paperclip"></i> Dokumen Sokongan</div>
+                    <div class="bb-docs">
+                        <a href="#" class="bb-doc-card">
+                            <div class="bb-doc-icon"><i class="fa fa-file-pdf-o"></i></div>
+                            <div style="flex:1;">
+                                <div class="bb-doc-sublabel">Surat Akuan</div>
+                                <div class="bb-doc-name">CONTOH_SURAT_AKUAN_SUMPAH.pdf</div>
+                                <div class="bb-doc-meta">10/03/2026 &mdash; 09:14am</div>
+                            </div>
+                            <i class="fa fa-download bb-doc-arrow"></i>
+                        </a>
+                        <a href="#" class="bb-doc-card">
+                            <div class="bb-doc-icon"><i class="fa fa-file-pdf-o"></i></div>
+                            <div style="flex:1;">
+                                <div class="bb-doc-sublabel">Surat Sokongan</div>
+                                <div class="bb-doc-name">CONTOH_DOKUMEN_SOKONGAN.pdf</div>
+                                <div class="bb-doc-meta">10/03/2026 &mdash; 09:14am</div>
+                            </div>
+                            <i class="fa fa-download bb-doc-arrow"></i>
+                        </a>
+                    </div>
+
+                    <!-- Comments -->
+                    <div class="bb-section-title"><i class="fa fa-comment-o"></i> Komen</div>
+                    <div class="bb-comment">
+                        <div class="bb-comment-label"><i class="fa fa-quote-left"></i> Komen Pemohon</div>
+                        <div class="bb-comment-text">Tajuk: Takdir Di Hujung Rindu. Kisah bermula dengan pertemuan tidak sengaja antara Tengku Adam, seorang pewaris empayar perniagaan yang dingin...</div>
+                    </div>
+
+                </div>
+
+                <!-- TAB: KRONOLOGI -->
+                <div class="tab-pane" id="tab_kronologi">
+                    <div class="kron-timeline">
+
+                        <div class="kron-item">
+                            <div class="kron-dot"><div class="kron-circle" style="background:#3b82f6;">1</div></div>
+                            <div class="kron-body">
+                                <div class="kron-status-row">
+                                    <span class="kron-badge" style="background:#eff6ff;color:#1d4ed8;">PERMOHONAN</span>
+                                    <span class="kron-time">10/03/2026 &nbsp;09:14:10</span>
+                                </div>
+                                <div class="kron-user" style="color:#3b82f6;">NETWORK TWENTY ONE</div>
+                                <div class="kron-desc">Tarikh permohonan untuk permohonan (PCBM20260396966) adalah pada 10/03/2026 09:14:10</div>
+                            </div>
+                        </div>
+
+                        <div class="kron-item">
+                            <div class="kron-dot"><div class="kron-circle" style="background:#8b5cf6;">2</div></div>
+                            <div class="kron-body">
+                                <div class="kron-status-row">
+                                    <span class="kron-badge" style="background:#f5f3ff;color:#6d28d9;">KAEDAH BAYARAN</span>
+                                    <span class="kron-time">10/03/2026 &nbsp;09:44:07</span>
+                                </div>
+                                <div class="kron-user" style="color:#8b5cf6;">NETWORK TWENTY ONE</div>
+                                <div class="kron-desc">Tarikh pemilihan kaedah pembayaran secara iPayment bagi permohonan (1039575) adalah pada 10/03/26 09:44:07</div>
+                            </div>
+                        </div>
+
+                        <div class="kron-item">
+                            <div class="kron-dot"><div class="kron-circle" style="background:#5e6ad2;">3</div></div>
+                            <div class="kron-body">
+                                <div class="kron-status-row">
+                                    <span class="kron-badge" style="background:#eef0ff;color:#4338ca;">MENUNGGU PENGESAHAN iPAYMENT</span>
+                                    <span class="kron-time">10/03/2026</span>
+                                </div>
+                                <div class="kron-user" style="color:#5e6ad2;">NETWORK TWENTY ONE</div>
+                                <div class="kron-desc">Pengguna telah memuat naik resit bagi pembayaran iPayment pada 10/03/2026</div>
+                            </div>
+                        </div>
+
+                        <div class="kron-item">
+                            <div class="kron-dot"><div class="kron-circle" style="background:#10b981;">4</div></div>
+                            <div class="kron-body">
+                                <div class="kron-status-row">
+                                    <span class="kron-badge" style="background:#ecfdf5;color:#065f46;">PEMBAYARAN</span>
+                                    <span class="kron-time">10/03/2026 &nbsp;09:50:23</span>
+                                </div>
+                                <div class="kron-user" style="color:#10b981;">NORHAFIZAH BINTI JAILANI</div>
+                                <div class="kron-desc">Tarikh pengesahan pembayaran pertama untuk permohonan (1039575), No Resit (RP0108844) adalah pada 10/03/26 09:50:23</div>
+                            </div>
+                        </div>
+
+                        <div class="kron-item">
+                            <div class="kron-dot"><div class="kron-circle" style="background:#f97316;">5</div></div>
+                            <div class="kron-body">
+                                <div class="kron-status-row">
+                                    <span class="kron-badge" style="background:#fff7ed;color:#c2410c;">MENUNGGU PENERIMAAN MEDIA</span>
+                                    <span class="kron-time">10/03/2026 &nbsp;10:02:22</span>
+                                </div>
+                                <div class="kron-user" style="color:#f97316;">NOR FAZLIDA BINTI ALI</div>
+                                <div class="kron-desc">Tarikh penerimaan media untuk permohonan (PCBM20260396966) adalah pada 10/03/2026 10:02:22</div>
+                            </div>
+                        </div>
+
+                        <div class="kron-item">
+                            <div class="kron-dot"><div class="kron-circle" style="background:#6366f1;">6</div></div>
+                            <div class="kron-body">
+                                <div class="kron-status-row">
+                                    <span class="kron-badge" style="background:#f0fdfa;color:#0f766e;">PENUKARAN FORMAT VIDEO &amp; MUAT NAIK</span>
+                                    <span class="kron-time">10/03/2026 &nbsp;10:51:50</span>
+                                </div>
+                                <div class="kron-user" style="color:#6366f1;">KELLY CHRISTINA A/P RATNAM</div>
+                                <div class="kron-desc">Tarikh penukaran format video dan muat naik untuk permohonan (PCBM20260396966) adalah pada 10/03/2026 10:51:50</div>
+                            </div>
+                        </div>
+
+                        <div class="kron-item">
+                            <div class="kron-dot"><div class="kron-circle" style="background:#6366f1;">7</div></div>
+                            <div class="kron-body">
+                                <div class="kron-status-row">
+                                    <span class="kron-badge" style="background:#eef2ff;color:#3730a3;">LANTIK KETUA PANEL</span>
+                                    <span class="kron-time">10/03/2026 &nbsp;10:59:38</span>
+                                </div>
+                                <div class="kron-user" style="color:#6366f1;">LT. KDR (B) MD. YUSUF BIN HJ. ISMAIL</div>
+                                <div class="kron-desc">Tarikh lantikan panel untuk permohonan (PCBM20260396966) adalah pada 10/03/2026 10:59:38. KP: AZIDI BIN ABDUL KHAHAR</div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Bottom Action Bar -->
+        <div class="bottom-actions">
+            <div>
+                <button class="btn-lg-custom btn-back"><i class="fa fa-arrow-left"></i> Kembali</button>
+            </div>
+            <div class="right-btns">
+                <button class="btn-lg-custom btn-save"><i class="fa fa-save"></i> Simpan</button>
+                <button class="btn-lg-custom btn-report">Lihat Laporan</button>
+                <button class="btn-lg-custom btn-submit">Hantar</button>
+            </div>
+        </div>
+
+    </div><!-- end main-content -->
+</div><!-- end container-main -->
+
+<div class="page-footer">
+    Hak Cipta Terpelihara &copy; Kementerian Dalam Negeri 2026.
+</div>
+
+<script>
+/* ---- VIDEO CONTROLS ---- */
+(function() {
+    var video   = document.getElementById('mainVideo');
+    var track   = document.getElementById('progressTrack');
+    var fill    = document.getElementById('progressFill');
+    var curEl   = document.getElementById('vidCurrentTime');
+    var durEl   = document.getElementById('vidDuration');
+    var playIcon = document.getElementById('playIcon');
+    var dragging = false;
+    var FALLBACK_DUR = 1080; // 18 min if metadata not loaded
+
+    function fmt(s) {
+        if (!isFinite(s)) s = 0;
+        var m = Math.floor(s / 60), sec = Math.floor(s % 60);
+        return m + ':' + (sec < 10 ? '0' : '') + sec;
+    }
+
+    function pctFromEvent(e) {
+        var rect = track.getBoundingClientRect();
+        return Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+    }
+
+    function getDur() {
+        var d = video.duration;
+        return (d && isFinite(d) && d > 0) ? d : FALLBACK_DUR;
+    }
+
+    function doSeek(pct) {
+        var dur = getDur();
+        try {
+            video.currentTime = dur * pct;
+            fill.style.width = (pct * 100) + '%';
+        } catch (ex) {
+            console.error('seek failed:', ex);
+        }
+    }
+
+    track.addEventListener('click', function(e) {
+        doSeek(pctFromEvent(e));
+    });
+    track.addEventListener('mousedown', function(e) {
+        dragging = true;
+        e.preventDefault();
+        doSeek(pctFromEvent(e));
+    });
+    document.addEventListener('mousemove', function(e) {
+        if (dragging) { e.preventDefault(); doSeek(pctFromEvent(e)); }
+    });
+    document.addEventListener('mouseup', function() { dragging = false; });
+
+    video.addEventListener('timeupdate', function() {
+        var dur = video.duration;
+        if (dur && isFinite(dur)) {
+            fill.style.width = (video.currentTime / dur * 100) + '%';
+        }
+        curEl.textContent = fmt(video.currentTime);
+    });
+    video.addEventListener('loadedmetadata', function() {
+        durEl.textContent = fmt(getDur());
+    });
+    video.addEventListener('durationchange', function() {
+        durEl.textContent = fmt(getDur());
+    });
+    video.addEventListener('play',  function() { playIcon.className = 'fa fa-pause'; });
+    video.addEventListener('pause', function() { playIcon.className = 'fa fa-play';  });
+    video.addEventListener('error', function(e) { console.error('video error:', video.error); });
+})();
+
+function fmtMs(s) {
+    var m = Math.floor(s / 60), sec = Math.floor(s % 60);
+    return m + ':' + (sec < 10 ? '0' : '') + sec;
+}
+function togglePlay() {
+    var v = document.getElementById('mainVideo');
+    v.paused ? v.play() : v.pause();
+}
+function toggleMute() {
+    var v = document.getElementById('mainVideo');
+    v.muted = !v.muted;
+    document.getElementById('volIcon').className = v.muted ? 'fa fa-volume-off' : 'fa fa-volume-up';
+}
+function toggleFullscreen() {
+    var el = document.getElementById('mainVideo');
+    document.fullscreenElement ? document.exitFullscreen() : el.requestFullscreen && el.requestFullscreen();
+}
+/* ---- END VIDEO CONTROLS ---- */
+
+function hmsToSec(hms) {
+    var p = hms.split(':');
+    return +p[0] * 3600 + +p[1] * 60 + +p[2];
+}
+function playSegment(startHms, endHms) {
+    var v = document.getElementById('mainVideo');
+    var endSec = hmsToSec(endHms);
+    v.currentTime = hmsToSec(startHms);
+    v.play();
+    function onTime() {
+        if (v.currentTime >= endSec) {
+            v.pause();
+            v.removeEventListener('timeupdate', onTime);
+        }
+    }
+    v.removeEventListener('timeupdate', v._segListener);
+    v._segListener = onTime;
+    v.addEventListener('timeupdate', onTime);
+}
+
+function fmtTime(s) {
+    var h = Math.floor(s / 3600);
+    var m = Math.floor((s % 3600) / 60);
+    var sec = Math.floor(s % 60);
+    return [h,m,sec].map(function(v){ return String(v).padStart(2,'0'); }).join(':');
+}
+function stampMula() {
+    var v = document.getElementById('mainVideo');
+    document.getElementById('inputMula').value = fmtTime(v.currentTime);
+}
+function stampBerhenti() {
+    var v = document.getElementById('mainVideo');
+    document.getElementById('inputBerhenti').value = fmtTime(v.currentTime);
+}
+
+function openAliranModal() {
+    var m = document.getElementById('aliranModal');
+    m.style.display = 'flex';
+}
+function closeAliranModal() {
+    document.getElementById('aliranModal').style.display = 'none';
+}
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeAliranModal();
+});
+
+function toggleSidebar(el) {
+    var sub = el.nextElementSibling;
+    if (sub && sub.classList.contains('sub-menu')) {
+        sub.classList.toggle('open');
+        el.parentElement.classList.toggle('open');
+    }
+}
+
+function showTab(id, link) {
+    document.querySelectorAll('.tab-pane').forEach(function(p) { p.classList.remove('active'); });
+    document.getElementById(id).classList.add('active');
+    document.querySelectorAll('.nav-tabs-custom li').forEach(function(l) { l.classList.remove('active'); });
+    link.parentElement.classList.add('active');
+}
+
+var _ahliPickerIdx = null;
+var _ahliNames = [
+    {n: 'ABDUL HAFEEZ BIN HAMZAH', t: 1, cats: [{k:'FILEM',j:1}]},
+    {n: 'ARJUNAITI BIN ABDULLAH', t: 1, cats: [{k:'FILEM',j:1}]},
+    {n: 'AZIDI BIN ABDUL KHAHAR', t: 11, cats: [{k:'FILEM',j:3},{k:'PITA B.M',j:2},{k:'PITA IKLAN',j:4},{k:'TV AWESOME',j:1},{k:'TV SUKE',j:1}]},
+    {n: 'AZREENA BINTI AHMAD', t: 5, cats: [{k:'FILEM',j:2},{k:'PITA IKLAN',j:2},{k:'CUTI',j:1}]},
+    {n: 'BUVANESWARY A/P MANIAM @ SUBRAMANIAM', t: 2, cats: [{k:'FILEM',j:1},{k:'PITA IKLAN',j:1}]},
+    {n: 'DATIN YAMUNARANI A/P R.MUTHUTHAMBY PILLAY', t: 0, cats: []},
+    {n: 'DATO DR NIK AZMI BIN NIK OMAR', t: 0, cats: []},
+    {n: 'DATO MOHD AZNOR BIN MAHAT', t: 0, cats: []},
+    {n: 'DATO SOBRI BIN AHMAD', t: 2, cats: [{k:'TV AL-HIJRAH',j:2}]},
+    {n: 'DATUK OOI KEE HENG', t: 2, cats: [{k:'PITA CINA',j:1},{k:'TV ENJOY',j:1}]},
+    {n: 'DEVARAJ A/L SUBRAMANIAM', t: 0, cats: []},
+    {n: 'DR. URA A/P PIN @ CHUM', t: 0, cats: []},
+    {n: 'EVANS ONG YIH JIE', t: 1, cats: [{k:'PITA IKLAN',j:1}]},
+    {n: 'FAHMI KHAWARIZMI BIN MAHMUD', t: 4, cats: [{k:'FILEM',j:1},{k:'PITA IKLAN',j:3}]},
+    {n: 'GOH SAW KHIM', t: 0, cats: []},
+    {n: 'HAIRIAH BINTI ABDUL GHANI', t: 1, cats: [{k:'FILEM',j:1}]},
+    {n: 'HAZLINDA BINTI HAMZAH', t: 0, cats: []},
+    {n: 'IRDAWANI BINTI MOHAMAD SELAMAT', t: 5, cats: [{k:'BH.FILEM',j:4},{k:'BH.PITA',j:1}]},
+    {n: 'KEPTEN (B) VEERAKUMAR A/L SUBBIAH', t: 0, cats: []},
+    {n: 'KOLONEL MUNRAJ SINGH A/L JUGHTAR SINGH (BERSARA)', t: 0, cats: []},
+    {n: 'KUMARESAN A/L KARUPPIAH', t: 0, cats: []},
+    {n: 'LEE HAO JIE', t: 1, cats: [{k:'BH.FILEM',j:1}]},
+    {n: 'LEE KUM YIP', t: 2, cats: [{k:'PITA CINA',j:1},{k:'PITA IKLAN',j:1}]},
+    {n: 'LT. KDR (B) MD. YUSUF BIN HJ. ISMAIL', t: 1, cats: [{k:'BH.FILEM',j:1}]},
+    {n: 'MARSILA BINTI SULAIMAN', t: 2, cats: [{k:'FILEM',j:2}]},
+    {n: 'MASNI BINTI AWANG', t: 2, cats: [{k:'FILEM',j:2}]},
+    {n: 'MIMI HANIRUL SAZNI BINTI MOHD SADALI', t: 4, cats: [{k:'TV AWESOME',j:3},{k:'TV SARAWAK',j:1}]},
+    {n: 'MOHD FAZLI BIN MOHD HARON', t: 1, cats: [{k:'PITA CINA',j:1}]},
+    {n: 'MOHD FIRDAUS BIN ABDUL RAHIM', t: 0, cats: []},
+    {n: 'MUSTAPA BIN MOHAMMAD YASIN', t: 2, cats: [{k:'TV AL-HIJRAH',j:2}]},
+    {n: 'MUZAMIR BIN SABOO', t: 1, cats: [{k:'PITA B.M',j:1}]},
+    {n: 'NOOR HAFIZA BINTI HASAN', t: 3, cats: [{k:'PITA IKLAN',j:3}]},
+    {n: 'NOR ATIKAH BINTI AB GHANI', t: 0, cats: []},
+    {n: 'NUR JANNAHKHAIRUNNISA BT MD SAID', t: 1, cats: [{k:'PITA B.M',j:1}]},
+    {n: 'OI CHU KIM TING @ REZUOI BIN ABDULLAH', t: 0, cats: []},
+    {n: 'ONG BEE LENG', t: 0, cats: []},
+    {n: 'PUNIDHA A/P N. PALIAH', t: 0, cats: []},
+    {n: 'RANGA RAO A/L SIMADARI NAIDU', t: 0, cats: []},
+    {n: 'RUSZIDAH BINTI LIMAT', t: 0, cats: []},
+    {n: 'SAIFUL ASIDI BIN JOHARI', t: 10, cats: [{k:'TV AL-HIJRAH',j:9},{k:'BH.FILEM',j:1}]},
+    {n: 'SHAFEEZUL BIN DIN', t: 0, cats: []},
+    {n: 'SIA SOH GUAD', t: 2, cats: [{k:'PITA IKLAN',j:1},{k:'MESYUARAT',j:1}]},
+    {n: 'SOFIA LIM BINTI ABDULLAH', t: 2, cats: [{k:'PITA IKLAN',j:1},{k:'TV AL-HIJRAH',j:1}]},
+    {n: 'STELLA STEPHEN CHIN', t: 2, cats: [{k:'TV AL-HIJRAH',j:2}]},
+    {n: 'THAVA RAJAN A/L SUBRAMANIAM', t: 0, cats: []},
+    {n: 'TOHIT BIN HJ. SIDEK', t: 1, cats: [{k:'TV AL-HIJRAH',j:1}]},
+    {n: 'TUAN HAJI MOHAMAD KHIR BIN MAT LAZIM', t: 0, cats: []},
+    {n: 'WOOI KOOI CHEANG', t: 0, cats: []},
+    {n: 'YM. ENGKU MOHAMED KHAIRY AZWI BIN ROZALAY', t: 4, cats: [{k:'FILEM',j:3},{k:'BH.FILEM',j:1}]},
+    {n: 'ZURAIDI BIN MOHD JOHAN', t: 1, cats: [{k:'FILEM',j:1}]}
+];
+function openAhliPicker(idx) {
+    _ahliPickerIdx = idx;
+    var s = document.getElementById('ahli-search');
+    if (s) s.value = '';
+    filterAhliList('');
+    var ov = document.getElementById('ahli-picker-overlay');
+    ov.style.display = 'flex';
+    if (s) setTimeout(function(){ s.focus(); }, 80);
+}
+function closeAhliPicker(e) {
+    if (!e || e.target === document.getElementById('ahli-picker-overlay')) {
+        document.getElementById('ahli-picker-overlay').style.display = 'none';
+    }
+}
+function filterAhliList(q) {
+    var f = (q || '').toLowerCase();
+    var taken = [
+        (document.getElementById('ahli-name-0') || {}).textContent || '',
+        (document.getElementById('ahli-name-1') || {}).textContent || ''
+    ];
+    var list = document.getElementById('ahli-picker-list');
+    var filtered = _ahliNames.filter(function(o){ return o.n.toLowerCase().indexOf(f) >= 0; });
+    filtered.sort(function(a,b){ return a.t - b.t; });
+    var rows = filtered.map(function(o) {
+        var takenIdx = taken.indexOf(o.n);
+        var isTaken = takenIdx >= 0 && takenIdx !== _ahliPickerIdx;
+        var baseStyle = 'padding:8px 16px;font-size:12.5px;border-bottom:1px solid #f8fafc;';
+        var style = isTaken
+            ? baseStyle + 'color:#94a3b8;cursor:not-allowed;'
+            : baseStyle + 'color:#1e293b;cursor:pointer;';
+        var click = isTaken ? '' : ' onclick="selectAhliFromPicker(\'' + o.n.replace(/'/g, "\\'") + '\')"';
+        var hover = isTaken ? '' : ' onmouseover="this.style.background=\'#eff6ff\'" onmouseout="this.style.background=\'\'"';
+        var badgeColor, badgeBg;
+        if (isTaken) {
+            badgeColor = '#94a3b8'; badgeBg = '#f1f5f9';
+        } else if (o.t === 0) {
+            badgeColor = '#64748b'; badgeBg = '#f1f5f9';
+        } else if (o.t <= 3) {
+            badgeColor = '#15803d'; badgeBg = '#dcfce7';
+        } else if (o.t <= 7) {
+            badgeColor = '#4338ca'; badgeBg = '#ede9fe';
+        } else {
+            badgeColor = '#b91c1c'; badgeBg = '#fee2e2';
+        }
+        var badge = '<span style="font-size:10px;font-weight:600;color:' + badgeColor + ';background:' + badgeBg + ';padding:2px 7px;border-radius:9px;white-space:nowrap;">' + o.t + ' tugasan</span>';
+        var nameHtml = isTaken ? o.n + ' <span style="font-size:10px;color:#94a3b8;">(dipilih)</span>' : o.n;
+        var topRow = '<div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">' +
+            '<span>' + nameHtml + '</span>' + badge + '</div>';
+        var CAT_CLR = {
+            'FILEM':       {bg:'#dbeafe',bd:'#93c5fd',tx:'#1d4ed8'},
+            'FILEM IKLAN': {bg:'#e0e7ff',bd:'#a5b4fc',tx:'#4338ca'},
+            'PITA B.M':    {bg:'#ffedd5',bd:'#fdba74',tx:'#c2410c'},
+            'PITA CINA':   {bg:'#ede9fe',bd:'#a5b4fc',tx:'#4338ca'},
+            'PITA TMNET':  {bg:'#fce7f3',bd:'#f9a8d4',tx:'#be185d'},
+            'PITA TRELER': {bg:'#ffe4e6',bd:'#fca5a5',tx:'#dc2626'},
+            'PITA IKLAN':  {bg:'#fff7ed',bd:'#fed7aa',tx:'#ea580c'},
+            'TV AL-HIJRAH':{bg:'#f3e8ff',bd:'#d8b4fe',tx:'#7e22ce'},
+            'TV AWESOME':  {bg:'#ede9fe',bd:'#c4b5fd',tx:'#6d28d9'},
+            'TV SARAWAK':  {bg:'#fdf4ff',bd:'#e879f9',tx:'#a21caf'},
+            'TV SUKE':     {bg:'#fdf2f8',bd:'#f0abfc',tx:'#9d174d'},
+            'TV ENJOY':    {bg:'#ecfdf5',bd:'#6ee7b7',tx:'#065f46'},
+            'TV UNIFI':    {bg:'#f0fdf4',bd:'#86efac',tx:'#15803d'},
+            'BH.FILEM':    {bg:'#d1fae5',bd:'#6ee7b7',tx:'#047857'},
+            'BH.PITA':     {bg:'#ccfbf1',bd:'#5eead4',tx:'#0f766e'},
+            'MESYUARAT':   {bg:'#fefce8',bd:'#fde047',tx:'#a16207'},
+            'CUTI':        {bg:'#fee2e2',bd:'#fca5a5',tx:'#b91c1c'}
+        };
+        var catsRow = '';
+        if (o.cats && o.cats.length > 0) {
+            var sorted = o.cats.slice().sort(function(a,b){return b.j - a.j;});
+            var chips = sorted.map(function(c) {
+                var clr = CAT_CLR[c.k] || {bg:'#f1f5f9',bd:'#cbd5e1',tx:'#475569'};
+                var bg  = isTaken ? '#f8fafc' : clr.bg;
+                var bd  = isTaken ? '#e2e8f0' : clr.bd;
+                var tx  = isTaken ? '#cbd5e1'  : clr.tx;
+                return '<span style="font-size:10px;font-weight:600;color:' + tx + ';background:' + bg + ';border:1px solid ' + bd + ';padding:1px 7px;border-radius:8px;margin-right:3px;white-space:nowrap;">' + c.k + ' \xd7' + c.j + '</span>';
+            }).join('');
+            catsRow = '<div style="margin-top:4px;line-height:1.9;">' + chips + '</div>';
+        }
+        return '<div style="' + style + '"' + click + hover + '>' + topRow + catsRow + '</div>';
+    }).join('');
+    list.innerHTML = rows || '<div style="padding:14px 16px;font-size:12px;color:#94a3b8;text-align:center;">Tiada rekod dijumpai</div>';
+}
+function selectAhliFromPicker(name) {
+    if (_ahliPickerIdx === null) return;
+    var span = document.getElementById('ahli-name-' + _ahliPickerIdx);
+    if (span) { span.textContent = name; span.parentElement.classList.add('has-val'); }
+    document.getElementById('ahli-picker-overlay').style.display = 'none';
+}
+function clearAhli(idx) {
+    var span = document.getElementById('ahli-name-' + idx);
+    if (span) { span.textContent = '-- Sila Pilih --'; span.parentElement.classList.remove('has-val'); }
+}
+
+function selectKeputusan(btn) {
+    document.querySelectorAll('#keputusan-group .keputusan-btn').forEach(function(b) { b.classList.remove('active'); });
+    btn.classList.add('active');
+    var val = btn.dataset.val;
+    document.getElementById('keputusan-val').value = val;
+    toggleTUT(val);
+}
+
+function selectApproval(btn) {
+    document.querySelectorAll('#approval_status_group .seg-btn').forEach(function(b) { b.classList.remove('active'); });
+    btn.classList.add('active');
+    var val = btn.dataset.val;
+    document.getElementById('approval_status').value = val;
+    toggleKeputusan(val);
+}
+
+function toggleKeputusan(val) {
+    var show = (val === '1');
+    document.getElementById('row_keputusan').style.display = show ? '' : 'none';
+    document.getElementById('row_pemberat').style.display = show ? '' : 'none';
+    document.getElementById('row_klasifikasi').style.display = show ? '' : 'none';
+    document.getElementById('row_alasan_ttk').style.display = show ? 'none' : '';
+    if (!show) { document.getElementById('row_tut').style.display = 'none'; }
+}
+
+function toggleTUT(val) {
+    var isTUT = (val === '4');
+    document.getElementById('row_tut').style.display = isTUT ? '' : 'none';
+    document.getElementById('row_klasifikasi').style.display = isTUT ? 'none' : '';
+}
+
+function toggleSenarai() {
+    var content = document.getElementById('senarai-content');
+    var icon = document.getElementById('senarai-icon');
+    var hidden = content.style.display === 'none';
+    content.style.display = hidden ? '' : 'none';
+    icon.className = hidden ? 'fa fa-angle-up' : 'fa fa-angle-down';
+}
+
+function toggleSidebarPanel() {
+    document.querySelector('.sidebar').classList.toggle('collapsed');
+}
+
+function addPill(selectId, targetId) {
+    var sel = document.getElementById(selectId);
+    var val = sel.value;
+    if (!val) return;
+    var box = document.getElementById(targetId);
+    var existing = box.querySelectorAll('.pill');
+    for (var i = 0; i < existing.length; i++) {
+        if (existing[i].textContent.replace('×','').trim() === val) return;
+    }
+    var pill = document.createElement('span');
+    pill.className = 'pill';
+    pill.innerHTML = val + ' <span class="x" onclick="this.parentElement.remove()">&#215;</span>';
+    box.appendChild(pill);
+    sel.value = '';
+}
+
+function simpanPengubahan() {
+    var mula = document.getElementById('inputMula').value.trim();
+    var berhenti = document.getElementById('inputBerhenti').value.trim();
+    var tindakan = document.getElementById('selTindakan').value;
+    var adegan = document.getElementById('selAdegan').value;
+    var keterangan = document.getElementById('txtKeterangan').value.trim();
+
+    if (!mula || mula === '00:00:00') { alert('Sila tetapkan Masa Mula.'); return; }
+    if (!berhenti || berhenti === '00:00:00') { alert('Sila tetapkan Masa Berhenti.'); return; }
+    if (!keterangan) { alert('Sila isi Keterangan Tindakan.'); return; }
+
+    var tbody = document.getElementById('senTbody');
+    var bil = tbody.querySelectorAll('tr').length + 1;
+    var esc = function(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); };
+
+    var tr = document.createElement('tr');
+    tr.innerHTML =
+        '<td style="text-align:center;"><span class="bil-badge">' + bil + '</span></td>' +
+        '<td>' +
+            '<button class="btn-play-sm" onclick="playSegment(\'' + mula + '\',\'' + berhenti + '\')"><i class="fa fa-play"></i></button> ' +
+            '<button class="btn-del-sm" onclick="hapusPengubahan(this)"><i class="fa fa-trash"></i></button>' +
+        '</td>' +
+        '<td><a class="ts-link" href="#" onclick="playSegment(\'' + mula + '\',\'' + berhenti + '\');return false;">' + esc(mula) + '</a><button class="btn-cf-edit" data-field="mula" onclick="openEditModal(this)" title="Edit"><i class="fa fa-pencil"></i></button></td>' +
+        '<td><a class="ts-link" href="#" onclick="playSegment(\'' + mula + '\',\'' + berhenti + '\');return false;">' + esc(berhenti) + '</a><button class="btn-cf-edit" data-field="berhenti" onclick="openEditModal(this)" title="Edit"><i class="fa fa-pencil"></i></button></td>' +
+        '<td><span class="chip-blue">' + esc(tindakan).toUpperCase() + '</span></td>' +
+        '<td><span class="chip-amber">' + esc(adegan).toUpperCase() + '</span><button class="btn-cf-edit" data-field="adegan" onclick="openEditModal(this)" title="Edit"><i class="fa fa-pencil"></i></button></td>' +
+        '<td><span class="ket-text">' + esc(keterangan) + '</span><button class="btn-cf-edit" data-field="ket" onclick="openEditModal(this)" title="Edit"><i class="fa fa-pencil"></i></button></td>';
+    tbody.appendChild(tr);
+
+    document.getElementById('inputMula').value = '00:00:00';
+    document.getElementById('inputBerhenti').value = '00:00:00';
+    document.getElementById('txtKeterangan').value = '';
+    selectTindakan(document.querySelector('#tindakan-group .tindakan-btn'));
+    selectAdegan(document.querySelector('#adegan-grid .adegan-chip'));
+}
+
+function hapusPengubahan(btn) {
+    var tr = btn.closest('tr');
+    var tbody = tr.parentNode;
+    tr.remove();
+    tbody.querySelectorAll('tr').forEach(function(row, idx) {
+        row.firstElementChild.querySelector('.bil-badge').textContent = (idx + 1);
+    });
+}
+
+function showSenTab(tab, link) {
+    document.getElementById('sen-pen').style.display = 'none';
+    document.getElementById('sen-jus').style.display = 'none';
+    document.getElementById('sen-' + tab).style.display = '';
+    document.querySelectorAll('.senarai-tabs a').forEach(function(a) { a.classList.remove('active'); });
+    link.classList.add('active');
+}
+
+function selectTindakan(btn) {
+    document.querySelectorAll('#tindakan-group .tindakan-btn').forEach(function(b) { b.classList.remove('active'); });
+    btn.classList.add('active');
+    document.getElementById('selTindakan').value = btn.dataset.val;
+}
+function selectAdegan(chip) {
+    document.querySelectorAll('#adegan-grid .adegan-chip').forEach(function(c) { c.classList.remove('active'); });
+    chip.classList.add('active');
+    document.getElementById('selAdegan').value = chip.dataset.val;
+}
+
+// Segmented button groups (Pemberat severity)
+document.querySelectorAll('.seg-group').forEach(function(grp) {
+    grp.querySelectorAll('.seg-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            grp.querySelectorAll('.seg-btn').forEach(function(b) { b.classList.remove('active'); });
+            this.classList.add('active');
+        });
+    });
+});
+
+// ===== RICH TEXT EDITORS =====
+(function() {
+    var ckDropdown = null;
+
+    // Prevent toolbar clicks from stealing focus/selection
+    document.querySelectorAll('.ck-toolbar').forEach(function(tb) {
+        tb.addEventListener('mousedown', function(e) { e.preventDefault(); });
+    });
+
+    function execOn(editor, cmd, val) {
+        editor.focus();
+        document.execCommand(cmd, false, val !== undefined ? val : null);
+    }
+
+    function closeDropdown() {
+        if (ckDropdown) { ckDropdown.remove(); ckDropdown = null; }
+    }
+
+    function showDropdown(anchor, items, editor) {
+        closeDropdown();
+        var dd = document.createElement('div');
+        dd.className = 'ck-dropdown';
+        var r = anchor.getBoundingClientRect();
+        dd.style.top = (r.bottom + 4) + 'px';
+        dd.style.left = r.left + 'px';
+        items.forEach(function(item) {
+            var div = document.createElement('div');
+            div.className = 'ck-dd-item';
+            div.innerHTML = item.html;
+            div.addEventListener('mousedown', function(e) {
+                e.preventDefault();
+                editor.focus();
+                document.execCommand(item.cmd, false, item.val);
+                closeDropdown();
+            });
+            dd.appendChild(div);
+        });
+        document.body.appendChild(dd);
+        ckDropdown = dd;
+    }
+
+    function showColorPicker(anchor, editor) {
+        closeDropdown();
+        var dd = document.createElement('div');
+        dd.className = 'ck-dropdown ck-colorpicker';
+        var r = anchor.getBoundingClientRect();
+        dd.style.top = (r.bottom + 4) + 'px';
+        dd.style.left = r.left + 'px';
+        ['#000','#e74c3c','#e67e22','#f1c40f','#27ae60','#2980b9','#8e44ad','#64748b','#fff'].forEach(function(c) {
+            var sw = document.createElement('div');
+            sw.className = 'ck-color-swatch';
+            sw.style.background = c;
+            sw.title = c;
+            sw.addEventListener('mousedown', function(e) {
+                e.preventDefault();
+                editor.focus();
+                document.execCommand('foreColor', false, c);
+                closeDropdown();
+            });
+            dd.appendChild(sw);
+        });
+        document.body.appendChild(dd);
+        ckDropdown = dd;
+    }
+
+    document.addEventListener('click', function(e) {
+        if (ckDropdown && !ckDropdown.contains(e.target)) closeDropdown();
+        var span = e.target.closest ? e.target.closest('.ck-toolbar span') : null;
+        if (!span) return;
+
+        var toolbar = span.closest('.ck-toolbar');
+        var editor = toolbar.nextElementSibling;
+        var fc = span.firstElementChild;
+        var fcTag = fc ? fc.tagName : '';
+        var fcClass = fc ? (fc.className || '') : '';
+        var isIcon = fcTag === 'I' && /fa-/.test(fcClass);
+        var txt = span.textContent.trim();
+        var title = span.getAttribute('title') || '';
+
+        if (title === 'Bold' || (!isIcon && fcTag === 'B' && txt === 'B'))         { execOn(editor, 'bold'); }
+        else if (title === 'Italic' || (!isIcon && fcTag === 'I' && txt === 'I'))  { execOn(editor, 'italic'); }
+        else if (title === 'Underline' || fcTag === 'U')                           { execOn(editor, 'underline'); }
+        else if (isIcon && /fa-strikethrough/.test(fcClass))                       { execOn(editor, 'strikeThrough'); }
+        else if (isIcon && /fa-list-ul/.test(fcClass))                             { execOn(editor, 'insertUnorderedList'); }
+        else if (isIcon && /fa-list-ol/.test(fcClass))                             { execOn(editor, 'insertOrderedList'); }
+        else if (isIcon && /fa-link/.test(fcClass)) {
+            var url = prompt('URL pautan:', 'https://');
+            if (url) execOn(editor, 'createLink', url);
+        }
+        else if (isIcon && /fa-picture-o/.test(fcClass)) {
+            var img = prompt('URL imej:', 'https://');
+            if (img) execOn(editor, 'insertImage', img);
+        }
+        else if (isIcon && /fa-arrows-alt/.test(fcClass)) {
+            editor.classList.toggle('ck-fullscreen');
+        }
+        else if (!isIcon && fcTag === 'B' && txt === 'A') { showColorPicker(span, editor); }
+        else if (txt === 'Styles') {
+            showDropdown(span, [
+                { html: 'Normal',    cmd: 'formatBlock', val: 'p' },
+                { html: '<b style="font-size:17px">Heading 1</b>', cmd: 'formatBlock', val: 'h1' },
+                { html: '<b style="font-size:14px">Heading 2</b>', cmd: 'formatBlock', val: 'h2' },
+                { html: '<b style="font-size:12px">Heading 3</b>', cmd: 'formatBlock', val: 'h3' },
+                { html: '<code>Preformatted</code>',               cmd: 'formatBlock', val: 'pre' }
+            ], editor);
+        }
+        else if (txt === 'Format') {
+            showDropdown(span, [
+                { html: 'Paragraph',   cmd: 'formatBlock', val: 'p' },
+                { html: '<blockquote style="margin:0;border-left:3px solid #cbd5e1;padding-left:8px;color:#64748b">Block Quote</blockquote>', cmd: 'formatBlock', val: 'blockquote' }
+            ], editor);
+        }
+        else if (txt === 'Font') {
+            showDropdown(span, [
+                { html: '<span style="font-family:Inter,sans-serif">Inter</span>',              cmd: 'fontName', val: 'Inter, sans-serif' },
+                { html: '<span style="font-family:Arial">Arial</span>',                         cmd: 'fontName', val: 'Arial, sans-serif' },
+                { html: '<span style="font-family:\'Times New Roman\'">Times New Roman</span>', cmd: 'fontName', val: 'Times New Roman, serif' },
+                { html: '<span style="font-family:\'Courier New\'">Courier New</span>',         cmd: 'fontName', val: 'Courier New, monospace' },
+                { html: '<span style="font-family:Georgia">Georgia</span>',                     cmd: 'fontName', val: 'Georgia, serif' }
+            ], editor);
+        }
+        else if (txt === 'Size') {
+            showDropdown(span, [
+                { html: '<span style="font-size:10px">Kecil</span>',  cmd: 'fontSize', val: '1' },
+                { html: '<span style="font-size:13px">Normal</span>', cmd: 'fontSize', val: '3' },
+                { html: '<span style="font-size:16px">Besar</span>',  cmd: 'fontSize', val: '5' },
+                { html: '<span style="font-size:22px">Gergasi</span>',cmd: 'fontSize', val: '7' }
+            ], editor);
+        }
+    });
+})();
+
+// Rating group (Klasifikasi)
+document.querySelectorAll('.rating-group .rating-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+        this.closest('.rating-group').querySelectorAll('.rating-btn').forEach(function(b) { b.classList.remove('active'); });
+        this.classList.add('active');
+        var hidden = document.getElementById('klasifikasi-val');
+        if (hidden) hidden.value = this.dataset.val;
+    });
+});
+</script>
+
+<!-- ---- PICKER MODAL ---- -->
+<!-- Ahli Panel Picker Modal -->
+<div id="ahli-picker-overlay" style="display:none;position:fixed;inset:0;z-index:1001;background:rgba(0,0,0,0.45);align-items:center;justify-content:center;" onclick="closeAhliPicker(event)">
+    <div style="background:#fff;border-radius:10px;width:400px;max-width:90vw;box-shadow:0 8px 32px rgba(0,0,0,0.18);" onclick="event.stopPropagation()">
+        <div style="padding:14px 18px;border-bottom:1px solid #e2e8f0;display:flex;align-items:center;justify-content:space-between;">
+            <span style="font-weight:700;font-size:14px;color:#1e293b;"><i class="fa fa-users" style="color:#2563eb;margin-right:7px;"></i>Pilih Ahli Panel</span>
+            <button type="button" onclick="closeAhliPicker()" style="background:none;border:none;font-size:20px;color:#94a3b8;cursor:pointer;line-height:1;">&times;</button>
+        </div>
+        <div style="padding:10px 16px;border-bottom:1px solid #f1f5f9;">
+            <input type="text" id="ahli-search" oninput="filterAhliList(this.value)" placeholder="Cari nama ahli..." style="width:100%;padding:7px 10px;border:1px solid #e2e8f0;border-radius:6px;font-size:12.5px;outline:none;box-sizing:border-box;font-family:'Inter',sans-serif;">
+        </div>
+        <div id="ahli-picker-list" style="max-height:260px;overflow-y:auto;overflow-x:hidden;"></div>
+        <div style="padding:10px 16px;border-top:1px solid #f1f5f9;text-align:right;">
+            <button type="button" onclick="closeAhliPicker()" style="padding:6px 16px;border:1px solid #e2e8f0;border-radius:6px;background:#f8fafc;color:#64748b;font-size:12px;cursor:pointer;">Batal</button>
+        </div>
+    </div>
+</div>
+
+<div class="picker-overlay" id="picker-overlay" onclick="closePicker(event)">
+    <div class="picker-modal" onclick="event.stopPropagation()">
+        <div class="picker-modal-header">
+            <span class="picker-modal-title" id="picker-modal-title">Pilih Genre</span>
+            <button type="button" class="picker-modal-close" onclick="closePicker()">&times;</button>
+        </div>
+        <div class="picker-modal-search">
+            <input type="text" id="picker-search" placeholder="Cari..." oninput="filterPickerChips(this.value)">
+        </div>
+        <div class="picker-modal-body">
+            <div class="picker-modal-chips" id="picker-chips"></div>
+        </div>
+        <div class="picker-modal-footer">
+            <span class="picker-count" id="picker-count">0 dipilih</span>
+            <div style="display:flex;gap:8px;">
+                <button type="button" class="picker-btn-cancel" onclick="closePicker()">Batal</button>
+                <button type="button" class="picker-btn-confirm" onclick="confirmPicker()">Sahkan</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+var PICKER_DATA = {
+    genre: {
+        title: 'Pilih Genre',
+        displayId: 'genre-display',
+        items: ['Animasi','Bual bicara','Biografi','Berita','Dokumentasi','Drama','Fantasi','Fiksyen','Epik','Candawara (Game Show)','Seram','Jenayah','Kartun','Keluarga','Komedi','Muzikal','Muzik','Misteri','Pengembaraan','Peperangan','Politik','Realiti-TV','Roman','Satira','Sejarah','Sci-Fi','Sukan','Thriller','Western (Cowboy)','Lain-lain'],
+        selected: ['Animasi','Bual bicara','Biografi','Berita','Lain-lain']
+    },
+    tema: {
+        title: 'Pilih Tema',
+        displayId: 'tema-display',
+        items: ['Adiwira','Alam Ghaib','Alam Sekitar','Berita','Biografi','Bual-bicara','Ceramah','Dendam','Demonstrasi','Dongeng','Ekspidisi','Fantasi','Festival','Forum','Hantu','Hiburan','Ideologi','Jati diri','Jenaka','Karaoke','Keadilan','Kebudayaan','Kecurangan','Kedaulatan','Kejayaan','Kekecewaan','Kekejaman','Kekeluargaan','Kemasyarakatan','Kesenian','Kesetiaan','Khurafat','Konflik','Konspirasi','LGBTQ','Maruah','Masakan','Misteri','Motivasi','Ngeri','Patriotik','Pejuang','Pembelotan','Pembunuhan','Pencederaan','Penderhakaan','Penerokaan','Pengembaraan','Pandemik','Pengetahuan Am','Pengkhianatan','Penguasaan','Penindasan','Penyelidikan','Penyeludupan','Penyiasatan','Peperangan','Perlumbaan','Permainan Video','Permusuhan','Perniagaan','Persahabatan','Persaingan','Persengketaan','Pertandingan','Penjajahan','Pertembungan','Pertentangan','Pengintipan','Pengorbanan','Promosi','Propaganda','Psikologi','Reaksi','Rencan','Rusuhan','Sabotaj','Sejarah','Sihir','Sukan','Tali barut','Teknologi','Wabak','Zombie','Lain-lain'],
+        selected: ['Alam Ghaib','Keadilan','Masakan']
+    }
+};
+
+var currentPickerId = null;
+var workingSelected = [];
+
+function openPicker(id) {
+    currentPickerId = id;
+    var cfg = PICKER_DATA[id];
+    workingSelected = cfg.selected.slice();
+
+    document.getElementById('picker-modal-title').textContent = cfg.title;
+    document.getElementById('picker-search').value = '';
+
+    var chipsEl = document.getElementById('picker-chips');
+    chipsEl.innerHTML = '';
+    cfg.items.forEach(function(item) {
+        var span = document.createElement('span');
+        span.className = 'picker-modal-chip' + (workingSelected.indexOf(item) >= 0 ? ' selected' : '');
+        span.textContent = item;
+        span.onclick = function() {
+            var idx = workingSelected.indexOf(item);
+            if (idx >= 0) { workingSelected.splice(idx, 1); this.classList.remove('selected'); }
+            else { workingSelected.push(item); this.classList.add('selected'); }
+            updatePickerCount();
+        };
+        chipsEl.appendChild(span);
+    });
+
+    updatePickerCount();
+    document.getElementById('picker-overlay').classList.add('open');
+    document.getElementById('picker-search').focus();
+}
+
+function updatePickerCount() {
+    document.getElementById('picker-count').textContent = workingSelected.length + ' dipilih';
+}
+
+function filterPickerChips(q) {
+    var lower = q.toLowerCase();
+    document.querySelectorAll('#picker-chips .picker-modal-chip').forEach(function(c) {
+        c.classList.toggle('hidden', q.length > 0 && c.textContent.toLowerCase().indexOf(lower) < 0);
+    });
+}
+
+function closePicker(e) {
+    if (e && e.target !== document.getElementById('picker-overlay')) return;
+    document.getElementById('picker-overlay').classList.remove('open');
+    currentPickerId = null;
+}
+
+function confirmPicker() {
+    if (!currentPickerId) return;
+    var cfg = PICKER_DATA[currentPickerId];
+    cfg.selected = workingSelected.slice();
+
+    var display = document.getElementById(cfg.displayId);
+    display.innerHTML = '';
+    if (cfg.selected.length === 0) {
+        display.innerHTML = '<span class="picker-empty">Tiada dipilih</span>';
+    } else {
+        cfg.selected.forEach(function(item) {
+            var tag = document.createElement('span');
+            tag.className = 'picker-tag';
+            tag.textContent = item;
+            display.appendChild(tag);
+        });
+    }
+
+    document.getElementById('picker-overlay').classList.remove('open');
+    currentPickerId = null;
+}
+
+// Close on Escape
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') { document.getElementById('picker-overlay').classList.remove('open'); currentPickerId = null; }
+});
+</script>
+
+<!-- Edit Field Modal -->
+<div id="efModal">
+    <div class="efm-box">
+        <div id="efmTitle" class="efm-title">Edit</div>
+        <div id="efmLabel" class="efm-label"></div>
+        <div id="efmBody"></div>
+        <div class="efm-footer">
+            <button class="efm-cancel" onclick="closeEfModal()">Batal</button>
+            <button class="efm-save" onclick="saveEfModal()">Simpan</button>
+        </div>
+    </div>
+</div>
+
+<script>
+var _efmBtn = null;
+var EFM_ADEGAN = [
+    { val: 'Ganas',                      label: 'Ganas' },
+    { val: 'Seram',                      label: 'Seram' },
+    { val: 'Ngeri',                      label: 'Ngeri' },
+    { val: 'Seksual',                    label: 'Seksual' },
+    { val: 'Kebogelan',                  label: 'Kebogelan' },
+    { val: 'Dadah',                      label: 'Dadah' },
+    { val: 'Rokok',                      label: 'Rokok' },
+    { val: 'Arak',                       label: 'Arak' },
+    { val: 'Bahasa: Dialog & Sarikata',  label: 'Bahasa / Sarikata' },
+    { val: 'Lain-lain',                  label: 'Lain-lain' }
+];
+
+function openEditModal(btn) {
+    _efmBtn = btn;
+    var field = btn.dataset.field;
+    var title = document.getElementById('efmTitle');
+    var label = document.getElementById('efmLabel');
+    var body  = document.getElementById('efmBody');
+    body.innerHTML = '';
+
+    if (field === 'mula' || field === 'berhenti') {
+        title.textContent = field === 'mula' ? 'Edit Masa Mula (Dan)' : 'Edit Masa Berhenti (Hingga)';
+        label.textContent = 'Masa (HH:MM:SS)';
+        var cur = btn.previousElementSibling.textContent.trim();
+        body.innerHTML = '<input id="efmVal" class="efm-input" type="text" value="' + cur + '" placeholder="00:00:00" maxlength="8">';
+    } else if (field === 'adegan') {
+        title.textContent = 'Edit Adegan';
+        label.textContent = 'Pilih Adegan';
+        var curAdegan = btn.previousElementSibling.textContent.trim().toUpperCase();
+        var chipsHtml = EFM_ADEGAN.map(function(a) {
+            var active = curAdegan === a.val.toUpperCase() ? ' active' : '';
+            return '<span class="efm-chip' + active + '" data-val="' + a.val.replace(/&/g,'&amp;').replace(/"/g,'&quot;') + '" onclick="efmPickChip(this)">' + a.label + '</span>';
+        }).join('');
+        body.innerHTML = '<div class="efm-chips">' + chipsHtml + '</div>';
+    } else if (field === 'ket') {
+        title.textContent = 'Edit Keterangan Tindakan';
+        label.textContent = 'Keterangan';
+        var curKet = btn.previousElementSibling.textContent.trim();
+        body.innerHTML = '<textarea id="efmVal" class="efm-input" rows="3" style="resize:vertical;">' + curKet.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') + '</textarea>';
+    }
+
+    document.getElementById('efModal').classList.add('show');
+    setTimeout(function() {
+        var inp = document.getElementById('efmVal');
+        if (inp) { inp.focus(); if (inp.select) inp.select(); }
+    }, 50);
+}
+
+function efmPickChip(chip) {
+    chip.closest('.efm-chips').querySelectorAll('.efm-chip').forEach(function(c) { c.classList.remove('active'); });
+    chip.classList.add('active');
+}
+
+function closeEfModal() {
+    document.getElementById('efModal').classList.remove('show');
+    _efmBtn = null;
+}
+
+function saveEfModal() {
+    if (!_efmBtn) return;
+    var field = _efmBtn.dataset.field;
+    var tr = _efmBtn.closest('tr');
+
+    if (field === 'mula' || field === 'berhenti') {
+        var newVal = document.getElementById('efmVal').value.trim();
+        if (!newVal) return;
+        var danCell  = tr.cells[2];
+        var hingCell = tr.cells[3];
+        var mula     = danCell.querySelector('.ts-link').textContent;
+        var berhenti = hingCell.querySelector('.ts-link').textContent;
+        if (field === 'mula') mula = newVal; else berhenti = newVal;
+        danCell.querySelector('.ts-link').textContent = mula;
+        danCell.querySelector('.ts-link').setAttribute('onclick', 'playSegment(\'' + mula + '\',\'' + berhenti + '\');return false;');
+        hingCell.querySelector('.ts-link').textContent = berhenti;
+        hingCell.querySelector('.ts-link').setAttribute('onclick', 'playSegment(\'' + mula + '\',\'' + berhenti + '\');return false;');
+        tr.querySelector('.btn-play-sm').setAttribute('onclick', 'playSegment(\'' + mula + '\',\'' + berhenti + '\')');
+
+    } else if (field === 'adegan') {
+        var activeChip = document.querySelector('#efModal .efm-chip.active');
+        if (!activeChip) return;
+        _efmBtn.previousElementSibling.textContent = activeChip.dataset.val.toUpperCase();
+
+    } else if (field === 'ket') {
+        _efmBtn.previousElementSibling.textContent = document.getElementById('efmVal').value.trim();
+    }
+
+    closeEfModal();
+}
+
+document.getElementById('efModal').addEventListener('click', function(e) {
+    if (e.target === this) closeEfModal();
+});
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && _efmBtn) closeEfModal();
+});
+
+function filterTugasanZero(root) {
+    (root || document).querySelectorAll('.tugasansemasatable tbody > tr').forEach(function(outerRow) {
+        var innerTbodies = outerRow.querySelectorAll('table tbody');
+        innerTbodies.forEach(function(tbody) {
+            tbody.querySelectorAll('tr').forEach(function(innerRow) {
+                var tds = innerRow.querySelectorAll('td');
+                if (tds.length >= 2 && parseInt(tds[1].textContent.trim(), 10) === 0) {
+                    innerRow.style.display = 'none';
+                }
+            });
+        });
+    });
+}
+document.addEventListener('DOMContentLoaded', function() { filterTugasanZero(); });
+filterTugasanZero();
+</script>
+
+</body>
+</html>

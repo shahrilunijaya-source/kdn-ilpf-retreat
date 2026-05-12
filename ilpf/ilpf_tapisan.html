@@ -1,0 +1,1732 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+<meta charset="utf-8">
+<title>iLPF - Tapisan PCBM20260396966</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+<style>
+* { box-sizing: border-box; }
+body {
+    font-family: 'Open Sans', sans-serif;
+    background: #ecf0f5;
+    color: #333;
+    font-size: 13px;
+    margin: 0;
+    padding: 0;
+}
+
+/* ---- HEADER ---- */
+.page-header-top {
+    background: #2B3643;
+    height: 50px;
+    color: #c6cfda;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+}
+.header-left { display: flex; align-items: center; gap: 14px; }
+.header-logo {
+    background: #32C5D2;
+    color: #fff;
+    font-weight: 800;
+    font-size: 17px;
+    padding: 6px 11px;
+    letter-spacing: 1px;
+}
+.header-title { color: #e74c3c; font-weight: 700; font-size: 13px; }
+.header-right { display: flex; align-items: center; gap: 22px; }
+.sidebar-toggle-btn {
+    background: none;
+    border: none;
+    color: #b4bcc8;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 3px;
+    line-height: 1;
+}
+.sidebar-toggle-btn:hover { background: #364150; color: #fff; }
+.sidebar.collapsed { width: 0; overflow: hidden; }
+.container-main { transition: none; }
+.header-right .notif {
+    color: #b4bcc8;
+    text-decoration: none;
+    font-size: 12px;
+    position: relative;
+    cursor: pointer;
+    white-space: nowrap;
+}
+.header-right .notif .badge {
+    background: #e74c3c;
+    color: #fff;
+    border-radius: 50%;
+    padding: 1px 5px;
+    font-size: 10px;
+    position: absolute;
+    top: -7px; right: -10px;
+}
+.header-user {
+    display: flex; align-items: center; gap: 8px;
+    color: #c6cfda; font-size: 12px; cursor: pointer;
+}
+.header-user .avatar {
+    width: 28px; height: 28px; border-radius: 50%;
+    background: #555; display: flex; align-items: center; justify-content: center;
+    color: #fff; font-size: 11px; font-weight: 700;
+}
+
+/* ---- LAYOUT ---- */
+.container-main { display: flex; margin-top: 50px; min-height: calc(100vh - 50px); }
+
+/* ---- SIDEBAR ---- */
+.sidebar {
+    width: 220px;
+    background: #2B3643;
+    flex-shrink: 0;
+    min-height: 100%;
+}
+.sidebar ul { list-style: none; padding: 0; margin: 0; }
+.sidebar > ul > li > a {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 15px;
+    color: #b4bcc8;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 600;
+    border-bottom: 1px solid #364150;
+    cursor: pointer;
+}
+.sidebar > ul > li > a:hover,
+.sidebar > ul > li.open > a { background: #364150; color: #e8edf2; }
+.sidebar > ul > li > a i.fa-fw { width: 18px; margin-right: 6px; }
+.sub-menu { background: #252f3b; display: none; }
+.sub-menu.open { display: block; }
+.sub-menu li a {
+    display: block;
+    padding: 8px 15px 8px 38px;
+    font-size: 12px;
+    color: #9aa3ae;
+    text-decoration: none;
+    border-bottom: 1px solid #2e3847;
+}
+.sub-menu li a:hover,
+.sub-menu li.active a { background: #1e2a35; color: #fff; }
+
+/* ---- MAIN CONTENT ---- */
+.main-content { flex: 1; padding: 15px 20px 30px; background: #ecf0f5; overflow-x: hidden; }
+
+/* ---- BREADCRUMB ---- */
+.breadcrumb-bar {
+    background: #fff;
+    border: 1px solid #e1e6ef;
+    padding: 8px 15px;
+    margin-bottom: 15px;
+    font-size: 12px;
+    color: #888;
+}
+.breadcrumb-bar a { color: #666; text-decoration: none; }
+.breadcrumb-bar a:hover { color: #32C5D2; }
+.breadcrumb-bar .sep { margin: 0 5px; color: #bbb; }
+.breadcrumb-bar .cur { color: #333; font-weight: 600; }
+
+/* ---- ALIRAN PROSES ---- */
+.aliran-box {
+    background: #fff;
+    border: 1px solid #e1e6ef;
+    padding: 18px 20px 15px;
+    margin-bottom: 12px;
+}
+.aliran-box h2 { font-size: 20px; font-weight: 800; color: #3d4d5e; margin: 0 0 3px; }
+.aliran-box h4 { font-size: 13px; color: #7a8da1; margin: 0 0 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+.steps-row { display: flex; gap: 4px; overflow-x: auto; }
+.step-item { flex: 0 0 100px; text-align: center; padding: 6px 4px; }
+.step-item .num { font-size: 28px; font-weight: 800; color: #8fa5bb; line-height: 1; }
+.step-item .ttl { font-size: 9.5px; font-weight: 700; color: #6e86a0; text-transform: uppercase; margin-top: 5px; line-height: 1.2; }
+.step-item .dsc { font-size: 9px; color: #9eaec0; margin-top: 3px; line-height: 1.3; }
+.step-item.active { background: #fff8e1; border: 1px solid #f0c070; border-radius: 3px; }
+.step-item.active .num { color: #d08a10; }
+.step-item.active .ttl { color: #7a5c00; }
+.step-item.active .dsc { color: #a07a20; }
+
+/* ---- HISTORY BUTTONS ---- */
+.btn-history { text-align: right; margin-bottom: 10px; }
+.btn-history .btn { margin-left: 5px; font-size: 12px; }
+
+/* ---- PROFILE / SYNOPSIS ---- */
+.profile-box {
+    background: #fff;
+    border: 1px solid #e1e6ef;
+    padding: 20px;
+    margin-bottom: 12px;
+}
+.profile-box h1 {
+    color: #32C5D2;
+    font-size: 22px;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin: 0 0 12px;
+}
+.synopsis-scroll {
+    max-height: 130px;
+    overflow-y: auto;
+    font-size: 12.5px;
+    line-height: 1.7;
+    color: #444;
+    padding-right: 5px;
+}
+.meta-tags { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 10px; }
+.meta-tag { display: flex; align-items: center; gap: 5px; color: #5a3a5a; font-weight: 700; font-size: 12px; }
+.meta-tag i { color: #8a4a8a; font-size: 13px; }
+
+/* ---- VIDEO + PANEL ---- */
+.video-section { display: flex; gap: 0; margin-bottom: 0; border: 1px solid #ccc; }
+.video-player {
+    flex: 0 0 62%;
+    background: #111;
+    display: flex;
+    flex-direction: column;
+}
+.video-screen {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    min-height: 240px;
+    position: relative;
+}
+.video-screen-inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+}
+.video-logo-box {
+    width: 90px;
+    height: 90px;
+    background: #1e8a8a;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+.video-logo-box .logo-ilpf { color: #fff; font-size: 20px; font-weight: 800; letter-spacing: 1px; }
+.video-logo-box .logo-sub { color: #b2dfdf; font-size: 8px; text-align: center; margin-top: 4px; line-height: 1.3; }
+.video-msg { color: #fff; text-align: center; }
+.video-msg .line1 { font-size: 13px; font-weight: 700; line-height: 1.4; }
+.video-msg .line2 { font-size: 15px; font-weight: 700; margin-top: 6px; }
+.video-msg .emoji { font-size: 22px; margin-top: 4px; }
+.video-controls {
+    background: #1a1a1a;
+    padding: 6px 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.video-controls .play-btn { color: #fff; font-size: 15px; cursor: pointer; }
+.progress-bar-wrap {
+    flex: 1;
+    height: 4px;
+    background: #444;
+    border-radius: 2px;
+    position: relative;
+    cursor: pointer;
+}
+.progress-fill {
+    height: 100%;
+    width: 10%;
+    background: #32C5D2;
+    border-radius: 2px;
+    position: relative;
+}
+.progress-fill::after {
+    content: '';
+    width: 10px; height: 10px;
+    background: #fff;
+    border-radius: 50%;
+    position: absolute;
+    right: -5px; top: -3px;
+}
+.video-time { color: #ccc; font-size: 11px; white-space: nowrap; }
+.video-vol { color: #ccc; font-size: 13px; cursor: pointer; }
+.video-full { color: #ccc; font-size: 13px; cursor: pointer; }
+
+/* Right panel */
+.video-panel {
+    flex: 0 0 38%;
+    background: #fff;
+    border-left: 1px solid #ddd;
+    display: flex;
+    flex-direction: column;
+}
+.vp-meta {
+    background: #dce8f0;
+    padding: 12px 14px;
+    border-bottom: 1px solid #c5d8e4;
+}
+.vp-meta-label { font-size: 12px; color: #444; margin-bottom: 4px; }
+.vp-file-btn {
+    display: inline-block;
+    padding: 4px 12px;
+    font-size: 11px;
+    font-weight: 600;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-bottom: 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
+.vp-file-btn.teal { background: #2bbfb0; color: #fff; }
+.vp-tapisan-header {
+    padding: 0 14px;
+    border-bottom: 1px solid #e0e0e0;
+    background: #fff;
+}
+.vp-tapisan-title {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 700;
+    color: #333;
+    padding: 10px 0 8px;
+    border-bottom: 2px solid #32C5D2;
+}
+.vp-form {
+    width: 100%;
+    border-collapse: collapse;
+    flex: 1;
+}
+.vp-form td {
+    padding: 8px 10px;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 12px;
+    vertical-align: middle;
+}
+.vp-form td.vp-lbl {
+    width: 38%;
+    color: #555;
+    font-weight: 500;
+    background: #fff;
+    white-space: nowrap;
+}
+.vp-form td.vp-ctrl { background: #fff; }
+.vp-ts-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 11px;
+    font-weight: 700;
+    width: 100%;
+    text-align: left;
+}
+.vp-ts-btn.blue { background: #3d8fd1; color: #fff; }
+.vp-ts-btn.red  { background: #e05555; color: #fff; }
+.vp-ts-btn i { font-size: 10px; }
+.vp-ts-input {
+    width: 100%;
+    border: 1px solid #ccc;
+    padding: 6px 10px;
+    font-size: 12px;
+    background: #f5f5f5;
+    border-radius: 2px;
+    color: #555;
+}
+.vp-select {
+    width: 100%;
+    padding: 6px 8px;
+    border: 1px solid #ccc;
+    font-size: 12px;
+    border-radius: 2px;
+    background: #fff;
+    color: #333;
+}
+.vp-textarea {
+    width: 100%;
+    border: 1px solid #ccc;
+    padding: 6px 8px;
+    font-size: 12px;
+    border-radius: 2px;
+    resize: vertical;
+    min-height: 90px;
+    font-family: inherit;
+    background: #fff;
+}
+.vp-save-row {
+    padding: 12px;
+    text-align: center;
+    border-top: 1px solid #eee;
+    background: #fff;
+}
+.vp-save {
+    background: #1ABB9C;
+    color: #fff;
+    border: none;
+    padding: 8px 36px;
+    font-size: 13px;
+    font-weight: 700;
+    border-radius: 3px;
+    cursor: pointer;
+    letter-spacing: 1px;
+}
+.vp-save:hover { background: #17a589; }
+
+/* ---- SENARAI PENGUBAHAN ---- */
+.senarai-box {
+    border: 1px solid #d0d8e4;
+    background: #fff;
+    margin-bottom: 12px;
+}
+.senarai-header {
+    background: #f0f3f7;
+    border-bottom: 1px solid #d0d8e4;
+    padding: 8px 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+}
+.senarai-header .sh-title { font-size: 12px; font-weight: 700; color: #3d5166; }
+.senarai-header .sh-toggle { color: #888; font-size: 13px; }
+.senarai-tabs { border-bottom: 1px solid #d0d8e4; padding: 0 10px; background: #fafbfc; }
+.senarai-tabs a {
+    display: inline-block;
+    padding: 8px 16px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #666;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    text-decoration: none;
+}
+.senarai-tabs a.active { color: #32C5D2; border-bottom-color: #32C5D2; }
+.senarai-body { padding: 10px 12px; }
+.senarai-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+.senarai-table th {
+    background: #f8f9fb;
+    border: 1px solid #dde3ec;
+    padding: 8px 10px;
+    font-weight: 700;
+    color: #555;
+    text-align: left;
+}
+.senarai-table td {
+    border: 1px solid #dde3ec;
+    padding: 7px 10px;
+    vertical-align: middle;
+}
+.senarai-table tr:nth-child(even) td { background: #fafbfc; }
+.senarai-table td a { color: #3498db; text-decoration: none; font-size: 11px; }
+.senarai-table td a:hover { text-decoration: underline; }
+.btn-play-sm {
+    background: #2ecc71; color: #fff; border: none;
+    width: 24px; height: 24px; border-radius: 2px; cursor: pointer;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 10px; margin-right: 2px;
+}
+.btn-del-sm {
+    background: #e74c3c; color: #fff; border: none;
+    width: 24px; height: 24px; border-radius: 2px; cursor: pointer;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 10px;
+}
+
+/* ---- TABS SECTION ---- */
+.tab-section {
+    background: #fff;
+    border: 1px solid #d0d8e4;
+    margin-bottom: 15px;
+}
+.nav-tabs-custom {
+    background: #f0f3f7;
+    border-bottom: 1px solid #d0d8e4;
+    margin: 0; padding: 0;
+    list-style: none;
+    display: flex;
+}
+.nav-tabs-custom li a {
+    display: block;
+    padding: 11px 20px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #666;
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+}
+.nav-tabs-custom li.active a {
+    color: #32C5D2;
+    background: #fff;
+    border-bottom: 2px solid #32C5D2;
+}
+.tab-body { padding: 18px; }
+.tab-pane { display: none; }
+.tab-pane.active { display: block; }
+
+/* ---- FORM TABLE ---- */
+.form-tbl {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 14px;
+    border: 1px solid #dde3ec;
+}
+.form-tbl td {
+    border: 1px solid #dde3ec;
+    padding: 10px 12px;
+    vertical-align: top;
+    font-size: 12.5px;
+}
+.form-tbl td.lbl {
+    width: 22%;
+    background: #f8f9fb;
+    font-weight: 700;
+    color: #444;
+}
+.form-tbl tr.sec-hdr td {
+    background: #5C9BD1;
+    color: #fff;
+    font-weight: 700;
+    font-size: 12px;
+    padding: 8px 12px;
+    border-color: #4a8bc0;
+}
+.form-control { border-radius: 2px !important; font-size: 12px; }
+.req { color: #e74c3c; }
+
+/* Pills */
+.multi-pill-box {
+    border: 1px solid #ccd5e0;
+    padding: 5px;
+    background: #fff;
+    min-height: 36px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3px;
+    align-items: center;
+    cursor: text;
+}
+.pill {
+    background: #e0e7f0;
+    color: #444;
+    padding: 2px 8px;
+    font-size: 11px;
+    border-radius: 2px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+.pill .x { color: #888; cursor: pointer; font-size: 12px; }
+.pill .x:hover { color: #e74c3c; }
+
+/* PEMBERAT */
+.pemberat-tbl { width: 100%; border-collapse: collapse; border: 1px solid #dde3ec; }
+.pemberat-tbl td { border: 1px solid #dde3ec; padding: 7px 10px; font-size: 12px; }
+.pemberat-tbl td:first-child { width: 50%; background: #f8f9fb; font-weight: 600; }
+
+/* Detail table (Butir-Butir) */
+.detail-tbl { width: 100%; border-collapse: collapse; }
+.detail-tbl td { border: 1px solid #dde3ec; padding: 9px 12px; font-size: 12.5px; }
+.detail-tbl tr:nth-child(odd) td { background: #f8f9fb; }
+.detail-tbl td:first-child { width: 25%; font-weight: 700; color: #444; background: #f2f4f7 !important; }
+
+/* Kronologi table */
+.kron-tbl { width: 100%; border-collapse: collapse; font-size: 12px; }
+.kron-tbl th {
+    background: #f8f9fb;
+    border: 1px solid #dde3ec;
+    border-bottom: 3px solid #d0d8e4;
+    padding: 9px 10px;
+    font-weight: 700;
+    color: #555;
+    text-align: center;
+}
+.kron-tbl td { border: 1px solid #dde3ec; padding: 8px 10px; }
+.kron-tbl tr:nth-child(even) td { background: #f5f7fa; }
+
+/* Bottom action bar */
+.bottom-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0 0;
+}
+.bottom-actions .right-btns { display: flex; gap: 8px; }
+.btn-lg-custom { padding: 9px 22px; font-size: 13px; font-weight: 600; border-radius: 2px; border: none; cursor: pointer; }
+.btn-back { background: #fff; border: 1px solid #ccc !important; color: #555; }
+.btn-back:hover { background: #f5f5f5; }
+.btn-save { background: #3498db; color: #fff; }
+.btn-save:hover { background: #2980b9; }
+.btn-report { background: #5bc0de; color: #fff; }
+.btn-report:hover { background: #46b8da; }
+.btn-submit { background: #1ABB9C; color: #fff; }
+.btn-submit:hover { background: #17a589; }
+.btn-view-task { background: #3498db; color: #fff; border: none; padding: 6px 14px; font-size: 12px; cursor: pointer; border-radius: 2px; margin: 8px 0 12px; }
+
+/* Footer */
+.page-footer { background: #f0f2f5; border-top: 1px solid #dde3ec; padding: 12px 20px; font-size: 11px; color: #999; }
+
+/* Panel lantik */
+.lantik-panel { border: 1px solid #dde3ec; padding: 12px; margin-top: 10px; }
+.lantik-panel label { font-weight: 700; font-size: 12px; margin-bottom: 6px; display: block; }
+.panel-list { border: 1px solid #dde3ec; height: 90px; width: 100%; font-size: 12px; }
+
+/* CKEditor toolbar mock */
+.ck-toolbar {
+    background: #f7f8fa;
+    border: 1px solid #dde3ec;
+    border-bottom: none;
+    padding: 5px 8px;
+    font-size: 12px;
+    color: #555;
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.ck-toolbar span { cursor: pointer; }
+.ck-toolbar .ck-sep { border-left: 1px solid #ccc; height: 14px; margin: 0 3px; }
+.ck-body {
+    border: 1px solid #dde3ec;
+    padding: 10px;
+    min-height: 100px;
+    font-size: 13px;
+    background: #fff;
+}
+
+/* Modal steps */
+.m-step {
+    flex: 1;
+    text-align: center;
+    padding: 10px 6px;
+    min-width: 70px;
+}
+.m-step-active {
+    background: #fff8e1;
+    border: 1px solid #f0c070;
+    border-radius: 4px;
+}
+.m-num { font-size: 26px; font-weight: 800; color: #8fa5bb; line-height: 1; }
+.m-step-active .m-num { color: #d08a10; }
+.m-ttl { font-size: 9px; font-weight: 700; color: #6e86a0; text-transform: uppercase; margin-top: 6px; line-height: 1.3; }
+.m-step-active .m-ttl { color: #7a5c00; }
+.m-dsc { font-size: 8.5px; color: #9eaec0; margin-top: 3px; line-height: 1.3; }
+.m-step-active .m-dsc { color: #a07a20; }
+.m-arrow { display: flex; align-items: center; color: #c0cdd8; font-size: 20px; padding: 0 2px; flex-shrink: 0; }
+
+/* Responsive */
+@media (max-width: 900px) {
+    .video-section { flex-direction: column; }
+    .video-player, .video-panel { flex: none; width: 100%; }
+    .steps-row { flex-wrap: wrap; }
+}
+</style>
+</head>
+<body>
+
+<!-- ========== HEADER ========== -->
+<div class="page-header-top">
+    <div class="header-left">
+        <button class="sidebar-toggle-btn" onclick="toggleSidebarPanel()" title="Tunjuk/Sembunyi Panel"><i class="fa fa-bars"></i></button>
+        <div class="header-logo">iLPF</div>
+        <span class="header-title">Sistem Pengurusan Penapisan Filem (iLPF) &mdash; Staging Mode</span>
+    </div>
+    <div class="header-right">
+        <a class="notif"><i class="fa fa-bell"></i> Tugasan Panggung <span class="badge">5</span></a>
+        <a class="notif"><i class="fa fa-calendar"></i> Cuti / Mesyuarat Luar <span class="badge">2</span></a>
+        <div class="header-user">
+            <div class="avatar">A</div>
+            <span>AZIDI BIN ABDUL KHAHAR</span>
+            <i class="fa fa-angle-down"></i>
+        </div>
+    </div>
+</div>
+
+<div class="container-main">
+
+    <!-- ========== SIDEBAR ========== -->
+    <div class="sidebar">
+        <ul>
+            <li><a href="#"><i class="fa fa-tachometer fa-fw"></i> Utama</a></li>
+            <li class="open">
+                <a onclick="toggleSidebar(this)"><i class="fa fa-file-o fa-fw"></i> Permohonan <i class="fa fa-angle-down" style="float:right;margin-top:2px;"></i></a>
+                <ul class="sub-menu open">
+                    <li class="active"><a href="#">Perakuan A</a></li>
+                    <li><a href="#">Iklan</a></li>
+                    <li><a href="#">Bahan Publisiti</a></li>
+                    <li><a href="#">Cetak Semula</a></li>
+                </ul>
+            </li>
+            <li>
+                <a onclick="toggleSidebar(this)"><i class="fa fa-television fa-fw"></i> Stesen TV <i class="fa fa-angle-down" style="float:right;margin-top:2px;"></i></a>
+                <ul class="sub-menu">
+                    <li><a href="#">Stesen TV Awesome</a></li>
+                    <li><a href="#">Stesen TV RTM</a></li>
+                    <li><a href="#">Stesen TV Al-Hijrah</a></li>
+                    <li><a href="#">Stesen Unifi TV</a></li>
+                    <li><a href="#">Stesen TV Sarawak</a></li>
+                    <li><a href="#">Stesen Suke TV</a></li>
+                    <li><a href="#">Stesen ENJOY TV</a></li>
+                </ul>
+            </li>
+            <li>
+                <a onclick="toggleSidebar(this)"><i class="fa fa-calendar fa-fw"></i> Cuti <i class="fa fa-angle-down" style="float:right;margin-top:2px;"></i></a>
+                <ul class="sub-menu">
+                    <li><a href="#">Mohon Cuti</a></li>
+                    <li><a href="#">Senarai Permohonan Cuti</a></li>
+                    <li><a href="#">Mesyuarat / Latihan</a></li>
+                </ul>
+            </li>
+            <li>
+                <a onclick="toggleSidebar(this)"><i class="fa fa-book fa-fw"></i> Sejarah <i class="fa fa-angle-down" style="float:right;margin-top:2px;"></i></a>
+                <ul class="sub-menu">
+                    <li><a href="#">Sejarah iLPF</a></li>
+                    <li><a href="#">Sejarah eFilem</a></li>
+                </ul>
+            </li>
+            <li>
+                <a onclick="toggleSidebar(this)"><i class="fa fa-file-text-o fa-fw"></i> Laporan <i class="fa fa-angle-down" style="float:right;margin-top:2px;"></i></a>
+                <ul class="sub-menu">
+                    <li><a href="#">Laporan Penapisan</a></li>
+                    <li><a href="#">Laporan Bahan Publisiti</a></li>
+                    <li><a href="#">Laporan Prestasi ALPF</a></li>
+                </ul>
+            </li>
+            <li>
+                <a onclick="toggleSidebar(this)"><i class="fa fa-map fa-fw"></i> Manual Pengguna <i class="fa fa-angle-down" style="float:right;margin-top:2px;"></i></a>
+                <ul class="sub-menu">
+                    <li><a href="#">ALPF</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <!-- ========== MAIN CONTENT ========== -->
+    <div class="main-content">
+
+        <!-- Breadcrumb -->
+        <div class="breadcrumb-bar">
+            <a href="#">Halaman Utama</a>
+            <span class="sep"><i class="fa fa-angle-right"></i></span>
+            <a href="#">Senarai Permohonan</a>
+            <span class="sep"><i class="fa fa-angle-right"></i></span>
+            <span class="cur">Tapisan</span>
+        </div>
+
+        <!-- Aliran Proses trigger bar -->
+        <div style="background:#fff;border:1px solid #e1e6ef;padding:10px 15px;margin-bottom:12px;display:flex;align-items:center;justify-content:space-between;">
+            <div>
+                <strong style="color:#3d4d5e;font-size:14px;">PERAKUAN A PITA</strong>
+                &nbsp;
+                <span style="background:#f0c070;color:#7a5c00;font-size:11px;font-weight:700;padding:2px 10px;border-radius:2px;">Langkah 7 / 11 &mdash; Tapisan &amp; Laporan</span>
+            </div>
+            <div style="display:flex;gap:8px;">
+                <button class="btn btn-info btn-xs" onclick="openAliranModal()"><i class="fa fa-sitemap"></i> Aliran Proses</button>
+                <button class="btn btn-success btn-xs"><i class="fa fa-search"></i> Sejarah ILPF</button>
+                <button class="btn btn-success btn-xs"><i class="fa fa-search"></i> Sejarah EFilem</button>
+            </div>
+        </div>
+
+        <!-- MODAL: Aliran Proses -->
+        <div id="aliranModal" style="display:none;position:fixed;inset:0;z-index:999;background:rgba(0,0,0,0.5);align-items:center;justify-content:center;">
+            <div style="background:#fff;width:90%;max-width:900px;border-radius:4px;overflow:hidden;box-shadow:0 10px 40px rgba(0,0,0,0.3);">
+                <!-- Modal header -->
+                <div style="background:#2B3643;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;">
+                    <div>
+                        <span style="color:#fff;font-weight:700;font-size:15px;">PERAKUAN A PITA</span>
+                        &nbsp;
+                        <span style="color:#c6cfda;font-size:12px;">Aliran Proses</span>
+                    </div>
+                    <button onclick="closeAliranModal()" style="background:none;border:none;color:#fff;font-size:20px;cursor:pointer;line-height:1;">&times;</button>
+                </div>
+                <!-- Steps -->
+                <div style="padding:24px 20px;overflow-x:auto;">
+                    <div style="display:flex;gap:0;min-width:700px;">
+                        <div class="m-step">
+                            <div class="m-num">1</div>
+                            <div class="m-ttl">Permohonan</div>
+                            <div class="m-dsc">Syarikat menghantar permohonan</div>
+                        </div>
+                        <div class="m-arrow">&#8250;</div>
+                        <div class="m-step">
+                            <div class="m-num">2</div>
+                            <div class="m-ttl">Pembayaran</div>
+                            <div class="m-dsc">Syarikat menyemak invois dan membuat pembayaran</div>
+                        </div>
+                        <div class="m-arrow">&#8250;</div>
+                        <div class="m-step">
+                            <div class="m-num">3</div>
+                            <div class="m-ttl">Pengesahan Bayaran</div>
+                            <div class="m-dsc">Unit bayaran menyemak dan mengesahkan bayaran</div>
+                        </div>
+                        <div class="m-arrow">&#8250;</div>
+                        <div class="m-step">
+                            <div class="m-num">4</div>
+                            <div class="m-ttl">Pengesahan Media</div>
+                            <div class="m-dsc">Unit Pita menerima dan menyemak bahan media</div>
+                        </div>
+                        <div class="m-arrow">&#8250;</div>
+                        <div class="m-step">
+                            <div class="m-num">5</div>
+                            <div class="m-ttl">Penukaran Format &amp; Muat Naik</div>
+                            <div class="m-dsc">Unit Pita menukar format dan muat naik bahan media</div>
+                        </div>
+                        <div class="m-arrow">&#8250;</div>
+                        <div class="m-step">
+                            <div class="m-num">6</div>
+                            <div class="m-ttl">Lantikan Panel</div>
+                            <div class="m-dsc">Penyelaras melantik Ketua Panel</div>
+                        </div>
+                        <div class="m-arrow">&#8250;</div>
+                        <div class="m-step m-step-active">
+                            <div class="m-num">7</div>
+                            <div class="m-ttl">Tapisan &amp; Laporan</div>
+                            <div class="m-dsc">Ketua Panel menonton dan menyediakan laporan</div>
+                        </div>
+                        <div class="m-arrow">&#8250;</div>
+                        <div class="m-step">
+                            <div class="m-num">8</div>
+                            <div class="m-ttl">Pengesahan Laporan</div>
+                            <div class="m-dsc">Pengerusi menyemak dan mengesahkan laporan</div>
+                        </div>
+                        <div class="m-arrow">&#8250;</div>
+                        <div class="m-step">
+                            <div class="m-num">9</div>
+                            <div class="m-ttl">Pembayaran Tambahan</div>
+                            <div class="m-dsc">Syarikat menyemak invois dan membuat pembayaran tambahan</div>
+                        </div>
+                        <div class="m-arrow">&#8250;</div>
+                        <div class="m-step">
+                            <div class="m-num">10</div>
+                            <div class="m-ttl">Pengesahan Bayaran Tambahan</div>
+                            <div class="m-dsc">Unit bayaran menyemak dan mengesahkan bayaran</div>
+                        </div>
+                        <div class="m-arrow">&#8250;</div>
+                        <div class="m-step">
+                            <div class="m-num">11</div>
+                            <div class="m-ttl">Selesai</div>
+                            <div class="m-dsc">Syarikat mencetak laporan tapisan dan Perakuan A</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Footer -->
+                <div style="background:#f8f9fb;border-top:1px solid #e1e6ef;padding:10px 20px;text-align:right;">
+                    <button onclick="closeAliranModal()" class="btn btn-default btn-sm">Tutup</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Profile / Synopsis -->
+        <div class="profile-box">
+            <h1>DUMMY PITA 10032026 CKEDITOR 002</h1>
+            <div class="synopsis-scroll">
+                Pada suatu hari, seorang petani tua bernama Murugan tinggal di sebuah kampung kecil di selatan India bersama anak lelakinya yang malas bernama Karthik, dan setiap hari Murugan bekerja keras di sawah dari pagi hingga petang tanpa mengeluh, namun Karthik hanya duduk di rumah dan bermain tanpa mahu membantu, lalu suatu petang Murugan berpura-pura sakit dan berkata kepada Karthik bahawa dia telah menyembunyikan emas di suatu tempat dalam sawah mereka, maka dengan penuh semangat Karthik mula menggali seluruh sawah itu untuk mencari emas tetapi tidak menjumpai apa-apa, kemudian Murugan yang sudah sembuh berkata kepada anaknya, &ldquo;Tanah yang kau gali itulah emasnya,&rdquo; lalu mereka menanam benih di atas tanah yang sudah digali itu dan pada musim menuai, hasil tanaman mereka melimpah ruah, dan barulah Karthik sedar bahawa kerja keras adalah harta yang paling berharga dalam hidup.
+            </div>
+            <div class="meta-tags">
+                <span class="meta-tag"><i class="fa fa-tv"></i> UNTUK TAYANGAN TV SAHAJA (BUKAN VOD)</span>
+                <span class="meta-tag"><i class="fa fa-video-camera"></i> CEREKA</span>
+                <span class="meta-tag"><i class="fa fa-film"></i> PITA</span>
+                <span class="meta-tag"><i class="fa fa-clock-o"></i> 2 JAM 56 MINIT</span>
+                <span class="meta-tag"><i class="fa fa-globe"></i> TEMPATAN</span>
+                <span class="meta-tag"><i class="fa fa-film"></i> DVD</span>
+                <span class="meta-tag"><i class="fa fa-film"></i> MP4</span>
+            </div>
+        </div>
+
+        <!-- Video Player + Right Panel -->
+        <div class="video-section">
+            <div class="video-player" style="position:relative;">
+                <video id="mainVideo" preload="auto" style="width:100%;display:block;background:#000;">
+                    <source src="files/video_fast.mp4" type="video/mp4">
+                </video>
+                <!-- Custom controls -->
+                <div style="background:#1a1a1a;padding:7px 12px;display:flex;align-items:center;gap:10px;">
+                    <button onclick="togglePlay()" id="playBtn" style="background:none;border:none;color:#fff;font-size:16px;cursor:pointer;width:22px;text-align:center;flex-shrink:0;">
+                        <i class="fa fa-play" id="playIcon"></i>
+                    </button>
+                    <span id="vidCurrentTime" style="color:#ccc;font-size:11px;white-space:nowrap;min-width:38px;">0:00</span>
+                    <div id="progressTrack" style="flex:1;padding:8px 0;cursor:pointer;position:relative;">
+                        <div style="height:6px;background:#444;border-radius:3px;position:relative;">
+                            <div id="progressFill" style="height:100%;width:0%;background:#32C5D2;border-radius:3px;pointer-events:none;position:relative;">
+                                <div style="width:12px;height:12px;background:#fff;border-radius:50%;position:absolute;right:-6px;top:-3px;box-shadow:0 1px 3px rgba(0,0,0,0.5);"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <span id="vidDuration" style="color:#ccc;font-size:11px;white-space:nowrap;min-width:38px;">0:00</span>
+                    <button onclick="toggleMute()" style="background:none;border:none;color:#ccc;font-size:13px;cursor:pointer;flex-shrink:0;">
+                        <i class="fa fa-volume-up" id="volIcon"></i>
+                    </button>
+                    <button onclick="toggleFullscreen()" style="background:none;border:none;color:#ccc;font-size:13px;cursor:pointer;flex-shrink:0;">
+                        <i class="fa fa-expand"></i>
+                    </button>
+                </div>
+                <!-- iLPF watermark overlay -->
+                <div style="
+                    position:absolute;
+                    top:12px;left:12px;
+                    pointer-events:none;
+                    opacity:0.82;
+                    background:#1a1a2e;
+                    border:2px solid #32C5D2;
+                    padding:10px 10px 8px;
+                    width:90px;
+                    text-align:center;
+                    box-shadow:inset 0 0 0 3px #1a1a2e, inset 0 0 0 5px #32C5D2;
+                ">
+                    <div style="
+                        border:2px solid #32C5D2;
+                        padding:6px 4px 4px;
+                        color:#32C5D2;
+                        font-size:22px;
+                        font-weight:900;
+                        letter-spacing:2px;
+                        font-family:'Open Sans',sans-serif;
+                        line-height:1;
+                    ">iLPF</div>
+                    <div style="color:#32C5D2;font-size:8px;margin-top:7px;line-height:1.5;font-family:'Open Sans',sans-serif;">
+                        Untuk<br>Kegunaan<br>Lembaga<br>Penapisan Filem
+                    </div>
+                </div>
+            </div>
+
+            <div class="video-panel">
+                <!-- Meta: Nama Video + Tarikh -->
+                <div class="vp-meta">
+                    <div class="vp-meta-label">Nama Video :</div>
+                    <button class="vp-file-btn teal">ILPF SAMPEL VIDEO 2 JAM 540.MP4</button>
+                    <div class="vp-meta-label">Tarikh Video :</div>
+                    <button class="vp-file-btn teal">10/03/2026 10:51 AM</button>
+                </div>
+                <!-- Tapisan Video header -->
+                <div class="vp-tapisan-header">
+                    <span class="vp-tapisan-title">Tapisan Video</span>
+                </div>
+                <!-- Form rows -->
+                <table class="vp-form">
+                    <tbody>
+                        <tr>
+                            <td class="vp-ctrl" colspan="2" style="padding:8px 10px 4px;">
+                                <button class="vp-ts-btn blue" onclick="stampMula()">
+                                    <i class="fa fa-play"></i> MASA MULA
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="vp-ctrl" colspan="2" style="padding:4px 10px;">
+                                <input id="inputMula" class="vp-ts-input" type="text" value="00:00:00" readonly>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="vp-ctrl" colspan="2" style="padding:4px 10px 8px;">
+                                <button class="vp-ts-btn red" onclick="stampBerhenti()">
+                                    <i class="fa fa-stop"></i> MASA BERHENTI
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="vp-ctrl" colspan="2" style="padding:4px 10px 8px;">
+                                <input id="inputBerhenti" class="vp-ts-input" type="text" value="00:00:00" readonly>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="vp-lbl">Tindakan</td>
+                            <td class="vp-ctrl">
+                                <select id="selTindakan" class="vp-select">
+                                    <option>Potongkan</option>
+                                    <option>Senyapkan</option>
+                                    <option>Kaburkan</option>
+                                    <option>Padamkan</option>
+                                    <option>Lain-lain</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="vp-lbl">Adegan</td>
+                            <td class="vp-ctrl">
+                                <select id="selAdegan" class="vp-select">
+                                    <option>Ganas</option>
+                                    <option>Seram</option>
+                                    <option>Ngeri</option>
+                                    <option>Seksual</option>
+                                    <option>Kebogelan</option>
+                                    <option>Dadah</option>
+                                    <option>Rokok</option>
+                                    <option>Arak</option>
+                                    <option>Bahasa: Dialog &amp; Sarikata</option>
+                                    <option>Lain-lain</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="vp-lbl" style="vertical-align:top;padding-top:10px;">Keterangan<br>Tindakan</td>
+                            <td class="vp-ctrl">
+                                <textarea id="txtKeterangan" class="vp-textarea" placeholder=""></textarea>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="vp-save-row">
+                    <button class="vp-save" onclick="simpanPengubahan()">SIMPAN</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Senarai Pengubahan -->
+        <div class="senarai-box">
+            <div class="senarai-header" onclick="toggleSenarai()">
+                <span class="sh-title">
+                    <i class="fa fa-list"></i>
+                    &nbsp;SENARAI PENGUBAHAN YANG DITAPIS : ILPF SAMPEL VIDEO 2 JAM 540.MP4
+                </span>
+                <span class="sh-toggle"><i class="fa fa-angle-up" id="senarai-icon"></i></span>
+            </div>
+            <div id="senarai-content">
+                <div class="senarai-tabs">
+                    <a class="active" onclick="showSenTab('pen',this)">Pengubahan</a>
+                </div>
+                <div class="senarai-body">
+                    <div id="sen-pen">
+                        <table class="senarai-table">
+                            <thead>
+                                <tr>
+                                    <th style="width:40px;text-align:center;">Bil</th>
+                                    <th>Aktiviti</th>
+                                    <th>Dan</th>
+                                    <th>Hingga</th>
+                                    <th>Tindakan</th>
+                                    <th>Adegan</th>
+                                    <th>Keterangan Tindakan</th>
+                                </tr>
+                            </thead>
+                            <tbody id="senTbody">
+                                <tr>
+                                    <td style="text-align:center;">1</td>
+                                    <td>
+                                        <button class="btn-play-sm" onclick="playSegment('00:03:12','00:03:40')"><i class="fa fa-play"></i></button>
+                                        <button class="btn-del-sm"><i class="fa fa-trash"></i></button>
+                                    </td>
+                                    <td><a href="#" onclick="playSegment('00:03:12','00:03:40');return false;">00:03:12</a><br><small style="color:#aaa;">cf</small></td>
+                                    <td><a href="#" onclick="playSegment('00:03:12','00:03:40');return false;">00:03:40</a><br><small style="color:#aaa;">cf</small></td>
+                                    <td>KABURKAN</td>
+                                    <td><a href="#">KEBOGELAN</a><br><small style="color:#aaa;">cf</small></td>
+                                    <td><a href="#">maklumat bodoh, tapi tidak sesuai</a><br><small style="color:#aaa;">cf</small></td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:center;">2</td>
+                                    <td>
+                                        <button class="btn-play-sm" onclick="playSegment('00:09:45','00:10:14')"><i class="fa fa-play"></i></button>
+                                        <button class="btn-del-sm"><i class="fa fa-trash"></i></button>
+                                    </td>
+                                    <td><a href="#" onclick="playSegment('00:09:45','00:10:14');return false;">00:09:45</a><br><small style="color:#aaa;">cf</small></td>
+                                    <td><a href="#" onclick="playSegment('00:09:45','00:10:14');return false;">00:10:14</a><br><small style="color:#aaa;">cf</small></td>
+                                    <td>KABURKAN</td>
+                                    <td><a href="#">SEKSUAL</a><br><small style="color:#aaa;">cf</small></td>
+                                    <td><a href="#">terlalu tidak bersesuaian</a><br><small style="color:#aaa;">cf</small></td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:center;">3</td>
+                                    <td>
+                                        <button class="btn-play-sm" onclick="playSegment('00:15:22','00:15:50')"><i class="fa fa-play"></i></button>
+                                        <button class="btn-del-sm"><i class="fa fa-trash"></i></button>
+                                    </td>
+                                    <td><a href="#" onclick="playSegment('00:15:22','00:15:50');return false;">00:15:22</a><br><small style="color:#aaa;">cf</small></td>
+                                    <td><a href="#" onclick="playSegment('00:15:22','00:15:50');return false;">00:15:50</a><br><small style="color:#aaa;">cf</small></td>
+                                    <td>POTONGAN</td>
+                                    <td><a href="#">SERAM</a><br><small style="color:#aaa;">cf</small></td>
+                                    <td><a href="#">adegan seram berlebihan</a><br><small style="color:#aaa;">cf</small></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="sen-jus" style="display:none;">
+                        <p style="color:#888;font-size:12px;">Tiada justifikasi direkodkan.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tabs Section -->
+        <div class="tab-section">
+            <ul class="nav-tabs-custom">
+                <li class="active"><a onclick="showTab('tab_tindakan', this)">Tindakan</a></li>
+                <li><a onclick="showTab('tab_permohonan', this)">Butir-Butir Permohonan</a></li>
+                <li><a onclick="showTab('tab_kronologi', this)">Kronologi</a></li>
+            </ul>
+
+            <div class="tab-body">
+
+                <!-- TAB: TINDAKAN -->
+                <div class="tab-pane active" id="tab_tindakan">
+
+                    <table class="form-tbl">
+                        <tr><td colspan="2" style="background:#f8f9fb;font-weight:700;color:#555;">Keterangan Ketua Unit</td></tr>
+                    </table>
+
+                    <table class="form-tbl">
+                        <tr class="sec-hdr"><td colspan="2">PITA</td></tr>
+                        <tr>
+                            <td class="lbl">SINOPSIS <span class="req">*</span></td>
+                            <td>
+                                <div class="ck-toolbar">
+                                    <span title="Bold"><b>B</b></span>
+                                    <span title="Italic"><i>I</i></span>
+                                    <span title="Underline"><u>U</u></span>
+                                    <div class="ck-sep"></div>
+                                    <span title="Bullet List"><i class="fa fa-list-ul"></i></span>
+                                    <span title="Numbered List"><i class="fa fa-list-ol"></i></span>
+                                    <div class="ck-sep"></div>
+                                    <span title="Link"><i class="fa fa-link"></i></span>
+                                    <span title="Image"><i class="fa fa-picture-o"></i></span>
+                                    <div class="ck-sep"></div>
+                                    <span>Styles</span>
+                                    <div class="ck-sep"></div>
+                                    <span>Format</span>
+                                    <div class="ck-sep"></div>
+                                    <span>Font</span>
+                                    <div class="ck-sep"></div>
+                                    <span>Size</span>
+                                </div>
+                                <div class="ck-body" contenteditable="true">
+                                    Pada suatu hari, seorang petani tua bernama Murugan tinggal di sebuah kampung kecil di selatan India bersama anak lelakinya yang malas bernama Karthik, dan setiap hari Murugan bekerja keras di sawah dari pagi hingga petang tanpa mengeluh...
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <table class="form-tbl">
+                        <tr class="sec-hdr"><td colspan="2">ASAS KLASIFIKASI</td></tr>
+                        <tr>
+                            <td class="lbl">GENRE <span class="req">*</span></td>
+                            <td>
+                                <div class="multi-pill-box" id="genre-pills">
+                                    <span class="pill">Bual Bicara <span class="x" onclick="this.parentElement.remove()">&#215;</span></span>
+                                    <span class="pill">Biografi <span class="x" onclick="this.parentElement.remove()">&#215;</span></span>
+                                    <span class="pill">Berita <span class="x" onclick="this.parentElement.remove()">&#215;</span></span>
+                                    <span class="pill">Dokumentari <span class="x" onclick="this.parentElement.remove()">&#215;</span></span>
+                                    <span class="pill">Lain-lain <span class="x" onclick="this.parentElement.remove()">&#215;</span></span>
+                                </div>
+                                <div style="display:flex;gap:5px;margin-top:6px;">
+                                    <select id="genreSelect" class="form-control" style="flex:1;">
+                                        <option value="">-- Pilih Genre --</option>
+                                        <option>Animasi</option>
+                                        <option>Bual bicara</option>
+                                        <option>Biografi</option>
+                                        <option>Berita</option>
+                                        <option>Dokumentasi</option>
+                                        <option>Drama</option>
+                                        <option>Fantasi</option>
+                                        <option>Fiksyen</option>
+                                        <option>Epik</option>
+                                        <option>Candawara (Game Show)</option>
+                                        <option>Seram</option>
+                                        <option>Jenayah</option>
+                                        <option>Kartun</option>
+                                        <option>Keluarga</option>
+                                        <option>Komedi</option>
+                                        <option>Muzikal</option>
+                                        <option>Muzik</option>
+                                        <option>Misteri</option>
+                                        <option>Pengembaraan</option>
+                                        <option>Peperangan</option>
+                                        <option>Politik</option>
+                                        <option>Realiti-TV</option>
+                                        <option>Roman</option>
+                                        <option>Satira</option>
+                                        <option>Sejarah</option>
+                                        <option>Sci-Fi</option>
+                                        <option>Sukan</option>
+                                        <option>Thriller</option>
+                                        <option>Western (Cowboy)</option>
+                                        <option>Lain-lain</option>
+                                    </select>
+                                    <button type="button" onclick="addPill('genreSelect','genre-pills')" class="btn btn-sm btn-default" style="white-space:nowrap;">+ Tambah</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="lbl">TEMA <span class="req">*</span></td>
+                            <td>
+                                <div class="multi-pill-box" id="tema-pills">
+                                    <span class="pill">Alam Ghaib <span class="x" onclick="this.parentElement.remove()">&#215;</span></span>
+                                    <span class="pill">Keadilan <span class="x" onclick="this.parentElement.remove()">&#215;</span></span>
+                                </div>
+                                <div style="display:flex;gap:5px;margin-top:6px;">
+                                    <select id="temaSelect" class="form-control" style="flex:1;">
+                                        <option value="">-- Pilih Tema --</option>
+                                        <option>Adiwira</option>
+                                        <option>Alam Ghaib</option>
+                                        <option>Alam Sekitar</option>
+                                        <option>Berita</option>
+                                        <option>Biografi</option>
+                                        <option>Bual-bicara</option>
+                                        <option>Ceramah</option>
+                                        <option>Dendam</option>
+                                        <option>Demonstrasi</option>
+                                        <option>Dongeng</option>
+                                        <option>Ekspidisi</option>
+                                        <option>Fantasi</option>
+                                        <option>Festival</option>
+                                        <option>Forum</option>
+                                        <option>Hantu</option>
+                                        <option>Hiburan</option>
+                                        <option>Ideologi</option>
+                                        <option>Jati diri</option>
+                                        <option>Jenaka</option>
+                                        <option>Karaoke</option>
+                                        <option>Keadilan</option>
+                                        <option>Kebudayaan</option>
+                                        <option>Kecurangan</option>
+                                        <option>Kedaulatan</option>
+                                        <option>Kejayaan</option>
+                                        <option>Kekecewaan</option>
+                                        <option>Kekejaman</option>
+                                        <option>Kekeluargaan</option>
+                                        <option>Kemasyarakatan</option>
+                                        <option>Kesenian</option>
+                                        <option>Kesetiaan</option>
+                                        <option>Khurafat</option>
+                                        <option>Konflik</option>
+                                        <option>Konspirasi</option>
+                                        <option>LGBTQ</option>
+                                        <option>Maruah</option>
+                                        <option>Masakan</option>
+                                        <option>Misteri</option>
+                                        <option>Motivasi</option>
+                                        <option>Ngeri</option>
+                                        <option>Patriotik</option>
+                                        <option>Pejuang</option>
+                                        <option>Pembelotan</option>
+                                        <option>Pembunuhan</option>
+                                        <option>Pencederaan</option>
+                                        <option>Penderhakaan</option>
+                                        <option>Penerokaan</option>
+                                        <option>Pengembaraan</option>
+                                        <option>Pandemik</option>
+                                        <option>Pengetahuan Am</option>
+                                        <option>Pengkhianatan</option>
+                                        <option>Penguasaan</option>
+                                        <option>Penindasan</option>
+                                        <option>Penyelidikan</option>
+                                        <option>Penyeludupan</option>
+                                        <option>Penyiasatan</option>
+                                        <option>Peperangan</option>
+                                        <option>Perlumbaan</option>
+                                        <option>Permainan Video</option>
+                                        <option>Permusuhan</option>
+                                        <option>Perniagaan</option>
+                                        <option>Persahabatan</option>
+                                        <option>Persaingan</option>
+                                        <option>Persengketaan</option>
+                                        <option>Pertandingan</option>
+                                        <option>Penjajahan</option>
+                                        <option>Pertembungan</option>
+                                        <option>Pertentangan</option>
+                                        <option>Pengintipan</option>
+                                        <option>Pengorbanan</option>
+                                        <option>Promosi</option>
+                                        <option>Propaganda</option>
+                                        <option>Psikologi</option>
+                                        <option>Reaksi</option>
+                                        <option>Rencan</option>
+                                        <option>Rusuhan</option>
+                                        <option>Sabotaj</option>
+                                        <option>Sejarah</option>
+                                        <option>Sihir</option>
+                                        <option>Sukan</option>
+                                        <option>Tali barut</option>
+                                        <option>Teknologi</option>
+                                        <option>Wabak</option>
+                                        <option>Zombie</option>
+                                        <option>Lain-lain</option>
+                                    </select>
+                                    <button type="button" onclick="addPill('temaSelect','tema-pills')" class="btn btn-sm btn-default" style="white-space:nowrap;">+ Tambah</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="lbl">DIALOG / SARI KATA <span class="req">*</span></td>
+                            <td>
+                                <div class="ck-toolbar">
+                                    <span title="Bold"><b>B</b></span>
+                                    <span title="Italic"><i>I</i></span>
+                                    <span title="Underline"><u>U</u></span>
+                                    <div class="ck-sep"></div>
+                                    <span><i class="fa fa-strikethrough"></i></span>
+                                    <div class="ck-sep"></div>
+                                    <span><i class="fa fa-list-ul"></i></span>
+                                    <span><i class="fa fa-list-ol"></i></span>
+                                    <div class="ck-sep"></div>
+                                    <span><i class="fa fa-link"></i></span>
+                                    <span><i class="fa fa-picture-o"></i></span>
+                                    <div class="ck-sep"></div>
+                                    <span>Styles</span>
+                                    <div class="ck-sep"></div>
+                                    <span>Format</span>
+                                    <div class="ck-sep"></div>
+                                    <span>Font</span>
+                                    <div class="ck-sep"></div>
+                                    <span><b>A</b></span>
+                                    <div class="ck-sep"></div>
+                                    <span><i class="fa fa-arrows-alt"></i></span>
+                                </div>
+                                <div class="ck-body" contenteditable="true" style="min-height:130px;">
+                                    <p><strong>Perenggan biasa</strong></p>
+                                    <p>Ini ialah perenggan dummy untuk menguji paparan teks dalam editor Summernote. Teks ini mengandungi pelbagai jenis aksara, simbol, dan bahasa untuk memastikan sistem menyokong Unicode (UTF-8) dengan betul.</p>
+                                    <p><strong>Format teks</strong></p>
+                                    <p>Teks bold, <em>italic</em>, <u>underline</u>, strikethrough, dan kombinasi bold + italic.<br>Subscript H<sub>2</sub>O dan superscript x<sup>2</sup>.</p>
+                                    <p><strong>Senarai (Bullet &amp; Numbered)</strong></p>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <table class="form-tbl">
+                        <tr>
+                            <td class="lbl">HANTAR UNTUK PENGESAHAN <span class="req">*</span></td>
+                            <td>
+                                <select class="form-control" style="width:40%;" id="approval_status" onchange="toggleKeputusan(this.value)">
+                                    <option value="-1">Sila Pilih</option>
+                                    <option value="1">YA</option>
+                                    <option value="0" selected>TIDAK</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr id="row_keputusan" style="display:none;">
+                            <td class="lbl">KEPUTUSAN <span class="req">*</span></td>
+                            <td>
+                                <select class="form-control" style="width:60%;" onchange="toggleTUT(this.value)">
+                                    <option value="">-- Sila Pilih --</option>
+                                    <option value="2">LULUS BERSIH DENGAN PENGUBAHAN LAIN (LBP)</option>
+                                    <option value="3">LULUS DENGAN PENGUBAHAN (LDP)</option>
+                                    <option value="4">TIDAK LULUS UNTUK TAYANGAN (TUT)</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr id="row_tut" style="display:none;">
+                            <td class="lbl">ALASAN KEPUTUSAN TUT <span class="req">*</span></td>
+                            <td><textarea class="form-control" rows="4" placeholder="Nyatakan alasan keputusan TUT..."></textarea></td>
+                        </tr>
+                        <tr id="row_pemberat" style="display:none;">
+                            <td class="lbl">PEMBERAT <span class="req">*</span></td>
+                            <td>
+                                <table class="pemberat-tbl">
+                                    <tr><td>GANAS</td><td><select class="form-control"><option>-- Sila Pilih --</option><option>Tiada</option><option>Sangat ringan</option><option>Ringan</option><option>Sederhana</option><option>Berat</option><option>Sangat berat</option><option>Keterlaluan</option></select></td></tr>
+                                    <tr><td>SERAM</td><td><select class="form-control"><option>-- Sila Pilih --</option><option>Tiada</option><option>Sangat ringan</option><option>Ringan</option><option>Sederhana</option><option>Berat</option><option>Sangat berat</option><option>Keterlaluan</option></select></td></tr>
+                                    <tr><td>NGERI</td><td><select class="form-control"><option>-- Sila Pilih --</option><option>Tiada</option><option>Sangat ringan</option><option>Ringan</option><option>Sederhana</option><option>Berat</option><option>Sangat berat</option><option>Keterlaluan</option></select></td></tr>
+                                    <tr><td>SEKSUAL</td><td><select class="form-control"><option>-- Sila Pilih --</option><option>Tiada</option><option>Sangat ringan</option><option>Ringan</option><option>Sederhana</option><option>Berat</option><option>Sangat berat</option><option>Keterlaluan</option></select></td></tr>
+                                    <tr><td>KEBOGELAN</td><td><select class="form-control"><option>-- Sila Pilih --</option><option>Tiada</option><option>Sangat ringan</option><option>Ringan</option><option>Sederhana</option><option>Berat</option><option>Sangat berat</option><option>Keterlaluan</option></select></td></tr>
+                                    <tr><td>DADAH</td><td><select class="form-control"><option>-- Sila Pilih --</option><option>Tiada</option><option>Sangat ringan</option><option>Ringan</option><option>Sederhana</option><option>Berat</option><option>Sangat berat</option><option>Keterlaluan</option></select></td></tr>
+                                    <tr><td>ROKOK</td><td><select class="form-control"><option>-- Sila Pilih --</option><option>Tiada</option><option>Sangat ringan</option><option>Ringan</option><option>Sederhana</option><option>Berat</option><option>Sangat berat</option><option>Keterlaluan</option></select></td></tr>
+                                    <tr><td>ARAK</td><td><select class="form-control"><option>-- Sila Pilih --</option><option>Tiada</option><option>Sangat ringan</option><option>Ringan</option><option>Sederhana</option><option>Berat</option><option>Sangat berat</option><option>Keterlaluan</option></select></td></tr>
+                                    <tr><td>BAHASA: DIALOG &amp; SARI KATA</td><td><select class="form-control"><option>-- Sila Pilih --</option><option>Tiada</option><option>Sangat ringan</option><option>Ringan</option><option>Sederhana</option><option>Berat</option><option>Sangat berat</option><option>Keterlaluan</option></select></td></tr>
+                                    <tr>
+                                        <td>LAIN-LAIN<br><input type="text" class="form-control" placeholder="Nyatakan" style="margin-top:5px;"></td>
+                                        <td><select class="form-control"><option>-- Sila Pilih --</option><option>Tiada</option><option>Sangat ringan</option><option>Ringan</option><option>Sederhana</option><option>Berat</option><option>Sangat berat</option><option>Keterlaluan</option></select></td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr id="row_klasifikasi" style="display:none;">
+                            <td class="lbl">KLASIFIKASI <span class="req">*</span></td>
+                            <td>
+                                <select class="form-control" style="width:30%;">
+                                    <option value="">-- Sila Pilih --</option>
+                                    <option value="U">U</option>
+                                    <option value="P12" selected>P12</option>
+                                    <option value="13">13</option>
+                                    <option value="16">16</option>
+                                    <option value="18">18</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr id="row_alasan_ttk">
+                            <td class="lbl">ALASAN TTK <span class="req">*</span></td>
+                            <td>
+                                <div class="ck-toolbar">
+                                    <span><b>B</b></span><span><i>I</i></span><span><u>U</u></span>
+                                    <div class="ck-sep"></div>
+                                    <span><i class="fa fa-list-ul"></i></span>
+                                    <span><i class="fa fa-list-ol"></i></span>
+                                    <div class="ck-sep"></div>
+                                    <span>Styles</span><div class="ck-sep"></div><span>Format</span><div class="ck-sep"></div><span>Font</span>
+                                </div>
+                                <div class="ck-body" contenteditable="true" style="min-height:120px;">
+                                    <p>Tajuk: Takdir Di Hujung Rindu. Kisah bermula dengan pertemuan tidak sengaja antara Tengku Adam, seorang pewaris empayar perniagaan yang dingin, dan Nurul Huda, seorang gadis kampung yang ceria namun dipenuhi keberanian. Mereka bertemu apabila kereta mewah Adam terbabit di tepi jalan kampung akibat masalah sekor kosong, dan Hudalah orang pertama yang datang mengulurkan bantuan dengan membawa bekal air teh manis dan karipap panas buatannya. Ketegangan timbul apabila ibu Adam, Puan Sri Salimah, tidak menyuarakan mahunya gadis kampung itu menjadi menantu...</p>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+
+
+                </div>
+
+                <!-- TAB: BUTIR-BUTIR PERMOHONAN -->
+                <div class="tab-pane" id="tab_permohonan">
+                    <table class="detail-tbl">
+                        <tr><td>Tajuk</td><td>DUMMY PITA 10032026 CKEDITOR 002</td></tr>
+                        <tr><td>Pengedar</td><td>NETWORK TWENTY ONE</td></tr>
+                        <tr><td>Dibuat / Diterbit</td><td>2026</td></tr>
+                        <tr><td>Bilangan Pita</td><td>1</td></tr>
+                        <tr><td>Bahasa</td><td>MELAYU</td></tr>
+                        <tr><td>Negara Asal</td><td>MALAYSIA</td></tr>
+                        <tr><td>Sarikata</td><td>TIADA</td></tr>
+                        <tr><td>Pelakon</td><td>NABILA HUDA, IKO UWAIS, CHRIS HEMSWORTH</td></tr>
+                        <tr><td>Pengarah</td><td>ERIK MATTI</td></tr>
+                        <tr><td>Penerbit</td><td>RAJA AZMI</td></tr>
+                        <tr><td>Cawangan</td><td>SEMENANJUNG</td></tr>
+                        <tr><td>Surat Akuan</td><td><a href="#"><i class="fa fa-file-pdf-o"></i> CONTOH_SURAT_AKUAN_SUMPAH.pdf &mdash; 10/03/2026 09:14am</a></td></tr>
+                        <tr><td>Surat Sokongan</td><td><a href="#"><i class="fa fa-file-pdf-o"></i> CONTOH_DOKUMEN_SOKONGAN.pdf &mdash; 10/03/2026 09:14am</a></td></tr>
+                        <tr><td>Komen</td><td>Tajuk: Takdir Di Hujung Rindu. Kisah bermula dengan pertemuan tidak sengaja antara Tengku Adam, seorang pewaris empayar perniagaan yang dingin...</td></tr>
+                    </table>
+                </div>
+
+                <!-- TAB: KRONOLOGI -->
+                <div class="tab-pane" id="tab_kronologi">
+                    <table class="kron-tbl">
+                        <thead>
+                            <tr>
+                                <th style="width:40px;">No</th>
+                                <th>Pengguna</th>
+                                <th>Tarikh</th>
+                                <th>Status</th>
+                                <th>Keterangan</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="text-align:center;">1</td>
+                                <td>NETWORK TWENTY ONE</td>
+                                <td>10/03/2026</td>
+                                <td>PERMOHONAN</td>
+                                <td>Tarikh permohonan untuk permohonan (PCBM20260396966) adalah pada 10/03/2026 09:14:10</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:center;">2</td>
+                                <td>NETWORK TWENTY ONE</td>
+                                <td>10/03/2026</td>
+                                <td>KAEDAH BAYARAN</td>
+                                <td>Tarikh pemilihan kaedah pembayaran secara iPayment bagi permohonan (1039575) adalah pada 10/03/26 09:44:07</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:center;">3</td>
+                                <td>NETWORK TWENTY ONE</td>
+                                <td>10/03/2026</td>
+                                <td>MENUNGGU PENGESAHAN iPAYMENT</td>
+                                <td>Pengguna telah memuat naik resit bagi pembayaran iPayment pada 10/03/2026</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:center;">4</td>
+                                <td>NORHAFIZAH BINTI JAILANI</td>
+                                <td>10/03/2026</td>
+                                <td>PEMBAYARAN</td>
+                                <td>Tarikh pengesahan pembayaran pertama untuk permohonan (1039575), No Resit (RP0108844) adalah pada 10/03/26 09:50:23</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:center;">5</td>
+                                <td>NOR FAZLIDA BINTI ALI</td>
+                                <td>10/03/2026</td>
+                                <td>MENUNGGU PENERIMAAN MEDIA</td>
+                                <td>Tarikh penerimaan media untuk permohonan (PCBM20260396966) adalah pada 10/03/2026 10:02:22</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:center;">6</td>
+                                <td>KELLY CHRISTINA A/P RATNAM</td>
+                                <td>10/03/2026</td>
+                                <td>PENUKARAN FORMAT VIDEO &amp; MUAT NAIK</td>
+                                <td>Tarikh penukaran format video dan muat naik untuk permohonan (PCBM20260396966) adalah pada 10/03/2026 10:51:50</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:center;">7</td>
+                                <td>LT. KDR (B) MD. YUSUF BIN HJ. ISMAIL</td>
+                                <td>10/03/2026</td>
+                                <td>LANTIK KETUA PANEL</td>
+                                <td>Tarikh lantikan panel untuk permohonan (PCBM20260396966) adalah pada 10/03/2026 10:59:38. KP: AZIDI BIN ABDUL KHAHAR</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Bottom Action Bar -->
+        <div class="bottom-actions">
+            <div>
+                <button class="btn-lg-custom btn-back"><i class="fa fa-arrow-left"></i> Kembali</button>
+            </div>
+            <div class="right-btns">
+                <button class="btn-lg-custom btn-save"><i class="fa fa-save"></i> Simpan</button>
+                <button class="btn-lg-custom btn-report">Lihat Laporan</button>
+                <button class="btn-lg-custom btn-submit">Hantar</button>
+            </div>
+        </div>
+
+    </div><!-- end main-content -->
+</div><!-- end container-main -->
+
+<div class="page-footer">
+    Hak Cipta Terpelihara &copy; Kementerian Dalam Negeri 2026.
+</div>
+
+<script>
+/* ---- VIDEO CONTROLS ---- */
+(function() {
+    var video   = document.getElementById('mainVideo');
+    var track   = document.getElementById('progressTrack');
+    var fill    = document.getElementById('progressFill');
+    var curEl   = document.getElementById('vidCurrentTime');
+    var durEl   = document.getElementById('vidDuration');
+    var playIcon = document.getElementById('playIcon');
+    var dragging = false;
+    var FALLBACK_DUR = 1080; // 18 min if metadata not loaded
+
+    function fmt(s) {
+        if (!isFinite(s)) s = 0;
+        var m = Math.floor(s / 60), sec = Math.floor(s % 60);
+        return m + ':' + (sec < 10 ? '0' : '') + sec;
+    }
+
+    function pctFromEvent(e) {
+        var rect = track.getBoundingClientRect();
+        return Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+    }
+
+    function getDur() {
+        var d = video.duration;
+        return (d && isFinite(d) && d > 0) ? d : FALLBACK_DUR;
+    }
+
+    function doSeek(pct) {
+        var dur = getDur();
+        try {
+            video.currentTime = dur * pct;
+            fill.style.width = (pct * 100) + '%';
+        } catch (ex) {
+            console.error('seek failed:', ex);
+        }
+    }
+
+    track.addEventListener('click', function(e) {
+        doSeek(pctFromEvent(e));
+    });
+    track.addEventListener('mousedown', function(e) {
+        dragging = true;
+        e.preventDefault();
+        doSeek(pctFromEvent(e));
+    });
+    document.addEventListener('mousemove', function(e) {
+        if (dragging) { e.preventDefault(); doSeek(pctFromEvent(e)); }
+    });
+    document.addEventListener('mouseup', function() { dragging = false; });
+
+    video.addEventListener('timeupdate', function() {
+        var dur = video.duration;
+        if (dur && isFinite(dur)) {
+            fill.style.width = (video.currentTime / dur * 100) + '%';
+        }
+        curEl.textContent = fmt(video.currentTime);
+    });
+    video.addEventListener('loadedmetadata', function() {
+        durEl.textContent = fmt(getDur());
+    });
+    video.addEventListener('durationchange', function() {
+        durEl.textContent = fmt(getDur());
+    });
+    video.addEventListener('play',  function() { playIcon.className = 'fa fa-pause'; });
+    video.addEventListener('pause', function() { playIcon.className = 'fa fa-play';  });
+    video.addEventListener('error', function(e) { console.error('video error:', video.error); });
+})();
+
+function fmtMs(s) {
+    var m = Math.floor(s / 60), sec = Math.floor(s % 60);
+    return m + ':' + (sec < 10 ? '0' : '') + sec;
+}
+function togglePlay() {
+    var v = document.getElementById('mainVideo');
+    v.paused ? v.play() : v.pause();
+}
+function toggleMute() {
+    var v = document.getElementById('mainVideo');
+    v.muted = !v.muted;
+    document.getElementById('volIcon').className = v.muted ? 'fa fa-volume-off' : 'fa fa-volume-up';
+}
+function toggleFullscreen() {
+    var el = document.getElementById('mainVideo');
+    document.fullscreenElement ? document.exitFullscreen() : el.requestFullscreen && el.requestFullscreen();
+}
+/* ---- END VIDEO CONTROLS ---- */
+
+function hmsToSec(hms) {
+    var p = hms.split(':');
+    return +p[0] * 3600 + +p[1] * 60 + +p[2];
+}
+function playSegment(startHms, endHms) {
+    var v = document.getElementById('mainVideo');
+    var endSec = hmsToSec(endHms);
+    v.currentTime = hmsToSec(startHms);
+    v.play();
+    function onTime() {
+        if (v.currentTime >= endSec) {
+            v.pause();
+            v.removeEventListener('timeupdate', onTime);
+        }
+    }
+    v.removeEventListener('timeupdate', v._segListener);
+    v._segListener = onTime;
+    v.addEventListener('timeupdate', onTime);
+}
+
+function fmtTime(s) {
+    var h = Math.floor(s / 3600);
+    var m = Math.floor((s % 3600) / 60);
+    var sec = Math.floor(s % 60);
+    return [h,m,sec].map(function(v){ return String(v).padStart(2,'0'); }).join(':');
+}
+function stampMula() {
+    var v = document.getElementById('mainVideo');
+    document.getElementById('inputMula').value = fmtTime(v.currentTime);
+}
+function stampBerhenti() {
+    var v = document.getElementById('mainVideo');
+    document.getElementById('inputBerhenti').value = fmtTime(v.currentTime);
+}
+
+function openAliranModal() {
+    var m = document.getElementById('aliranModal');
+    m.style.display = 'flex';
+}
+function closeAliranModal() {
+    document.getElementById('aliranModal').style.display = 'none';
+}
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeAliranModal();
+});
+
+function toggleSidebar(el) {
+    var sub = el.nextElementSibling;
+    if (sub && sub.classList.contains('sub-menu')) {
+        sub.classList.toggle('open');
+        el.parentElement.classList.toggle('open');
+    }
+}
+
+function showTab(id, link) {
+    document.querySelectorAll('.tab-pane').forEach(function(p) { p.classList.remove('active'); });
+    document.getElementById(id).classList.add('active');
+    document.querySelectorAll('.nav-tabs-custom li').forEach(function(l) { l.classList.remove('active'); });
+    link.parentElement.classList.add('active');
+}
+
+function toggleKeputusan(val) {
+    var show = (val === '1');
+    document.getElementById('row_keputusan').style.display = show ? '' : 'none';
+    document.getElementById('row_pemberat').style.display = show ? '' : 'none';
+    document.getElementById('row_klasifikasi').style.display = show ? '' : 'none';
+    document.getElementById('row_alasan_ttk').style.display = show ? 'none' : '';
+    if (!show) { document.getElementById('row_tut').style.display = 'none'; }
+}
+
+function toggleTUT(val) {
+    var isTUT = (val === '4');
+    document.getElementById('row_tut').style.display = isTUT ? '' : 'none';
+    document.getElementById('row_klasifikasi').style.display = isTUT ? 'none' : '';
+}
+
+function toggleSenarai() {
+    var content = document.getElementById('senarai-content');
+    var icon = document.getElementById('senarai-icon');
+    var hidden = content.style.display === 'none';
+    content.style.display = hidden ? '' : 'none';
+    icon.className = hidden ? 'fa fa-angle-up' : 'fa fa-angle-down';
+}
+
+function toggleSidebarPanel() {
+    document.querySelector('.sidebar').classList.toggle('collapsed');
+}
+
+function addPill(selectId, targetId) {
+    var sel = document.getElementById(selectId);
+    var val = sel.value;
+    if (!val) return;
+    var box = document.getElementById(targetId);
+    var existing = box.querySelectorAll('.pill');
+    for (var i = 0; i < existing.length; i++) {
+        if (existing[i].textContent.replace('×','').trim() === val) return;
+    }
+    var pill = document.createElement('span');
+    pill.className = 'pill';
+    pill.innerHTML = val + ' <span class="x" onclick="this.parentElement.remove()">&#215;</span>';
+    box.appendChild(pill);
+    sel.value = '';
+}
+
+function simpanPengubahan() {
+    var mula = document.getElementById('inputMula').value.trim();
+    var berhenti = document.getElementById('inputBerhenti').value.trim();
+    var tindakan = document.getElementById('selTindakan').value;
+    var adegan = document.getElementById('selAdegan').value;
+    var keterangan = document.getElementById('txtKeterangan').value.trim();
+
+    if (!mula || mula === '00:00:00') { alert('Sila tetapkan Masa Mula.'); return; }
+    if (!berhenti || berhenti === '00:00:00') { alert('Sila tetapkan Masa Berhenti.'); return; }
+    if (!keterangan) { alert('Sila isi Keterangan Tindakan.'); return; }
+
+    var tbody = document.getElementById('senTbody');
+    var bil = tbody.querySelectorAll('tr').length + 1;
+    var esc = function(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); };
+
+    var tr = document.createElement('tr');
+    tr.innerHTML =
+        '<td style="text-align:center;">' + bil + '</td>' +
+        '<td>' +
+            '<button class="btn-play-sm" onclick="playSegment(\'' + mula + '\',\'' + berhenti + '\')"><i class="fa fa-play"></i></button> ' +
+            '<button class="btn-del-sm" onclick="hapusPengubahan(this)"><i class="fa fa-trash"></i></button>' +
+        '</td>' +
+        '<td><a href="#" onclick="playSegment(\'' + mula + '\',\'' + berhenti + '\');return false;">' + esc(mula) + '</a><br><small style="color:#aaa;">cf</small></td>' +
+        '<td><a href="#" onclick="playSegment(\'' + mula + '\',\'' + berhenti + '\');return false;">' + esc(berhenti) + '</a><br><small style="color:#aaa;">cf</small></td>' +
+        '<td>' + esc(tindakan).toUpperCase() + '</td>' +
+        '<td><a href="#">' + esc(adegan).toUpperCase() + '</a><br><small style="color:#aaa;">cf</small></td>' +
+        '<td><a href="#">' + esc(keterangan) + '</a><br><small style="color:#aaa;">cf</small></td>';
+    tbody.appendChild(tr);
+
+    document.getElementById('inputMula').value = '00:00:00';
+    document.getElementById('inputBerhenti').value = '00:00:00';
+    document.getElementById('txtKeterangan').value = '';
+    document.getElementById('selTindakan').selectedIndex = 0;
+    document.getElementById('selAdegan').selectedIndex = 0;
+}
+
+function hapusPengubahan(btn) {
+    var tr = btn.closest('tr');
+    var tbody = tr.parentNode;
+    tr.remove();
+    tbody.querySelectorAll('tr').forEach(function(row, idx) {
+        row.firstElementChild.textContent = (idx + 1);
+    });
+}
+
+function showSenTab(tab, link) {
+    document.getElementById('sen-pen').style.display = 'none';
+    document.getElementById('sen-jus').style.display = 'none';
+    document.getElementById('sen-' + tab).style.display = '';
+    document.querySelectorAll('.senarai-tabs a').forEach(function(a) { a.classList.remove('active'); });
+    link.classList.add('active');
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,6 @@
+vendor/
+.env
+config.php
+uploads/
+results/
+*.log
