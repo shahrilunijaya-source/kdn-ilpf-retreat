@@ -1,3 +1,8 @@
 .gstack/
 ilpf/files/*.mp4
 ilpf/.playwright-mcp/
+System/.env
+System/config.php
+System/.playwright-mcp/
+System/assets/*.mp4
+Websites/.playwright-mcp/

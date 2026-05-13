@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<title>Utama · iLPF</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../ilpf.css">
+<script src="js/data.js"></script>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel" src="js/icons.jsx"></script>
+<script type="text/babel" src="js/shell.jsx"></script>
+<script type="text/babel" src="js/aku-janji.jsx"></script>
+<script type="text/babel" src="js/dashboard.jsx"></script>
+<script type="text/babel" src="js/tweaks-panel.jsx"></script>
+
+<script type="text/babel">
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "state": "heavy",
+  "showAkuJanji": true,
+  "tod": "petang",
+  "akuVariant": "legacy"
+}/*EDITMODE-END*/;
+
+function App() {
+  const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
+  return (
+    <>
+      <Shell activeKey="utama" context="Ruang Kerja ALPF">
+        <Dashboard
+          state={t.state}
+          showAkuJanji={t.showAkuJanji}
+          tod={t.tod}
+          akuVariant={t.akuVariant}
+        />
+      </Shell>
+
+      <TweaksPanel title="Tweaks">
+        <TweakSection label="Keadaan dashboard">
+          <TweakSelect
+            label="Keadaan"
+            value={t.state}
+            onChange={(v) => setTweak("state", v)}
+            options={[
+              { value: "calm", label: "Lapang · 0 tugasan" },
+              { value: "normal", label: "Normal · 3 tugasan" },
+              { value: "heavy", label: "Berat · 5 tugasan, 2 lewat" },
+              { value: "ending", label: "Pelantikan tamat · 11 hari" },
+            ]}
+          />
+          <TweakToggle
+            label="Aku Janji overlay"
+            value={t.showAkuJanji}
+            onChange={(v) => setTweak("showAkuJanji", v)}
+          />
+          <TweakRadio
+            label="Variant"
+            value={t.akuVariant}
+            onChange={(v) => setTweak("akuVariant", v)}
+            options={[
+              { value: "v2", label: "v2 (lembut)" },
+              { value: "legacy", label: "Legacy (paksa)" }
+            ]}
+          />
+        </TweakSection>
+        <TweakSection label="Waktu">
+          <TweakSelect
+            label="Sapaan"
+            value={t.tod}
+            onChange={(v) => setTweak("tod", v)}
+            options={[
+              { value: "pagi", label: "Pagi" },
+              { value: "tengah-hari", label: "Tengah hari" },
+              { value: "petang", label: "Petang" },
+              { value: "malam", label: "Malam" },
+            ]}
+          />
+        </TweakSection>
+      </TweaksPanel>
+    </>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+</script>
+</body>
+</html>

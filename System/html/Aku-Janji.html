@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<title>Aku Janji · v2 vs Legacy · iLPF</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../ilpf.css">
+<style>
+  body { background: var(--paper-2); }
+  .cmp-page { padding: 32px 32px 60px; max-width: 1400px; margin: 0 auto; }
+  .cmp-page__head { margin-bottom: 24px; }
+  .cmp-page__title { font-size: 24px; font-weight: 700; color: var(--pine); letter-spacing: -0.02em; margin: 0 0 6px; }
+  .cmp-page__sub { font-size: 13.5px; color: var(--mute); margin: 0 0 16px; }
+  .cmp-page__intro {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--r-md);
+    padding: 14px 18px;
+    font-size: 12.5px;
+    line-height: 1.6;
+    color: var(--ink);
+    margin-bottom: 22px;
+  }
+  .cmp-page__intro strong { color: var(--pine); font-weight: 600; }
+
+  .cmp-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+  }
+  .cmp-frame {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    position: relative;
+    overflow: hidden;
+    min-height: 640px;
+    box-shadow: 0 12px 36px -16px rgba(0,38,36,0.18);
+  }
+  .cmp-frame__bar {
+    height: 30px;
+    background: var(--pine-deep);
+    color: rgba(255,255,255,0.55);
+    font-size: 10.5px;
+    letter-spacing: 0.06em;
+    display: flex; align-items: center; padding: 0 14px;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+  }
+  .cmp-frame__topbar {
+    height: 48px;
+    background: var(--pine);
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    display: flex; align-items: center;
+    padding: 0 16px;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+  }
+  .cmp-frame__topbar .i { color: var(--teal); }
+
+  .cmp-frame__body { padding: 22px 28px; position: relative; min-height: 520px; }
+  .cmp-frame__sketch h1 { font-size: 20px; color: var(--pine); margin: 0 0 4px; letter-spacing: -0.02em; }
+  .cmp-frame__sketch p { font-size: 12.5px; color: var(--mute); margin: 0 0 18px; }
+  .cmp-skel {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+  .cmp-skel__card {
+    height: 84px;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--r-md);
+    padding: 12px;
+  }
+  .cmp-skel__bar {
+    height: 10px;
+    background: var(--line);
+    border-radius: 3px;
+    margin-bottom: 6px;
+  }
+  .cmp-skel__bar.short { width: 40%; }
+  .cmp-skel__bar.med { width: 70%; }
+  .cmp-skel__big {
+    height: 140px;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--r-md);
+    padding: 14px;
+  }
+
+  .cmp-tag {
+    position: absolute;
+    top: 14px; left: 14px;
+    z-index: 5;
+    padding: 5px 10px;
+    background: var(--pine);
+    color: #fff;
+    border-radius: 6px;
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+  }
+  .cmp-tag--v2 { background: var(--teal); color: var(--pine-deep); }
+
+  .cmp-note {
+    margin-top: 14px;
+    padding: 12px 16px;
+    background: rgba(0,184,169,0.06);
+    border: 1px solid rgba(0,184,169,0.22);
+    border-radius: var(--r-md);
+    font-size: 11.5px;
+    color: var(--pine);
+    line-height: 1.55;
+  }
+  .cmp-note.is-warn {
+    background: rgba(255,107,53,0.06);
+    border-color: rgba(255,107,53,0.30);
+    color: #9A3412;
+  }
+
+  /* Override absolute-positioning of overlays so they sit within their frame */
+  .cmp-frame .aku {
+    position: absolute !important;
+    top: 90px !important;
+    right: 22px !important;
+    left: auto !important;
+  }
+  .cmp-frame .aku--legacy {
+    position: absolute !important;
+    inset: 78px 0 0 0 !important;
+    z-index: 5 !important;
+  }
+  .cmp-frame__body { isolation: isolate; }
+</style>
+<script src="js/data.js"></script>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel" src="js/icons.jsx"></script>
+<script type="text/babel" src="js/aku-janji.jsx"></script>
+
+<script type="text/babel">
+const { useState } = React;
+
+function MockFrame({ children, label, variant }) {
+  return (
+    <div className="cmp-frame">
+      <span className={`cmp-tag ${variant === 'v2' ? 'cmp-tag--v2' : ''}`}>{label}</span>
+      <div className="cmp-frame__bar">Portal Rasmi PPF · KDN</div>
+      <div className="cmp-frame__topbar">
+        <span className="i">i</span>LPF<span className="dot" />
+      </div>
+      <div className="cmp-frame__body">
+        <div className="cmp-frame__sketch">
+          <h1>Selamat petang, Encik Ridzuan.<span className="dot" /></h1>
+          <p>5 tugasan dalam tangan. 2 lewat. Anggaran 7 jam kerja.</p>
+        </div>
+        <div className="cmp-skel">
+          <div className="cmp-skel__card">
+            <div className="cmp-skel__bar short" />
+            <div className="cmp-skel__bar med" />
+            <div className="cmp-skel__bar" style={{ width: '80%' }} />
+          </div>
+          <div className="cmp-skel__card">
+            <div className="cmp-skel__bar short" />
+            <div className="cmp-skel__bar med" />
+            <div className="cmp-skel__bar" style={{ width: '60%' }} />
+          </div>
+        </div>
+        <div className="cmp-skel__big">
+          <div className="cmp-skel__bar short" />
+          <div className="cmp-skel__bar med" style={{ marginTop: 12 }} />
+          <div className="cmp-skel__bar" style={{ width: '85%' }} />
+          <div className="cmp-skel__bar med" style={{ marginTop: 10 }} />
+        </div>
+        {children}
+      </div>
+    </div>
+  );
+}
+
+function App() {
+  const [v2Open, setV2Open] = useState(true);
+  const [legacyOpen, setLegacyOpen] = useState(true);
+
+  const reset = () => { setV2Open(true); setLegacyOpen(true); };
+
+  return (
+    <div className="cmp-page">
+      <div className="cmp-page__head">
+        <h1 className="cmp-page__title">Aku Janji · Perbandingan Variant<span className="dot" /></h1>
+        <p className="cmp-page__sub">
+          Versi v2 (lembut, suku tahunan) berbanding versi legacy (paksa, setiap log masuk). Kedua-dua menghantar
+          ke endpoint backend yang sama dan menyimpan timestamp + IP + suku.
+        </p>
+        <div className="cmp-page__intro">
+          <strong>Versi v2</strong> — overlay telus di sudut Dashboard, muncul sekali setiap suku
+          (Q1/Q2/Q3/Q4). Boleh diabaikan untuk sesi semasa. Membenarkan ALPF terus bekerja.
+          {' · '}
+          <strong>Legacy</strong> — modal blocking penuh skrin, muncul setiap log masuk, tiada akses ke
+          ruang kerja tanpa Bersetuju.
+          {' '}
+          <a href="#" onClick={(e) => { e.preventDefault(); reset(); }} style={{ color: 'var(--pine)', fontWeight: 600 }}>
+            ↻ Reset kedua-duanya
+          </a>
+        </div>
+      </div>
+
+      <div className="cmp-grid">
+        <MockFrame label="v2 · LEMBUT · 1× per suku" variant="v2">
+          {v2Open && <AkuJanjiV2 onDismiss={() => setV2Open(false)} />}
+          <div className="cmp-note">
+            <strong>Tingkah laku:</strong> Tap "Saya akui" → spinner → resit dengan rujukan
+            backend. ALPF boleh juga tap "Ingatkan saya kemudian" — sistem akan tunggu suku
+            berikutnya. Tidak menghalang akses ke ruang kerja.
+          </div>
+        </MockFrame>
+
+        <MockFrame label="LEGACY · PAKSA · setiap log masuk">
+          {legacyOpen && <AkuJanjiLegacy onDismiss={() => setLegacyOpen(false)} />}
+          <div className="cmp-note is-warn">
+            <strong>Tingkah laku:</strong> Modal menutup seluruh skrin. "Bersetuju" → spinner → resit.
+            "Tidak Bersetuju" → ALPF dipaksa log keluar. Ditampilkan pada setiap log masuk tanpa mengira
+            suku.
+          </div>
+        </MockFrame>
+      </div>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+</script>
+</body>
+</html>

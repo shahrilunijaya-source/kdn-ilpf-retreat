@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 80" width="160" height="80">
+  <rect x="0" y="0" width="160" height="80" rx="18" fill="#003D3A"></rect>
+  <text x="80" y="54" text-anchor="middle" font-family="Poppins, system-ui, sans-serif" font-weight="700" font-size="38" letter-spacing="-1.5" fill="#FAFAF7">iLPF</text>
+  <circle cx="129" cy="54" r="4" fill="#00B8A9"></circle>
+</svg>

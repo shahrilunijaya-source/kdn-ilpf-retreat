@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 110" width="360" height="110">
+  
+  <text x="0" y="60" class="wm" fill="#003D3A">iLPF</text>
+  <circle cx="168" cy="56" r="7" fill="#00B8A9"></circle>
+  <line x1="0" y1="78" x2="340" y2="78" stroke="#E4E7EB" stroke-width="1"></line>
+  <text x="0" y="100" class="desc" fill="#6B7280">Lembaga Penapisan Filem Malaysia</text>
+</svg>

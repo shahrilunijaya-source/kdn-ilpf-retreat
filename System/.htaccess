@@ -1,0 +1,34 @@
+Options -Indexes
+DirectoryIndex Utama.php login.php
+
+# Redirect .html pages to .php equivalents
+RewriteEngine On
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Map old .html links to .php
+RewriteRule ^Utama\.html$           Utama.php           [R=301,L]
+RewriteRule ^Profil\.html$          Profil.php          [R=301,L]
+RewriteRule ^Tapisan\.html$         Tapisan.php         [R=301,L]
+RewriteRule ^Tapisan-Senarai\.html$ Tapisan-Senarai.php [R=301,L]
+RewriteRule ^Laporan\.html$         Laporan.php         [R=301,L]
+RewriteRule ^Aku-Janji\.html$       Aku-Janji.php       [R=301,L]
+RewriteRule ^login\.html$           login.php           [R=301,L]
+
+# Security: block direct access to lib/ and db/
+RewriteRule ^lib/   - [F,L]
+RewriteRule ^db/    - [F,L]
+
+# Hide .env and config
+<FilesMatch "^(\.env|config\.php)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# PHP settings
+<IfModule mod_php.c>
+    php_flag display_errors Off
+    php_value session.cookie_httponly 1
+    php_value session.use_strict_mode 1
+</IfModule>

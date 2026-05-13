@@ -1,0 +1,109 @@
+/* iLPF v2 — The Clear Frame · brand tokens + base
+   Inherited from portal spec; extended for workspace + auth screens. */
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap");
+
+:root {
+  /* Brand */
+  --teal: #00B8A9;
+  --teal-deep: #009A8E;
+  --teal-soft: rgba(0, 184, 169, 0.12);
+  --pine: #003D3A;
+  --pine-deep: #002624;
+  --pine-shade: #001E1C;
+  --orange: #FF6B35;
+  --orange-soft: rgba(255, 107, 53, 0.12);
+  --paper: #FAFAF7;
+  --paper-2: #F4F3EE;
+  --ink: #0A0E13;
+  --ink-2: #1A1F26;
+
+  /* Neutrals */
+  --line: #E5E3DC;
+  --line-2: #D7D5CC;
+  --mute: #6B7177;
+  --mute-2: #9A9F9F;
+
+  /* Status */
+  --success: #10B981;
+  --warning: #F59E0B;
+  --danger: #EF4444;
+
+  /* AI surface */
+  --ai-bg: #001E1C;
+  --ai-bg-deep: #0A0F14;
+  --ai-border: rgba(0, 184, 169, 0.22);
+  --ai-text: #FFFFFF;
+  --ai-muted: rgba(255, 255, 255, 0.62);
+  --ai-subtle: rgba(255, 255, 255, 0.42);
+  --ai-accent: #5DCAA5;
+
+  /* Type */
+  --font: "Poppins", system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, monospace;
+
+  /* Radii */
+  --r-sm: 6px;
+  --r-md: 10px;
+  --r-lg: 14px;
+  --r-xl: 18px;
+
+  /* Shadows */
+  --sh-1: 0 1px 2px rgba(10, 14, 19, 0.04);
+  --sh-2: 0 4px 14px rgba(10, 14, 19, 0.06), 0 1px 2px rgba(10, 14, 19, 0.04);
+  --sh-3: 0 18px 48px -16px rgba(0, 38, 36, 0.25), 0 4px 14px rgba(10, 14, 19, 0.06);
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font);
+  color: var(--ink);
+  background: var(--paper);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+button, input, textarea, select { font-family: inherit; }
+button { cursor: pointer; border: 0; background: none; padding: 0; }
+
+/* The DOT — micro-signature */
+.dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--teal);
+  vertical-align: middle;
+  margin-left: 2px;
+}
+.dot--lg { width: 8px; height: 8px; }
+.dot--orange { background: var(--orange); }
+.dot--white { background: #fff; }
+
+/* iLPF wordmark */
+.wordmark {
+  font-family: var(--font);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.wordmark .i { color: var(--teal); }
+.wordmark .lpf { color: inherit; }
+
+/* Eyebrow */
+.eyebrow {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--mute);
+}
+.eyebrow--teal { color: var(--teal); }
+.eyebrow--orange { color: var(--orange); }
+.eyebrow--white { color: rgba(255, 255, 255, 0.7); }
+
+/* Utility */
+.tabular { font-variant-numeric: tabular-nums; }
+.mono { font-family: var(--mono); }

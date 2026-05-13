@@ -1,0 +1,124 @@
+/* ============================================================
+   iLPF — Shared UI Kit Stylesheet
+   Imports tokens, adds component-level styles
+   ============================================================ */
+
+@import url('../colors_and_type.css');
+
+* { box-sizing: border-box; }
+body { margin: 0; }
+
+/* ---------- Buttons ---------- */
+.btn {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: 14px;
+  padding: 10px 18px;
+  border-radius: var(--radius-md);
+  border: none;
+  cursor: pointer;
+  line-height: 1;
+  transition: transform var(--dur-fast) var(--ease-out),
+              box-shadow var(--dur-base) var(--ease-out),
+              background var(--dur-base) var(--ease-out),
+              border-color var(--dur-base) var(--ease-out);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+.btn:focus-visible { outline: none; box-shadow: var(--shadow-focus); }
+
+.btn-primary {
+  background: var(--teal);
+  color: white;
+  box-shadow: var(--glow-teal);
+}
+.btn-primary:hover { box-shadow: var(--glow-teal-hover); background: var(--teal-600); transform: translateY(-1px); }
+.btn-primary:active { transform: translateY(0); background: var(--teal-700); }
+
+.btn-secondary {
+  background: var(--pine);
+  color: var(--paper);
+  box-shadow: var(--glow-pine);
+}
+.btn-secondary:hover { background: var(--pine-700); transform: translateY(-1px); }
+
+.btn-ghost {
+  background: transparent;
+  color: var(--pine);
+  border: 1px solid var(--gray-200);
+}
+.btn-ghost:hover { background: var(--gray-50); border-color: var(--gray-300); }
+
+.btn-orange {
+  background: var(--orange);
+  color: white;
+  box-shadow: var(--glow-orange);
+}
+.btn-orange:hover { background: var(--orange-600); transform: translateY(-1px); }
+
+.btn-lg { padding: 14px 24px; font-size: 16px; border-radius: var(--radius-lg); }
+.btn-sm { padding: 7px 12px; font-size: 13px; border-radius: 8px; }
+
+/* ---------- Inputs ---------- */
+.input {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  padding: 11px 14px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--gray-200);
+  background: white;
+  color: var(--fg-2);
+  outline: none;
+  width: 100%;
+  transition: border-color var(--dur-base), box-shadow var(--dur-base);
+}
+.input:focus { border-color: var(--teal); box-shadow: var(--shadow-focus); }
+.input::placeholder { color: var(--fg-4); }
+
+/* ---------- Cards ---------- */
+.card {
+  background: white;
+  border-radius: var(--radius-lg);
+  border: var(--border-hairline);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-5);
+}
+.card-md { box-shadow: var(--shadow-md); }
+.card-lg { box-shadow: var(--shadow-lg); border-radius: var(--radius-xl); }
+
+/* ---------- Badges ---------- */
+.badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 4px 10px; border-radius: 999px;
+  font-size: 12px; font-weight: 500; line-height: 1.4;
+}
+.badge .dot { width: 6px; height: 6px; border-radius: 999px; }
+.badge-success { background: #E6F8F6; color: #00897C; }
+.badge-success .dot { background: #00B8A9; }
+.badge-warning { background: #FFF4D6; color: #876700; }
+.badge-warning .dot { background: #F4B400; }
+.badge-danger  { background: #FFECEC; color: #B5343A; }
+.badge-danger .dot  { background: #E5484D; }
+.badge-info    { background: #E8F1FC; color: #1F4FA8; }
+.badge-info .dot { background: #2A6FDB; }
+.badge-pine    { background: var(--pine); color: var(--paper); }
+.badge-neutral { background: var(--gray-100); color: var(--fg-2); }
+
+/* ---------- Helpers ---------- */
+.dot-after::after {
+  content: "";
+  display: inline-block; width: 0.32em; height: 0.32em;
+  border-radius: 999px; background: var(--teal);
+  margin-left: 0.18em; transform: translateY(-0.18em);
+}
+.dot-after-orange::after { background: var(--orange); }
+
+.eyebrow {
+  font-weight: 600; font-size: 12px;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--teal);
+}
+
+.divider { height: 1px; background: var(--gray-200); border: 0; }

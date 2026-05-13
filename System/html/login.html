@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<title>Log Masuk · iLPF</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../ilpf.css">
+<style>
+  html, body, #root { height: 100%; }
+  body { overflow: hidden; }
+  /* Mobile fallback: stack the split layout */
+  @media (max-width: 880px) {
+    .vb-page { grid-template-columns: 1fr !important; grid-template-rows: auto 1fr; }
+    .vb-left { padding: 28px 28px 22px; }
+    .vb-left__hero { font-size: 30px !important; }
+    .vb-left__decisive { display: none !important; }
+    .vb-right { padding: 32px 24px; }
+  }
+</style>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel" src="js/tweaks-panel.jsx"></script>
+<script type="text/babel" src="js/login-variants.jsx"></script>
+
+<script type="text/babel">
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "otpLen": 6,
+  "phone": "+60 162217576"
+}/*EDITMODE-END*/;
+
+function App() {
+  const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
+  return (
+    <>
+      <LoginB otpLen={t.otpLen} phone={t.phone} />
+
+      <TweaksPanel title="Tweaks">
+        <TweakSection label="MFA">
+          <TweakRadio
+            label="Panjang OTP"
+            value={t.otpLen}
+            onChange={(v) => setTweak("otpLen", v)}
+            options={[
+              { value: 6, label: "6 digit" },
+              { value: 8, label: "8 digit" }
+            ]}
+          />
+          <TweakText
+            label="No. telefon"
+            value={t.phone}
+            onChange={(v) => setTweak("phone", v)}
+          />
+        </TweakSection>
+        <TweakSection label="Petunjuk demo">
+          <div style={{ fontSize: 11.5, lineHeight: 1.55, color: "rgba(255,255,255,0.6)", padding: "4px 2px 8px" }}>
+            <div style={{ marginBottom: 4 }}>· ID + kata laluan apa-apa → OTP</div>
+            <div style={{ marginBottom: 4 }}>· OTP penuh → disahkan</div>
+            <div style={{ marginBottom: 4 }}>· OTP semua 0 → ralat</div>
+            <div>· "Guna kod sandaran" → input 4×4</div>
+          </div>
+        </TweakSection>
+      </TweaksPanel>
+    </>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+</script>
+</body>
+</html>
