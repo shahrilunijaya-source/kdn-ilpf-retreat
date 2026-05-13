@@ -20,6 +20,8 @@ function VideoPlayer({ pins }) {
   const fillRef   = useRefTV(null);
   const thumbRef  = useRefTV(null);
   const vFillRef  = useRefTV(null);
+  const trackRef  = useRefTV(null);
+  const volRef    = useRefTV(null);
   const timeRef   = useRefTV(null);
   const durRef    = useRefTV(null);
   const [playing, setPlaying] = useStateTV(false);
@@ -41,6 +43,46 @@ function VideoPlayer({ pins }) {
     const p = Math.max(0, Math.min(1, pct));
     if (vFillRef.current) vFillRef.current.style.width = (p * 100) + '%';
   };
+
+  /* Native DOM drag — bypasses React synthetic event + pointer capture quirks */
+  useEffectTV(() => {
+    const makeDragger = (el, onValue) => {
+      if (!el) return () => {};
+      let active = false;
+      const pct = (e) => {
+        const r = el.getBoundingClientRect();
+        return Math.max(0, Math.min(1, (e.clientX - r.left) / r.width));
+      };
+      const onDown = (e) => { e.preventDefault(); active = true; onValue(pct(e)); };
+      const onMove = (e) => { if (active) onValue(pct(e)); };
+      const onUp   = ()  => { active = false; };
+      el.addEventListener('mousedown', onDown);
+      document.addEventListener('mousemove', onMove);
+      document.addEventListener('mouseup',   onUp);
+      return () => {
+        el.removeEventListener('mousedown', onDown);
+        document.removeEventListener('mousemove', onMove);
+        document.removeEventListener('mouseup',   onUp);
+      };
+    };
+
+    const unTrack = makeDragger(trackRef.current, (p) => {
+      const dur = (() => { const d = vidRef.current?.duration; return (d && isFinite(d) && d > 0) ? d : FALLBACK_DUR; })();
+      try { if (vidRef.current) vidRef.current.currentTime = dur * p; } catch(e) {}
+      if (fillRef.current)  fillRef.current.style.width  = (p * 100) + '%';
+      if (thumbRef.current) thumbRef.current.style.left  = (p * 100) + '%';
+    });
+
+    const unVol = makeDragger(volRef.current, (p) => {
+      const v = vidRef.current;
+      if (v) { v.volume = p; v.muted = p === 0; }
+      if (vFillRef.current) vFillRef.current.style.width = (p * 100) + '%';
+      setVol(p);
+      setMuted(p === 0);
+    });
+
+    return () => { unTrack(); unVol(); };
+  }, []);
 
   useEffectTV(() => {
     window.__iLPFSeek = (sec) => {
@@ -70,33 +112,6 @@ function VideoPlayer({ pins }) {
     if (!v) return;
     playing ? v.pause() : v.play();
     setPlaying(!playing);
-  };
-
-  const makeDragHandler = (onValue) => (e) => {
-    const el = e.currentTarget;
-    el.setPointerCapture(e.pointerId);
-    const compute = (ev) => {
-      const r = el.getBoundingClientRect();
-      onValue(Math.max(0, Math.min(1, (ev.clientX - r.left) / r.width)));
-    };
-    compute(e);
-    const onMove = (ev) => compute(ev);
-    const onUp   = () => { el.removeEventListener('pointermove', onMove); el.removeEventListener('pointerup', onUp); };
-    el.addEventListener('pointermove', onMove);
-    el.addEventListener('pointerup',   onUp);
-  };
-
-  const onScrubValue = (pct) => {
-    try { if (vidRef.current) vidRef.current.currentTime = getDur() * pct; } catch(e) {}
-    applyFill(pct);
-  };
-
-  const onVolValue = (pct) => {
-    const v = vidRef.current;
-    if (v) { v.volume = pct; v.muted = pct === 0; }
-    applyVol(pct);
-    setVol(pct);
-    setMuted(pct === 0);
   };
 
   const toggleMute = () => {
@@ -132,8 +147,8 @@ function VideoPlayer({ pins }) {
           }
         </button>
 
-        {/* Scrubber */}
-        <div className="tap-video__track" onPointerDown={makeDragHandler(onScrubValue)}>
+        {/* Scrubber — ref attached, native mousedown drives drag */}
+        <div ref={trackRef} className="tap-video__track">
           <div className="tap-video__rail" />
           <div ref={fillRef} className="tap-video__fill" />
           <div ref={thumbRef} className="tap-video__thumb" />
@@ -155,8 +170,8 @@ function VideoPlayer({ pins }) {
           }
         </button>
 
-        {/* Volume slider */}
-        <div className="tap-video__vol" onPointerDown={makeDragHandler(onVolValue)}>
+        {/* Volume slider — ref attached, native mousedown drives drag */}
+        <div ref={volRef} className="tap-video__vol">
           <div className="tap-video__vol-rail" />
           <div ref={vFillRef} className="tap-video__vol-fill" style={{ width: '100%' }} />
         </div>

@@ -9,21 +9,21 @@ USE u958029070_ilpf;
 
 INSERT IGNORE INTO ilpf_films (no_permohonan, film_ref, tajuk, pengedar, jenis, durasi_minit, tarikh_hantar)
 VALUES
-  ('BEBAN-DEMO-001','BEBAN-DEMO-001','[Demo] Filem Rujukan 01','Sistem Demo','Filem',90,'2026-01-01'),
-  ('BEBAN-DEMO-002','BEBAN-DEMO-002','[Demo] Filem Rujukan 02','Sistem Demo','Filem',90,'2026-01-01'),
-  ('BEBAN-DEMO-003','BEBAN-DEMO-003','[Demo] Filem Rujukan 03','Sistem Demo','Filem',90,'2026-01-01'),
-  ('BEBAN-DEMO-004','BEBAN-DEMO-004','[Demo] Filem Rujukan 04','Sistem Demo','Filem',90,'2026-01-01'),
-  ('BEBAN-DEMO-005','BEBAN-DEMO-005','[Demo] Filem Rujukan 05','Sistem Demo','Filem',90,'2026-01-01'),
-  ('BEBAN-DEMO-006','BEBAN-DEMO-006','[Demo] Filem Rujukan 06','Sistem Demo','Filem',90,'2026-01-01'),
-  ('BEBAN-DEMO-007','BEBAN-DEMO-007','[Demo] Filem Rujukan 07','Sistem Demo','Filem',90,'2026-01-01'),
-  ('BEBAN-DEMO-008','BEBAN-DEMO-008','[Demo] Filem Rujukan 08','Sistem Demo','Filem',90,'2026-01-01'),
-  ('BEBAN-DEMO-009','BEBAN-DEMO-009','[Demo] Filem Rujukan 09','Sistem Demo','Filem',90,'2026-01-01'),
-  ('BEBAN-DEMO-010','BEBAN-DEMO-010','[Demo] Filem Rujukan 10','Sistem Demo','Filem',90,'2026-01-01'),
-  ('BEBAN-DEMO-011','BEBAN-DEMO-011','[Demo] Filem Rujukan 11','Sistem Demo','Filem',90,'2026-01-01'),
-  ('BEBAN-DEMO-012','BEBAN-DEMO-012','[Demo] Filem Rujukan 12','Sistem Demo','Filem',90,'2026-01-01'),
-  ('BEBAN-DEMO-013','BEBAN-DEMO-013','[Demo] Filem Rujukan 13','Sistem Demo','Filem',90,'2026-01-01'),
-  ('BEBAN-DEMO-014','BEBAN-DEMO-014','[Demo] Filem Rujukan 14','Sistem Demo','Filem',90,'2026-01-01'),
-  ('BEBAN-DEMO-015','BEBAN-DEMO-015','[Demo] Filem Rujukan 15','Sistem Demo','Filem',90,'2026-01-01');
+  ('BEBAN-DEMO-001','BEBAN-DEMO-001','Abang Long Fadil 3',              'Astro Shaw Sdn Bhd',          'Filem',105,'2025-10-12'),
+  ('BEBAN-DEMO-002','BEBAN-DEMO-002','Projek: Memikat Suami 3',         'Primeworks Studios',           'Pita', 94,'2025-10-20'),
+  ('BEBAN-DEMO-003','BEBAN-DEMO-003','Sang Kancil: Lagenda Rimba',      'Les Copaque Production',       'Filem', 88,'2025-11-03'),
+  ('BEBAN-DEMO-004','BEBAN-DEMO-004','Paskal 2: Misi Hitam',            'Skop Productions',             'Filem',118,'2025-11-15'),
+  ('BEBAN-DEMO-005','BEBAN-DEMO-005','Interchange: Bayang Gelap',       'KRU Studios',                  'Filem',112,'2025-11-28'),
+  ('BEBAN-DEMO-006','BEBAN-DEMO-006','Pulang: Kenangan Abadi',          'Astro Shaw Sdn Bhd',           'Filem', 96,'2025-12-05'),
+  ('BEBAN-DEMO-007','BEBAN-DEMO-007','Munafik 3',                       'Khabir Bhatia Productions',    'Filem',103,'2025-12-14'),
+  ('BEBAN-DEMO-008','BEBAN-DEMO-008','Ejen Ali: Misi Galaksi',          'Les Copaque Production',       'Filem', 92,'2025-12-22'),
+  ('BEBAN-DEMO-009','BEBAN-DEMO-009','Dukun 2: Bayangan Malam',         'Tayangan Unggul Sdn Bhd',      'Filem', 99,'2026-01-08'),
+  ('BEBAN-DEMO-010','BEBAN-DEMO-010','Mat Kilau: Semangat Pejuang',     'Primeworks Studios',           'Filem',125,'2026-01-16'),
+  ('BEBAN-DEMO-011','BEBAN-DEMO-011','Kutukan Rimba Batu',              'Skop Productions',             'Filem', 97,'2026-01-24'),
+  ('BEBAN-DEMO-012','BEBAN-DEMO-012','Polis Evo: Operasi Merah',        'Astro Shaw Sdn Bhd',           'Filem',110,'2026-02-06'),
+  ('BEBAN-DEMO-013','BEBAN-DEMO-013','Lelaki Harapan Dunia 2',          'Kewi Production',              'Filem', 95,'2026-02-18'),
+  ('BEBAN-DEMO-014','BEBAN-DEMO-014','KL Special Force 3',              'Tayangan Unggul Sdn Bhd',      'Filem',108,'2026-03-02'),
+  ('BEBAN-DEMO-015','BEBAN-DEMO-015','Serigala Jahanam 2',              'Khabir Bhatia Productions',    'Filem',101,'2026-03-15');
 
 -- ─── ASSIGNMENTS (beban per member) ─────────────────────────────────────────
 -- Each INSERT uses subqueries — safe regardless of auto-increment IDs

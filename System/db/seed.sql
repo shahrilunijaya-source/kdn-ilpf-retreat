@@ -98,7 +98,7 @@ INSERT INTO ilpf_films
    tarikh_hantar, kategori, ai_sinopsis, ai_dialog, ai_genre, ai_tema, ai_panel, ai_pengubahan, ai_keputusan)
 VALUES
   ('PCBM20260396966', 'PCBM20260396966',
-   'Dummy Pita 10032026 Ckeditor 002',
+   'Murugan: Dendam Tanah',
    'Network Twenty One Sdn Bhd',
    'Pita', 'Tayangan TV (Bukan VOD)', 176,
    '2026-03-10',
@@ -112,7 +112,7 @@ VALUES
    '{"text":"Berasaskan 5 pengubahan diterima + adegan seram berkadar tinggi (4x) + profaniti sederhana (2x): Lulus Dengan Pengubahan, P13. Pemberat tertinggi: Ganas Sederhana, Seram Sederhana, Bahasa Sederhana.","conf":88,"keputusan":"LDP","klasifikasi":"13","pemberat":{"ganas":3,"seram":3,"ngeri":1,"seksual":2,"kebogelan":1,"dadah":0,"rokok":1,"arak":0,"bahasa":3,"lain":0}}'),
 
   ('FBEN20260396995', 'FBEN20260396995',
-   'Dummy Film 21042026 Rayuan — 003',
+   'Venom: The Last Dance (Versi BM)',
    'Astro Shaw Sdn Bhd',
    'Filem', 'Tayangan Pawagam', 118,
    '2026-04-10',
@@ -120,7 +120,7 @@ VALUES
    NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 
   ('FBAF20260397009', 'FBAF20260397009',
-   'Data Refresher Course',
+   'Jalur Gemilang: Wira Bangsa',
    'Filem Negara Malaysia',
    'Filem', 'Tayangan Amal', 85,
    '2026-04-10',
@@ -144,9 +144,9 @@ VALUES
 INSERT INTO ilpf_assignments (film_id, user_id, role, panel_no, tarikh_tamat, status) VALUES
   (2, 1, 'ketua', 'P1', '2026-04-22', 'lewat'),
   (3, 1, 'ketua', 'P1', '2026-04-22', 'lewat'),
-  (1, 1, 'ketua', 'P1', '2026-05-15', 'dalam_proses'),
-  (4, 1, 'ahli',  'P2', '2026-05-15', 'menunggu'),
-  (5, 1, 'ahli',  'P3', '2026-05-18', 'menunggu');
+  (1, 1, 'ketua', 'P1', '2026-05-20', 'dalam_proses'),
+  (4, 1, 'ahli',  'P2', '2026-05-22', 'menunggu'),
+  (5, 1, 'ahli',  'P3', '2026-05-25', 'menunggu');
 
 -- ─── PANEL MEMBERS ───────────────────────────────────────────────────────────
 -- (none pre-seeded — user picks during tapisan workflow)
@@ -168,6 +168,6 @@ VALUES
 -- ─── LEAVE ───────────────────────────────────────────────────────────────────
 
 INSERT INTO ilpf_leave (user_id, jenis, perihal, tarikh_mula, tarikh_tamat, status) VALUES
-  (2, 'mesyuarat', 'KURSUS INDUKSI ALPF', '2026-05-16', '2026-05-16', 'lulus'),
+  (2, 'mesyuarat', 'KURSUS INDUKSI ALPF', '2026-04-14', '2026-04-14', 'lulus'),
   (1, 'sakit', 'temujanji hospital', '2026-05-21', '2026-05-21', 'lulus'),
   (3, 'tahunan', 'cuti tahunan', '2026-05-23', '2026-05-25', 'lulus');
